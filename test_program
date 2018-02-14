@@ -1,2 +1,4 @@
-int a = 5 
-print a 
+print "Hello World!";
+print "Hello you!";
+int a = 5 + 2;
+print a;

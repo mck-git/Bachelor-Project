@@ -13,7 +13,7 @@ public class Lexer {
 
     private static InputType m = InputType.NORMAL;
 
-    public static void read(String filename) throws FileNotFoundException, IOException
+    public static void read(String filename) throws IOException
     {
 
         File file = new File(filename);
@@ -25,14 +25,18 @@ public class Lexer {
 
         while (line != null)
         {
-            readString(line);
+            tokenizeString(line);
+
+            Compile.MainCompiler.handleLine(tokens);
             line = bufferedReader.readLine();
+            tokens.clear();
+            m = InputType.NORMAL;
         }
 
         fileReader.close();
     }
 
-    public static void readString(String line)
+    public static void tokenizeString(String line)
     {
 
         for (char c : line.toCharArray())
@@ -55,15 +59,30 @@ public class Lexer {
                 readInputString(c);
             }
 
+            else if (m == InputType.METHOD)
+            {
+                readInputMethod(c);
+            }
         }
-
     }
 
-    private static void readInputString(char c) {
-        if (c == '"')
+    private static void readInputNormal(char c) {
+        if ( c == ' ' || c == '\n' || c == ';')
         {
             tokens.add( new Token(buffer, m) );
             buffer = "";
+        }
+
+        // MATH
+//        else if (c == '=' || c == '+' || c == '-' || c == '/' || c == '*')
+//        {
+//            tokens.add( new Token(buffer, m) );
+//            buffer = "";
+//        }
+
+        else if (c == '"')
+        {
+            m = InputType.STRING;
         }
 
         else
@@ -80,17 +99,26 @@ public class Lexer {
         }
     }
 
-    private static void readInputNormal(char c) {
-        if ( c == ' ' )
+    private static void readInputString(char c) {
+        if (c == '"')
         {
             tokens.add( new Token(buffer, m) );
             buffer = "";
+            m = InputType.NORMAL;
         }
 
-        else if (c == '"')
+        else
         {
-            m = InputType.STRING;
+            buffer += c;
         }
     }
+
+    private static void readInputMethod(char c) {
+
+    }
+
+
+
+
 
 }

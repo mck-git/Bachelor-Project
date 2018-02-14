@@ -13,6 +13,9 @@ public class Token {
         this.inputType = inputType;
     }
 
+    public InputType getInputType() {
+        return inputType;
+    }
 
     public String getContent() {
         return content;

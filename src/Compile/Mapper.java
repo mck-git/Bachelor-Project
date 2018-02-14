@@ -1,4 +1,4 @@
-package Compiler;
+package Compile;
 
 import DataTypes.IntegerVariable;
 import Maps.IntegerMap;
