@@ -40,26 +40,26 @@ public class Lexer {
             // NORMAL MODE
             if (m == InputType.NORMAL)
             {
-                handleInputNormal(c);
+                readInputNormal(c);
             }
 
             // ARGUMENT MODE
             else if (m == InputType.ARGUMENTS)
             {
-                handleInputArgument(c);
+                readInputArgument(c);
             }
 
             // STRING MODE
             else if (m == InputType.STRING)
             {
-                handleInputString(c);
+                readInputString(c);
             }
 
         }
 
     }
 
-    private static void handleInputString(char c) {
+    private static void readInputString(char c) {
         if (c == '"')
         {
             tokens.add( new Token(buffer, m) );
@@ -72,7 +72,7 @@ public class Lexer {
         }
     }
 
-    private static void handleInputArgument(char c) {
+    private static void readInputArgument(char c) {
         if ( c == ',' && m == InputType.ARGUMENTS )
         {
             tokens.add( new Token(buffer, m) );
@@ -80,7 +80,7 @@ public class Lexer {
         }
     }
 
-    private static void handleInputNormal(char c) {
+    private static void readInputNormal(char c) {
         if ( c == ' ' )
         {
             tokens.add( new Token(buffer, m) );
