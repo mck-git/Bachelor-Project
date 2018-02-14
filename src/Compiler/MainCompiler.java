@@ -1,12 +1,13 @@
 package Compiler;
 
 import DataTypes.IntegerVariable;
+import Parser.Lexer;
 
 public class MainCompiler {
 
     public static void main(String[] args) throws Exception
     {
-        Parser.read("test_program");
+        Lexer.read("test_program");
     }
 
     public static void handleLine(String line)
