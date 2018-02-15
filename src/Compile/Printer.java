@@ -1,5 +1,6 @@
 package Compile;
 
+import DataTypes.CharVariable;
 import DataTypes.IntegerVariable;
 import DataTypes.StringVariable;
 import DataTypes.Token;
@@ -30,27 +31,32 @@ public class Printer {
                         printIntVariable(val[1]);
                         break;
 
+                    case "char" :
+                        printCharVariable(val[1]);
+                        break;
+
                     case "string" :
                         printStringVariable(val[1]);
                         break;
-
                 }
-
-
-
-
             }
 
             else
                 System.out.println(t.getContent());
-
-
         }
 
     }
 
     private static void printIntVariable(Object o) {
         IntegerVariable v =  (IntegerVariable) o;
+
+        System.out.println(
+                v.getValue()
+        );
+    }
+
+    private static void printCharVariable(Object o) {
+        CharVariable v = (CharVariable) o;
 
         System.out.println(
                 v.getValue()

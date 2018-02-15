@@ -1,5 +1,6 @@
 package Compile;
 
+import DataTypes.CharVariable;
 import DataTypes.IntegerVariable;
 import DataTypes.StringVariable;
 import DataTypes.Token;
@@ -67,6 +68,16 @@ public class Declarations {
                 new StringVariable(
                         tokens.get(1).getContent(),
                         tokens.get(3).getContent()
+                )
+        );
+    }
+
+    public static void declareChar(ArrayList<Token> tokens)
+    {
+        Mapper.addToCharMap(
+                new CharVariable(
+                        tokens.get(1).getContent(),
+                        tokens.get(3).getContent().charAt(0)
                 )
         );
     }
