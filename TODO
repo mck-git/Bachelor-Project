@@ -1,7 +1,10 @@
-Add math support when declaring integers
+Add math support when declaring integers (DONE)
+    Add order of operations?
 
 Add support for char and String variables
 
 Add support for lists of ints, chars and Strings
 
 Add method support
+
+Add loop support

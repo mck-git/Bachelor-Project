@@ -1,4 +1,6 @@
-print "Hello World!";
-print "Hello you!";
-int a = 5 + 2;
-print a;
+print "Hello World!"
+print "Hello you!"
+int a = 9
+
+print "The value of a is"
+print a

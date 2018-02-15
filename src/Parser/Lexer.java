@@ -20,7 +20,6 @@ public class Lexer {
         FileReader fileReader = new FileReader(file);
         BufferedReader bufferedReader = new BufferedReader(fileReader);
 
-
         String line = bufferedReader.readLine();
 
         while (line != null)
@@ -63,22 +62,27 @@ public class Lexer {
             {
                 readInputMethod(c);
             }
+
+
+
         }
+
+        endTokenAndSwitchType(InputType.NORMAL);
     }
 
     private static void readInputNormal(char c) {
         if ( c == ' ' || c == '\n' || c == ';')
         {
-            tokens.add( new Token(buffer, m) );
-            buffer = "";
+            endTokenAndSwitchType(InputType.NORMAL);
         }
 
         // MATH
-//        else if (c == '=' || c == '+' || c == '-' || c == '/' || c == '*')
-//        {
-//            tokens.add( new Token(buffer, m) );
-//            buffer = "";
-//        }
+        else if ( c == '+' || c == '-' || c == '/' || c == '*')
+        {
+            endTokenAndSwitchType(InputType.NORMAL);
+            buffer += c;
+            endTokenAndSwitchType(InputType.NORMAL);
+        }
 
         else if (c == '"')
         {
@@ -94,17 +98,14 @@ public class Lexer {
     private static void readInputArgument(char c) {
         if ( c == ',' && m == InputType.ARGUMENTS )
         {
-            tokens.add( new Token(buffer, m) );
-            buffer = "";
+            endTokenAndSwitchType(InputType.ARGUMENTS);
         }
     }
 
     private static void readInputString(char c) {
         if (c == '"')
         {
-            tokens.add( new Token(buffer, m) );
-            buffer = "";
-            m = InputType.NORMAL;
+            endTokenAndSwitchType(InputType.NORMAL);
         }
 
         else
@@ -118,7 +119,12 @@ public class Lexer {
     }
 
 
-
+    private static void endTokenAndSwitchType(InputType it)
+    {
+        tokens.add( new Token(buffer, m) );
+        buffer = "";
+        m = it;
+    }
 
 
 }

@@ -15,7 +15,7 @@ public class Printer {
             if (t.getInputType() != InputType.STRING)
             {
                 if (t.getContent().equals("print"))
-                    continue;
+                    System.out.print("[out]: ");
 
 
 
