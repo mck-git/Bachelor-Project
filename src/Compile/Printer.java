@@ -1,6 +1,7 @@
 package Compile;
 
 import DataTypes.IntegerVariable;
+import DataTypes.StringVariable;
 import DataTypes.Token;
 import SharedResources.InputType;
 
@@ -20,15 +21,24 @@ public class Printer {
 
 
                 Object[] val = Mapper.findVariable(t.getContent());
-                if ( val != null && val[0] == ("int") )
+                if (val == null)
+                    continue;
+
+                switch (val[0].toString())
                 {
+                    case "int" :
+                        printIntVariable(val[1]);
+                        break;
 
-                    IntegerVariable v =  (IntegerVariable) val[1];
+                    case "string" :
+                        printStringVariable(val[1]);
+                        break;
 
-                    System.out.println(
-                            v.getValue()
-                    );
                 }
+
+
+
+
             }
 
             else
@@ -37,5 +47,21 @@ public class Printer {
 
         }
 
+    }
+
+    private static void printIntVariable(Object o) {
+        IntegerVariable v =  (IntegerVariable) o;
+
+        System.out.println(
+                v.getValue()
+        );
+    }
+
+    private static void printStringVariable(Object o) {
+        StringVariable v = (StringVariable) o;
+
+        System.out.println(
+                v.getValue()
+        );
     }
 }

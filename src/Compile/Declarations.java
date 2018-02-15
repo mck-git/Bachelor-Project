@@ -1,8 +1,10 @@
 package Compile;
 
 import DataTypes.IntegerVariable;
+import DataTypes.StringVariable;
 import DataTypes.Token;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class Declarations {
@@ -58,6 +60,19 @@ public class Declarations {
                 )
         );
     }
+
+    public static void declareString(ArrayList<Token> tokens)
+    {
+        Mapper.addToStringMap(
+                new StringVariable(
+                        tokens.get(1).getContent(),
+                        tokens.get(3).getContent()
+                )
+        );
+    }
+
+
+
 
 
     private static boolean isNumeric(String s)

@@ -24,6 +24,9 @@ public class MainCompiler {
                 Declarations.declareInteger(tokens);
                 break;
 
+            case "string":
+                Declarations.declareString(tokens);
+                break;
 
             case "print":
                 Printer.print(tokens);
