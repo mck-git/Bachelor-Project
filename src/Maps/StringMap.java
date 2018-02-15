@@ -1,6 +1,5 @@
 package Maps;
 
-import DataTypes.IntegerVariable;
 import DataTypes.StringVariable;
 
 import java.util.HashMap;

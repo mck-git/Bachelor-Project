@@ -28,6 +28,10 @@ public class MainCompiler {
                 Declarations.declareString(tokens);
                 break;
 
+            case "char":
+                Declarations.declareChar(tokens);
+                break;
+
             case "print":
                 Printer.print(tokens);
                 break;

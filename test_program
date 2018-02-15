@@ -2,6 +2,8 @@ print "Hello World!"
 
 string hello = "Hello you!"
 
+char c = y
+
 int a = 9
 
 print "The value of a is"
@@ -9,3 +11,6 @@ print a
 
 print "The string hello is"
 print hello
+
+print "The char c is"
+print c
