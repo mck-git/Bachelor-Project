@@ -1,23 +1,24 @@
 package DataTypes;
 
-public class IntegerVariable {
-
+public class BooleanVariable {
     String name;
-    int value;
+    boolean value;
 
-    public IntegerVariable(String name, int value)
+    public BooleanVariable(String name, boolean value)
     {
         this.name = name;
         this.value = value;
     }
-
 
     public String getName()
     {
         return this.name;
     }
 
-    public int getValue() {
+    public boolean getValue()
+    {
         return this.value;
     }
+
+
 }

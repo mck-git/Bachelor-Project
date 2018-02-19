@@ -19,7 +19,7 @@ public class CharMap {
         charMap.replace(name,cv);
     }
 
-    public static CharVariable findVal(String name)
+    public static CharVariable find(String name)
     {
         return (CharVariable) charMap.get(name);
     }

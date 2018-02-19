@@ -17,7 +17,7 @@ public class CharVariable {
     }
 
     public char getValue() {
-        return value;
+        return this.value;
     }
 
 

@@ -1,4 +1,4 @@
-package Compile;
+package Compile.Operations;
 
 public enum MathOperation {
     PLUS,

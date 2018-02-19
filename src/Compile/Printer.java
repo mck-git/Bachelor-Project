@@ -1,9 +1,7 @@
 package Compile;
 
-import DataTypes.CharVariable;
-import DataTypes.IntegerVariable;
-import DataTypes.StringVariable;
-import DataTypes.Token;
+import DataTypes.*;
+import Maps.BooleanMap;
 import SharedResources.InputType;
 
 import java.util.ArrayList;
@@ -38,6 +36,10 @@ public class Printer {
                     case "string" :
                         printStringVariable(val[1]);
                         break;
+
+                    case "boolean" :
+                        printBooleanVariable(val[1]);
+                        break;
                 }
             }
 
@@ -47,7 +49,8 @@ public class Printer {
 
     }
 
-    private static void printIntVariable(Object o) {
+    private static void printIntVariable(Object o)
+    {
         IntegerVariable v =  (IntegerVariable) o;
 
         System.out.println(
@@ -55,7 +58,8 @@ public class Printer {
         );
     }
 
-    private static void printCharVariable(Object o) {
+    private static void printCharVariable(Object o)
+    {
         CharVariable v = (CharVariable) o;
 
         System.out.println(
@@ -63,8 +67,18 @@ public class Printer {
         );
     }
 
-    private static void printStringVariable(Object o) {
+    private static void printStringVariable(Object o)
+    {
         StringVariable v = (StringVariable) o;
+
+        System.out.println(
+                v.getValue()
+        );
+    }
+
+    private static void printBooleanVariable(Object o)
+    {
+        BooleanVariable v = (BooleanVariable) o;
 
         System.out.println(
                 v.getValue()

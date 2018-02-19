@@ -32,6 +32,10 @@ public class MainCompiler {
                 Declarations.declareChar(tokens);
                 break;
 
+            case "boolean":
+                Declarations.declareBoolean(tokens);
+                break;
+
             case "print":
                 Printer.print(tokens);
                 break;

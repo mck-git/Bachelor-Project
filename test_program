@@ -29,3 +29,13 @@ c = w
 
 print "The char c is now"
 print c
+
+boolean b = true
+
+print "The boolean b is"
+print b
+
+b = false & true
+
+print "The boolean b is now"
+print b

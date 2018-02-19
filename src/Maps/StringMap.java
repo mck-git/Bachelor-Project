@@ -19,7 +19,7 @@ public class StringMap {
         stringMap.replace(name, sv);
     }
 
-    public static StringVariable findVal(String name)
+    public static StringVariable find(String name)
     {
         return (StringVariable) stringMap.get(name);
     }

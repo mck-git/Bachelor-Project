@@ -19,7 +19,7 @@ public class IntegerMap {
         intMap.replace(name, iv);
     }
 
-    public static IntegerVariable findVal(String name)
+    public static IntegerVariable find(String name)
     {
         return (IntegerVariable) intMap.get(name);
     }
