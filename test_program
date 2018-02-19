@@ -9,8 +9,23 @@ int a = 9
 print "The value of a is"
 print a
 
+a = 2
+
+print "The value of a is now"
+print a
+
 print "The string hello is"
 print hello
 
+hello = "hello again :)"
+
+print "The string hello is now"
+print hello
+
 print "The char c is"
+print c
+
+c = w
+
+print "The char c is now"
 print c
