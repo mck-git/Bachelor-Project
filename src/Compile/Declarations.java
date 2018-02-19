@@ -13,11 +13,23 @@ public class Declarations {
 
     public static void declareInteger(ArrayList<Token> tokens)
     {
+        int num = evaluateMath(tokens);
+
+
+        Mapper.addToIntMap(
+                new IntegerVariable(
+                        tokens.get(1).getContent(),
+                        num
+                )
+        );
+    }
+
+    private static int evaluateMath(ArrayList<Token> tokens) {
         int num = 0;
         MathOperation op = MathOperation.PLUS;
 
 
-        for (int i = 3; i < tokens.size(); i++)
+        for (int i = 0; i < tokens.size(); i++)
         {
             String s = tokens.get(i).getContent();
 
@@ -52,14 +64,7 @@ public class Declarations {
             }
 
         }
-
-
-        Mapper.addToIntMap(
-                new IntegerVariable(
-                        tokens.get(1).getContent(),
-                        num
-                )
-        );
+        return num;
     }
 
     public static void declareString(ArrayList<Token> tokens)
@@ -83,6 +88,46 @@ public class Declarations {
     }
 
 
+    public static void redefineVariable(ArrayList<Token> tokens)
+    {
+        Object[] val = Mapper.findVariable(tokens.get(0).getContent());
+
+        if (val == null)
+            return;
+
+        switch ((String) val[0])
+        {
+            case "int":
+                Mapper.redefineInt(
+                        new IntegerVariable(
+                                tokens.get(0).getContent(),
+                                evaluateMath(tokens)
+                        )
+                );
+                break;
+
+            case "string":
+                Mapper.redefineString(
+                        new StringVariable(
+                                tokens.get(0).getContent(),
+                                tokens.get(2).getContent()
+                        )
+                );
+                break;
+
+            case "char":
+                Mapper.redefineChar(
+                        new CharVariable(
+                                tokens.get(0).getContent(),
+                                tokens.get(2).getContent().charAt(0)
+                        )
+                );
+                break;
+        }
+
+
+
+    }
 
 
 

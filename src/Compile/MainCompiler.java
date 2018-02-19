@@ -35,6 +35,9 @@ public class MainCompiler {
             case "print":
                 Printer.print(tokens);
                 break;
+
+            default :
+                Declarations.redefineVariable(tokens);
         }
 
     }

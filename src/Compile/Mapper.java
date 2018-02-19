@@ -14,14 +14,31 @@ public class Mapper {
         IntegerMap.add(iv.getName(),iv);
     }
 
+    public static void redefineInt(IntegerVariable iv)
+    {
+        IntegerMap.edit(iv.getName(),iv);
+    }
+
+
     public static void addToStringMap(StringVariable sv)
     {
         StringMap.add(sv.getName(), sv);
     }
 
+    public static void redefineString(StringVariable sv)
+    {
+        StringMap.edit(sv.getName(),sv);
+    }
+
+
     public static void addToCharMap(CharVariable cv)
     {
         CharMap.add(cv.getName(), cv);
+    }
+
+    public static void redefineChar(CharVariable cv)
+    {
+        CharMap.edit(cv.getName(),cv);
     }
 
     public static Object[] findVariable(String varname)
