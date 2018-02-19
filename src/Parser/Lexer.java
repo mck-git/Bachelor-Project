@@ -26,6 +26,8 @@ public class Lexer {
         {
             tokenizeString(line);
 
+            clearBlankTokens();
+
             Compile.MainCompiler.handleLine(tokens);
             line = bufferedReader.readLine();
             tokens.clear();
@@ -35,7 +37,7 @@ public class Lexer {
         fileReader.close();
     }
 
-    public static void tokenizeString(String line)
+    private static void tokenizeString(String line)
     {
 
         for (char c : line.toCharArray())
@@ -77,7 +79,7 @@ public class Lexer {
         }
 
         // MATH
-        else if ( c == '+' || c == '-' || c == '/' || c == '*')
+        else if ( c == '+' || c == '-' || c == '/' || c == '*' || c == '&' || c == '|' )
         {
             endTokenAndSwitchType(InputType.NORMAL);
             buffer += c;
@@ -86,7 +88,7 @@ public class Lexer {
 
         else if (c == '"')
         {
-            m = InputType.STRING;
+            endTokenAndSwitchType(InputType.STRING);
         }
 
         else
@@ -118,6 +120,14 @@ public class Lexer {
 
     }
 
+    private static void clearBlankTokens()
+    {
+        for (int i = tokens.size()-1; i > 0; i--)
+        {
+            if (tokens.get(i).getContent().equals(""))
+                tokens.remove(i);
+        }
+    }
 
     private static void endTokenAndSwitchType(InputType it)
     {

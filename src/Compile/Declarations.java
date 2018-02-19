@@ -46,7 +46,6 @@ public class Declarations {
                 new BooleanVariable(
                         tokens.get(1).getContent(),
                         evaluateBoolean(tokens)
-//                        Boolean.parseBoolean(tokens.get(3).getContent())
                 )
         );
     }
@@ -93,7 +92,6 @@ public class Declarations {
                         new BooleanVariable(
                                 tokens.get(0).getContent(),
                                 evaluateBoolean(tokens)
-                                //Boolean.parseBoolean(tokens.get(2).getContent())
                         )
                 );
         }
