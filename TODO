@@ -7,16 +7,7 @@ Add redefine variable support (DONE)
 
 Add support for booleans (DONE)
 
-Add boolean expression support (equals, greater than, less than, etc.)
-
-    Boolean comparison tokens (== / > / <) create a BooleanStatement
-
-    These consist of two numbers and a comparison tool
-
-    The BooleanStatement s get saved to an array
-
-    After line has been parsed, the array is read through and compared according to the tokens.
-
+Add boolean expression support (equals, greater than, less than, etc.) (DONE)
 
 Add support for lists of ints, chars and Strings
 
