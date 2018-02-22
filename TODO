@@ -20,6 +20,8 @@ Add boolean expression support (equals, greater than, less than, etc.)
 
 Add support for lists of ints, chars and Strings
 
+Add conditional statements support (if)
+
 Add loop support
 
 

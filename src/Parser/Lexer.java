@@ -86,6 +86,12 @@ public class Lexer {
             endTokenAndSwitchType(InputType.NORMAL);
         }
 
+        else if (c == '=' && buffer.equals("="))
+        {
+            buffer += c;
+            endTokenAndSwitchType(InputType.NORMAL);
+        }
+
         else if (c == '"')
         {
             endTokenAndSwitchType(InputType.STRING);

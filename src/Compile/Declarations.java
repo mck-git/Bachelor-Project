@@ -1,9 +1,11 @@
 package Compile;
 
+import Compile.Operations.BooleanNumOperation;
 import Compile.Operations.BooleanOperation;
 import Compile.Operations.MathOperation;
 import DataTypes.*;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class Declarations {
@@ -126,60 +128,179 @@ public class Declarations {
 
             else if (isNumeric(s))
             {
-                switch (op)
-                {
-                    case PLUS:
-                        num = num + Integer.parseInt(s);
-                        break;
-                    case MINUS:
-                        num = num - Integer.parseInt(s);
-                        break;
-                    case MULT:
-                        num = num * Integer.parseInt(s);
-                        break;
-                    case DIVISION:
-                        num = num / Integer.parseInt(s);
-                        break;
-                }
+                num = applyMathOp(num, op, s);
             }
 
         }
         return num;
     }
 
+    private static int applyMathOp(int num, MathOperation op, String s) {
+        switch (op)
+        {
+            case PLUS:
+                num = num + Integer.parseInt(s);
+                break;
+            case MINUS:
+                num = num - Integer.parseInt(s);
+                break;
+            case MULT:
+                num = num * Integer.parseInt(s);
+                break;
+            case DIVISION:
+                num = num / Integer.parseInt(s);
+                break;
+        }
+        return num;
+    }
+
     private static boolean evaluateBoolean(ArrayList<Token> tokens)
     {
-        boolean b = true;
+        boolean result = true;
         BooleanOperation op = BooleanOperation.AND;
+        BooleanNumOperation numOp = BooleanNumOperation.GREATER;
+
+
+        boolean numberSequence = false;
+        int numIndexStart = 0;
+
+        int numBuffer = 0;
+
 
         for (int i = 0; i < tokens.size(); i++)
         {
             String s = tokens.get(i).getContent();
 
             if (s.equals("&"))
+            {
+                if (numberSequence)
+                {
+                    result = applyBooleanNumOp(
+                            result, op, numOp,
+                            numBuffer, evaluateMath(new ArrayList<>(tokens.subList(numIndexStart,i)))
+                    );
+                    numberSequence = false;
+                }
+
                 op = BooleanOperation.AND;
+            }
 
             else if (s.equals("|"))
+            {
+                if (numberSequence)
+                {
+                    result = applyBooleanNumOp(
+                            result, op, numOp,
+                            numBuffer, evaluateMath(new ArrayList<>(tokens.subList(numIndexStart,i)))
+                    );
+                    numberSequence = false;
+                }
+
                 op = BooleanOperation.OR;
+            }
+
+            else if (s.equals("<"))
+            {
+                numOp = BooleanNumOperation.LESSER;
+
+                numBuffer = evaluateMath(
+                        new ArrayList<>(tokens.subList(numIndexStart,i))
+                );
+
+                numberSequence = false;
+
+            }
+
+            else if (s.equals(">"))
+            {
+                numOp = BooleanNumOperation.GREATER;
+
+                numBuffer = evaluateMath(
+                        new ArrayList<>(tokens.subList(numIndexStart,i))
+                );
+
+                numberSequence = false;
+            }
+
+            else if (s.equals("=="))
+            {
+                numOp = BooleanNumOperation.EQUALS;
+
+                numBuffer = evaluateMath(
+                        new ArrayList<>(tokens.subList(numIndexStart,i))
+                );
+
+                numberSequence = false;
+            }
 
             else if (isBoolean(s))
             {
-                switch (op)
-                {
-                    case AND :
-                        b = b && Boolean.parseBoolean(s);
-                        break;
-
-                    case OR :
-                        b = b || Boolean.parseBoolean(s);
-                        break;
-                }
+                result = applyBooleanOp(
+                        result, op, s
+                        );
             }
 
+            else if (isNumeric(s))
+            {
+                if (numberSequence)
+                    continue;
+
+                numIndexStart = i;
+
+
+                numberSequence = true;
+            }
         }
 
-        return b;
+        if (numberSequence)
+        {
+            result = applyBooleanNumOp(
+                    result, op, numOp,
+                    numBuffer, evaluateMath(new ArrayList<>(tokens.subList(numIndexStart,tokens.size())))
+            );
+        }
+
+        return result;
     }
+
+    private static boolean applyBooleanOp(boolean result, BooleanOperation op, String s) {
+        switch (op)
+        {
+            case AND :
+                return result && Boolean.parseBoolean(s);
+
+            case OR :
+                return result || Boolean.parseBoolean(s);
+
+            default :
+                return result;
+        }
+
+    }
+
+    private static boolean applyBooleanNumOp(boolean result, BooleanOperation op, BooleanNumOperation numOp, int num1, int num2) {
+        switch (numOp)
+        {
+            case LESSER:
+                return applyBooleanOp (
+                        result, op, "" + (num1 < num2)
+                );
+
+            case GREATER:
+                return applyBooleanOp(
+                        result, op, "" + (num1 > num2)
+                );
+
+            case EQUALS:
+                return applyBooleanOp(
+                        result, op, "" + (num1 == num2)
+                );
+
+            default:
+                return result;
+        }
+    }
+
 
     private static boolean isNumeric(String s)
     {
