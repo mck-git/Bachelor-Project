@@ -8,6 +8,9 @@ import java.util.ArrayList;
 
 public class MainCompiler {
 
+    private
+
+
     public static void main(String[] args) throws Exception
     {
         Lexer.read("test_program");
@@ -35,6 +38,13 @@ public class MainCompiler {
             case "boolean":
                 Declarations.declareBoolean(tokens);
                 break;
+
+            case "if":
+                Conditionals.handleIf(tokens);
+                break;
+
+            case "}":
+
 
             case "print":
                 Printer.print(tokens);

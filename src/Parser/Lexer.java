@@ -78,8 +78,11 @@ public class Lexer {
             endTokenAndSwitchType(InputType.NORMAL);
         }
 
-        // MATH
-        else if ( c == '+' || c == '-' || c == '/' || c == '*' || c == '&' || c == '|' )
+        // SYMBOLS
+        else if ( c == '+' || c == '-' || c == '/' || c == '*'
+                  || c == '&' || c == '|'
+                  || c == '(' || c == ')'
+                  || c == '{' || c == '}')
         {
             endTokenAndSwitchType(InputType.NORMAL);
             buffer += c;
