@@ -131,16 +131,30 @@ public class Lexer {
 
     private static void clearBlankTokens()
     {
-        for (int i = tokens.size()-1; i > 0; i--)
+        int i = 0;
+
+        while ( i < tokens.size() )
         {
             String token = tokens.get(i).getContent().trim();
 
             if ( token.equals("") || token.equals("\n") || token.equals("\t") )
-            {
-                tokens.remove(i);
-                System.out.println("Removed blank token");
-            }
+                tokens.remove(tokens.get(i));
+            else
+                i++;
         }
+
+
+//        for (int i = tokens.size()-1; i > 0; i--)
+//        {
+//            String token = tokens.get(i).getContent().trim();
+//
+//            if ( token.equals("") || token.equals("\n") || token.equals("\t") )
+//            {
+//                tokens.remove(tokens.get(i));
+//                System.out.println("Removed blank token");
+//            }
+//
+//        }
     }
 
     private static void endTokenAndSwitchType(InputType it)
