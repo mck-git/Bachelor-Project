@@ -1,4 +1,4 @@
-package Debug;
+package DebugMethods;
 
 import DataTypes.Token;
 

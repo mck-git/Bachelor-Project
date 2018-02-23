@@ -73,7 +73,7 @@ public class Lexer {
     }
 
     private static void readInputNormal(char c) {
-        if ( c == ' ' || c == '\n' || c == ';')
+        if ( c == ' ' || c == '\n' || c == ';' || c == '\t')
         {
             endTokenAndSwitchType(InputType.NORMAL);
         }
@@ -133,8 +133,13 @@ public class Lexer {
     {
         for (int i = tokens.size()-1; i > 0; i--)
         {
-            if (tokens.get(i).getContent().equals(""))
+            String token = tokens.get(i).getContent().trim();
+
+            if ( token.equals("") || token.equals("\n") || token.equals("\t") )
+            {
                 tokens.remove(i);
+                System.out.println("Removed blank token");
+            }
         }
     }
 
