@@ -103,8 +103,8 @@ public class Declarations {
     }
 
 
-
-    private static int evaluateMath(ArrayList<Token> tokens)
+    // MOVE
+    public static int evaluateMath(ArrayList<Token> tokens)
     {
         int num = 0;
         MathOperation op = MathOperation.PLUS;
@@ -154,7 +154,8 @@ public class Declarations {
         return num;
     }
 
-    private static boolean evaluateBoolean(ArrayList<Token> tokens)
+    // MOVE
+    public static boolean evaluateBoolean(ArrayList<Token> tokens)
     {
         boolean result = true;
         BooleanOperation op = BooleanOperation.AND;
@@ -301,7 +302,7 @@ public class Declarations {
         }
     }
 
-
+    // MOVE
     private static boolean isNumeric(String s)
     {
         try {
@@ -312,6 +313,7 @@ public class Declarations {
         }
     }
 
+    // MOVE
     private static boolean isBoolean(String s)
     {
         return (s.equals("true") || s.equals("false"));

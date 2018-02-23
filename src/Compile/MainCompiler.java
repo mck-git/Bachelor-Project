@@ -2,11 +2,14 @@ package Compile;
 
 import DataTypes.Token;
 import Parser.Lexer;
+import SharedResources.ExecutionType;
 
 import java.util.ArrayList;
 
 
 public class MainCompiler {
+
+    private static ExecutionType executionType = ExecutionType.NORMAL;
 
     public static void main(String[] args) throws Exception
     {
@@ -16,6 +19,9 @@ public class MainCompiler {
     public static void handleLine(ArrayList<Token> tokens)
     {
         if (tokens.isEmpty())
+            return;
+
+        if (executionType == ExecutionType.IF_FALSE)
             return;
 
         switch (tokens.get(0).getContent())
@@ -36,6 +42,14 @@ public class MainCompiler {
                 Declarations.declareBoolean(tokens);
                 break;
 
+            case "if":
+                Conditionals.handleIf(tokens);
+                break;
+
+            case "}":
+                executionType = ExecutionType.NORMAL;
+                break;
+
             case "print":
                 Printer.print(tokens);
                 break;
@@ -46,5 +60,10 @@ public class MainCompiler {
 
     }
 
+
+    public static void setExecutionType(ExecutionType et)
+    {
+        executionType = et;
+    }
 
 }
