@@ -82,7 +82,8 @@ public class Lexer {
         else if ( c == '+' || c == '-' || c == '/' || c == '*'
                   || c == '&' || c == '|'
                   || c == '(' || c == ')'
-                  || c == '{' || c == '}')
+                  || c == '{' || c == '}'
+                  || c == '!')
         {
             endTokenAndSwitchType(InputType.NORMAL);
             buffer += c;
@@ -143,18 +144,6 @@ public class Lexer {
                 i++;
         }
 
-
-//        for (int i = tokens.size()-1; i > 0; i--)
-//        {
-//            String token = tokens.get(i).getContent().trim();
-//
-//            if ( token.equals("") || token.equals("\n") || token.equals("\t") )
-//            {
-//                tokens.remove(tokens.get(i));
-//                System.out.println("Removed blank token");
-//            }
-//
-//        }
     }
 
     private static void endTokenAndSwitchType(InputType it)

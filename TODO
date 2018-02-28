@@ -9,11 +9,12 @@ Add support for booleans (DONE)
 
 Add boolean expression support (equals, greater than, less than, etc.) (DONE)
 
-Add conditional statements support (if)
-
-Add support for lists of ints, chars and Strings
+Add conditional statements support (if) (DONE)
 
 Add loop support
 
+Add ! and () for conditional statements
+
+Add support for lists of ints, chars and Strings
 
 Add method support

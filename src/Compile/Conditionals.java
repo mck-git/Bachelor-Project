@@ -18,7 +18,7 @@ public class Conditionals {
         {
             token = tokens.get(i).getContent();
 
-            if (Declarations.isNumeric(token) || Declarations.isBoolean(token))
+            if (Declarations.isNumeric(token) || Declarations.isBoolean(token) || token.equals("!"))
                 conditionalStart = i;
 
             else if (token.equals("{"))
