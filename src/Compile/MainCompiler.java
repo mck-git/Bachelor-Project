@@ -1,6 +1,7 @@
 package Compile;
 
 import DataTypes.Token;
+import Errors.InvalidSyntaxException;
 import Parser.Lexer;
 import SharedResources.ExecutionType;
 
@@ -13,10 +14,11 @@ public class MainCompiler {
 
     public static void main(String[] args) throws Exception
     {
-        Lexer.read("test_program");
+//        Lexer.read("test_program");
+        Lexer.read("test_loops");
     }
 
-    public static void handleLine(ArrayList<Token> tokens)
+    public static void handleLine(ArrayList<Token> tokens) throws InvalidSyntaxException
     {
         if (tokens.isEmpty())
             return;
@@ -24,7 +26,16 @@ public class MainCompiler {
         if (executionType == ExecutionType.IF_FALSE)
             return;
 
-        switch (tokens.get(0).getContent())
+        String firstTokenContent = tokens.get(0).getContent();
+
+        if (executionType == ExecutionType.WHILE && !firstTokenContent.equals("}"))
+        {
+            System.out.println("saving token");
+            Loops.saveLine(tokens);
+            return;
+        }
+
+        switch (firstTokenContent)
         {
             case "int":
                 Declarations.declareInteger(tokens);
@@ -47,7 +58,13 @@ public class MainCompiler {
                 break;
 
             case "}":
+                if (executionType == ExecutionType.WHILE)
+                    Loops.executeLoop();
                 executionType = ExecutionType.NORMAL;
+                break;
+
+            case "while":
+                Loops.initiateWhile(tokens);
                 break;
 
             case "print":

@@ -15,30 +15,32 @@ public class Printer {
             if (t.getInputType() != InputType.STRING)
             {
                 if (t.getContent().equals("print"))
+                {
                     System.out.print("[out]: ");
+                    continue;
+                }
 
 
-
-                Object[] val = Mapper.findVariable(t.getContent());
-                if (val == null)
+                SearchedVariable foundVariable = Mapper.findVariable(t.getContent());
+                if (foundVariable == null)
                     continue;
 
-                switch (val[0].toString())
+                switch (foundVariable.getType())
                 {
                     case "int" :
-                        printIntVariable(val[1]);
+                        printIntVariable(foundVariable.getValue());
                         break;
 
                     case "char" :
-                        printCharVariable(val[1]);
+                        printCharVariable(foundVariable.getValue());
                         break;
 
                     case "string" :
-                        printStringVariable(val[1]);
+                        printStringVariable(foundVariable.getValue());
                         break;
 
                     case "boolean" :
-                        printBooleanVariable(val[1]);
+                        printBooleanVariable(foundVariable.getValue());
                         break;
                 }
             }

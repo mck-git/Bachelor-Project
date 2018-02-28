@@ -1,9 +1,6 @@
 package Compile;
 
-import DataTypes.BooleanVariable;
-import DataTypes.CharVariable;
-import DataTypes.IntegerVariable;
-import DataTypes.StringVariable;
+import DataTypes.*;
 import Maps.BooleanMap;
 import Maps.CharMap;
 import Maps.IntegerMap;
@@ -59,30 +56,29 @@ public class Mapper {
     }
 
     // AUX FUNCTIONS
-    public static Object[] findVariable(String varname)
+    public static SearchedVariable findVariable(String varname)
     {
         Object result;
 
         result = IntegerMap.find(varname);
 
         if (result != null)
-            return new Object[]{"int",result};
+            return new SearchedVariable("int", result);
 
         result = CharMap.find(varname);
 
         if (result != null)
-            return new Object[]{"char",result};
-
+            return new SearchedVariable("char",result);
 
         result = StringMap.find(varname);
 
         if (result != null)
-            return new Object[]{"string",result};
+            return new SearchedVariable("string",result);
 
         result = BooleanMap.find(varname);
 
         if (result != null)
-            return new Object[]{"boolean",result};
+            return new SearchedVariable("boolean",result);
 
         return null;
     }

@@ -4,6 +4,7 @@ import java.io.*;
 import java.util.ArrayList;
 
 import DataTypes.Token;
+import Errors.InvalidSyntaxException;
 import SharedResources.InputType;
 
 
@@ -13,7 +14,9 @@ public class Lexer {
 
     private static InputType m = InputType.NORMAL;
 
-    public static void read(String filename) throws IOException
+    private static int lineNumber = 0;
+
+    public static void read(String filename) throws IOException, InvalidSyntaxException
     {
 
         File file = new File(filename);
@@ -24,6 +27,7 @@ public class Lexer {
 
         while (line != null)
         {
+            lineNumber++;
             tokenizeString(line);
 
             clearBlankTokens();
@@ -153,5 +157,8 @@ public class Lexer {
         m = it;
     }
 
-
+    public static int getLineNumber()
+    {
+        return lineNumber;
+    }
 }

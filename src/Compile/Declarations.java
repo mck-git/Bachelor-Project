@@ -55,12 +55,12 @@ public class Declarations {
 
     public static void redefineVariable(ArrayList<Token> tokens)
     {
-        Object[] val = Mapper.findVariable(tokens.get(0).getContent());
+        SearchedVariable val = Mapper.findVariable(tokens.get(0).getContent());
 
         if (val == null)
             return;
 
-        switch ((String) val[0])
+        switch (val.getType())
         {
             case "int":
                 Mapper.redefineInt(
@@ -112,25 +112,34 @@ public class Declarations {
 
         for (int i = 0; i < tokens.size(); i++)
         {
-            String s = tokens.get(i).getContent();
+            String tokenContent = tokens.get(i).getContent();
 
-            if ( s.equals("+") )
+            if ( tokenContent.equals("+") )
                 op = MathOperation.PLUS;
 
-            else if ( s.equals("-") )
+            else if ( tokenContent.equals("-") )
                 op = MathOperation.MINUS;
 
-            else if ( s.equals("*"))
+            else if ( tokenContent.equals("*"))
                 op = MathOperation.MULT;
 
-            else if ( s.equals("/"))
+            else if ( tokenContent.equals("/"))
                 op = MathOperation.DIVISION;
 
-            else if (isNumeric(s))
-            {
-                num = applyMathOp(num, op, s);
-            }
+            else if (isNumeric(tokenContent))
+                num = applyMathOp(num, op, tokenContent);
 
+            else
+            {
+                SearchedVariable foundVariable = Mapper.findVariable(tokenContent);
+
+                if (foundVariable == null || !foundVariable.getType().equals("int") )
+                    continue;
+
+                IntegerVariable varValue = (IntegerVariable) foundVariable.getValue();
+
+                num = applyMathOp(num, op, "" + varValue.getValue());
+            }
         }
         return num;
     }
@@ -170,9 +179,9 @@ public class Declarations {
 
         for (int i = 0; i < tokens.size(); i++)
         {
-            String s = tokens.get(i).getContent();
+            String tokenContent = tokens.get(i).getContent();
 
-            if (s.equals("&"))
+            if (tokenContent.equals("&"))
             {
                 if (numberSequence)
                 {
@@ -184,9 +193,13 @@ public class Declarations {
                 }
 
                 op = BooleanOperation.AND;
+
+                continue;
             }
 
-            else if (s.equals("|"))
+
+
+            if (tokenContent.equals("|"))
             {
                 if (numberSequence)
                 {
@@ -198,9 +211,11 @@ public class Declarations {
                 }
 
                 op = BooleanOperation.OR;
+
+                continue;
             }
 
-            else if (s.equals("<"))
+            if (tokenContent.equals("<"))
             {
                 numOp = BooleanNumOperation.LESSER;
 
@@ -210,9 +225,10 @@ public class Declarations {
 
                 numberSequence = false;
 
+                continue;
             }
 
-            else if (s.equals(">"))
+            if (tokenContent.equals(">"))
             {
                 numOp = BooleanNumOperation.GREATER;
 
@@ -221,9 +237,11 @@ public class Declarations {
                 );
 
                 numberSequence = false;
+
+                continue;
             }
 
-            else if (s.equals("=="))
+            if (tokenContent.equals("=="))
             {
                 numOp = BooleanNumOperation.EQUALS;
 
@@ -232,25 +250,27 @@ public class Declarations {
                 );
 
                 numberSequence = false;
+
+                continue;
             }
 
-            else if (isBoolean(s))
+            if (isBoolean(tokenContent))
             {
                 result = applyBooleanOp(
-                        result, op, s
+                        result, op, tokenContent
                         );
+
+                continue;
             }
 
-            else if (isNumeric(s))
+            if (isNumeric(tokenContent))
             {
                 if (numberSequence)
                     continue;
-
                 numIndexStart = i;
-
-
                 numberSequence = true;
             }
+
         }
 
         if (numberSequence)

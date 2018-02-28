@@ -1,20 +1,35 @@
-Add math support when declaring integers (DONE)
-    Add order of operations?
+FEATURES:
 
-Add support for char and String variables (DONE)
+    Add math support when declaring integers (DONE)
+        Add order of operations?
 
-Add redefine variable support (DONE)
+    Add support for char and String variables (DONE)
 
-Add support for booleans (DONE)
+    Add redefine variable support (DONE)
 
-Add boolean expression support (equals, greater than, less than, etc.) (DONE)
+    Add support for booleans (DONE)
 
-Add conditional statements support (if) (DONE)
+    Add boolean expression support (equals, greater than, less than, etc.) (DONE)
 
-Add loop support
+    Add conditional statements support (if) (DONE)
 
-Add ! and () for conditional statements
+    Add loop support
 
-Add support for lists of ints, chars and Strings
+    Add ! and () for conditional statements
 
-Add method support
+    Add support for lists of ints, chars and Strings
+
+    Add method support
+
+SMALL FEATURES:
+
+    Assign variables to be equal to other variables
+
+    Fix mismatch in boolean statements (such as 'true & 5')
+
+
+REFACTORING:
+
+    Reevaluate method placements (such as evaluateBoolean and the like)
+
+    Integrate errors

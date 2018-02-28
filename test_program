@@ -45,11 +45,21 @@ b = 5 > 3
 print "is 5 > 3?"
 print b
 
-b = 5 == 5 & 5 < 6
+b = 5 == 5
 
 print "is 5 == 5?"
 print b
 
-if  b  {
+if  false  {
     print "Shit works"
+    print "also dis"
+}
+
+print "After the if"
+
+int i = 0
+
+while i < 5 {
+    print "looping"
+    a = a + 1
 }

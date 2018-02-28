@@ -11,6 +11,6 @@ public class PrintTokens {
     {
         System.out.println("Tokens: ");
         for (Token t : tokens)
-            System.out.println(t.getContent());
+            System.out.println("\t" + t.getContent());
     }
 }
