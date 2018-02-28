@@ -303,7 +303,7 @@ public class Declarations {
     }
 
     // MOVE
-    private static boolean isNumeric(String s)
+    public static boolean isNumeric(String s)
     {
         try {
             Integer.parseInt(s);
@@ -314,7 +314,7 @@ public class Declarations {
     }
 
     // MOVE
-    private static boolean isBoolean(String s)
+    public static boolean isBoolean(String s)
     {
         return (s.equals("true") || s.equals("false"));
     }
