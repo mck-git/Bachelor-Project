@@ -9,7 +9,7 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class Declarations {
-
+    final static int STATEMENT_BODY_START_INDEX = 2;
 
     public static void declareInteger(ArrayList<Token> tokens)
     {
@@ -60,13 +60,16 @@ public class Declarations {
         if (val == null)
             return;
 
+        ArrayList<Token> body = new ArrayList<>(tokens.subList(STATEMENT_BODY_START_INDEX, tokens.size()));
+
         switch (val.getType())
         {
             case "int":
+
                 Mapper.redefineInt(
                         new IntegerVariable(
                                 tokens.get(0).getContent(),
-                                evaluateMath(tokens)
+                                evaluateMath(body)
                         )
                 );
                 break;
@@ -93,7 +96,7 @@ public class Declarations {
                 Mapper.redefineBoolean(
                         new BooleanVariable(
                                 tokens.get(0).getContent(),
-                                evaluateBoolean(tokens)
+                                evaluateBoolean(body)
                         )
                 );
         }
