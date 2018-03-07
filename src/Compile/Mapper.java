@@ -1,10 +1,7 @@
 package Compile;
 
 import DataTypes.*;
-import Maps.BooleanMap;
-import Maps.CharMap;
-import Maps.IntegerMap;
-import Maps.StringMap;
+import Maps.*;
 
 public class Mapper {
 
@@ -53,6 +50,13 @@ public class Mapper {
     public static void redefineBoolean(BooleanVariable bv)
     {
         BooleanMap.edit(bv.getName(),bv);
+    }
+
+
+    // VOID FUNCTIONS
+    public static void storeVoidFunction(VoidFunction vf)
+    {
+        VoidFunctionMap.add(vf.getName(),vf);
     }
 
     // AUX FUNCTIONS

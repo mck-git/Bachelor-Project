@@ -5,4 +5,5 @@ public enum ExecutionType {
     IF_FALSE,
     IF_TRUE,
     WHILE,
+    METHOD,
 }
