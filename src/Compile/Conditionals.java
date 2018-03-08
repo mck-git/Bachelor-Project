@@ -1,6 +1,5 @@
 package Compile;
 
-import DataTypes.SearchedVariable;
 import DataTypes.Token;
 import Errors.InvalidSyntaxException;
 import Parser.Lexer;
@@ -14,9 +13,9 @@ public class Conditionals {
     public static void handleIf(ArrayList<Token> tokens) throws InvalidSyntaxException
     {
         if (evaluateConditionalLine(tokens))
-            MainCompiler.setExecutionType(ExecutionType.IF_TRUE);
+            Translator.setExecutionType(ExecutionType.IF_TRUE);
         else
-            MainCompiler.setExecutionType(ExecutionType.IF_FALSE);
+            Translator.setExecutionType(ExecutionType.IF_FALSE);
 
     }
 

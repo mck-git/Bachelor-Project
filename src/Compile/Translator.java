@@ -8,14 +8,14 @@ import SharedResources.ExecutionType;
 import java.util.ArrayList;
 
 
-public class MainCompiler {
+public class Translator {
 
     private static ExecutionType executionType = ExecutionType.NORMAL;
 
     public static void main(String[] args) throws Exception
     {
-//        Lexer.read("test_program");
-        Lexer.read("test_loops");
+        Lexer.read("test_program");
+//        Lexer.read("test_loops");
     }
 
     public static void handleLine(ArrayList<Token> tokens) throws InvalidSyntaxException

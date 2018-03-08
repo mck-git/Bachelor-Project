@@ -15,13 +15,13 @@ public class Loops {
     {
         if ( ! Conditionals.evaluateConditionalLine(tokens) )
         {
-            MainCompiler.setExecutionType(ExecutionType.IF_FALSE);
+            Translator.setExecutionType(ExecutionType.IF_FALSE);
             return;
         }
 
         conditionalTokens = (ArrayList<Token>) tokens.clone();
 
-        MainCompiler.setExecutionType(ExecutionType.WHILE);
+        Translator.setExecutionType(ExecutionType.WHILE);
         loopTokens.clear();
     }
 
@@ -33,11 +33,11 @@ public class Loops {
 
     public static void executeLoop() throws InvalidSyntaxException
     {
-        MainCompiler.setExecutionType(ExecutionType.NORMAL);
+        Translator.setExecutionType(ExecutionType.NORMAL);
         while (Conditionals.evaluateConditionalLine(conditionalTokens) ) // && count < 2
         {
             for (ArrayList<Token> t : loopTokens) {
-                MainCompiler.handleLine(t);
+                Translator.handleLine(t);
             }
         }
     }
