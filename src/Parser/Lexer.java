@@ -3,6 +3,7 @@ package Parser;
 import java.io.*;
 import java.util.ArrayList;
 
+import Compile.Translator;
 import DataTypes.Token;
 import Errors.InvalidSyntaxException;
 import SharedResources.InputType;
@@ -32,7 +33,7 @@ public class Lexer {
 
             clearBlankTokens();
 
-            Compile.MainCompiler.handleLine(tokens);
+            Translator.handleLine(tokens);
             line = bufferedReader.readLine();
             tokens.clear();
             m = InputType.NORMAL;
@@ -140,12 +141,8 @@ public class Lexer {
 
         while ( i < tokens.size() )
         {
-            String token = tokens.get(i).getContent().trim();
-
-            if ( token.equals("") || token.equals("\n") || token.equals("\t") )
-                tokens.remove(tokens.get(i));
-            else
-                i++;
+            if (tokens.get(i).getContent().equals(""))
+                tokens.remove(i);
         }
 
     }
