@@ -8,7 +8,7 @@ import SharedResources.ExecutionType;
 import java.util.ArrayList;
 
 
-public class MainCompiler {
+public class Translator {
 
     private static ExecutionType executionType = ExecutionType.NORMAL;
 

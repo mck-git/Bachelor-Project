@@ -1,6 +1,7 @@
 *.xml
 .classpath
 
+.idea/
 
 # Compiled class file
 *.class

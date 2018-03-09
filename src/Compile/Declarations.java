@@ -150,7 +150,7 @@ public class Declarations {
     {
         String name = tokens.get(2).getContent();
         functionDeclared = new VoidFunction(name, new ArrayList<ArrayList<Token>>());
-        MainCompiler.setExecutionType(ExecutionType.METHOD);
+        Translator.setExecutionType(ExecutionType.METHOD);
     }
 
     public static void saveLine(ArrayList<Token> tokens)
