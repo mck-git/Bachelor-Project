@@ -142,7 +142,11 @@ public class Lexer {
         while ( i < tokens.size() )
         {
             if (tokens.get(i).getContent().equals(""))
+            {
                 tokens.remove(i);
+            }
+            else
+                i++;
         }
 
     }
