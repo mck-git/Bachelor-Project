@@ -196,7 +196,7 @@ public class Declarations {
                 if (foundVariable == null || !foundVariable.getType().equals("int") )
                     continue;
 
-                IntegerVariable varValue = (IntegerVariable) foundVariable.getValue();
+                IntegerVariable varValue = (IntegerVariable) foundVariable.getVariable();
 
                 num = applyMathOp(num, op, "" + varValue.getValue());
             }

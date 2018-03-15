@@ -21,4 +21,16 @@ public class VoidFunctionMap {
         return (VoidFunction) voidFunctionMap.get(name);
     }
 
+    public static int size()
+    {
+        return voidFunctionMap.size();
+    }
+
+    /**
+     * FOR TESTING PURPOSES ONLY! DO NOT USE
+     */
+    public static void clear()
+    {
+        voidFunctionMap.clear();
+    }
 }

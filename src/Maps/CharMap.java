@@ -24,5 +24,17 @@ public class CharMap {
         return (CharVariable) charMap.get(name);
     }
 
+    public static int size()
+    {
+        return charMap.size();
+    }
 
+
+    /**
+     * FOR TESTING PURPOSES ONLY! DO NOT USE
+     */
+    public static void clear()
+    {
+        charMap.clear();
+    }
 }

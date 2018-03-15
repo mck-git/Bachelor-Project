@@ -14,9 +14,10 @@ public class Translator {
 
     public static void main(String[] args) throws Exception
     {
-        Lexer.read("test_program");
+//        Lexer.read("test_program");
 //        Lexer.read("test_loops");
 //        Lexer.read("test_methods");
+        Lexer.read("quick_test");
     }
 
     public static void handleLine(ArrayList<Token> tokens) throws InvalidSyntaxException

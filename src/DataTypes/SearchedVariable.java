@@ -3,19 +3,19 @@ package DataTypes;
 public class SearchedVariable {
 
     String type;
-    Object value;
+    Object variable;
 
-    public SearchedVariable(String type, Object value)
+    public SearchedVariable(String type, Object variable)
     {
         this.type = type;
-        this.value = value;
+        this.variable = variable;
     }
 
     public String getType() {
         return type;
     }
 
-    public Object getValue() {
-        return value;
+    public Object getVariable() {
+        return variable;
     }
 }

@@ -24,4 +24,17 @@ public class BooleanMap {
         return (BooleanVariable) booleanMap.get(name);
     }
 
+    public static int size()
+    {
+        return booleanMap.size();
+    }
+
+
+    /**
+     * FOR TESTING PURPOSES ONLY! DO NOT USE
+     */
+    public static void clear()
+    {
+        booleanMap.clear();
+    }
 }
