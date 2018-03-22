@@ -13,20 +13,9 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class DeclarationsTest {
 
-    @Before
-    void clearMaps() {
-        IntegerMap.clear();
-        BooleanMap.clear();
-        StringMap.clear();
-        CharMap.clear();
-        VoidFunctionMap.clear();
-
-
-    }
-
     @Test
     void declareInteger() {
-        clearMaps();
+        Mapper.clearMaps();
         ArrayList<Token> line = new ArrayList<>();
 
         line.add(new Token("int", InputType.NORMAL));
@@ -52,7 +41,7 @@ class DeclarationsTest {
 
     @Test
     void declareString() {
-        clearMaps();
+        Mapper.clearMaps();
         ArrayList<Token> line = new ArrayList<>();
 
         line.add(new Token("string", InputType.NORMAL));
@@ -77,7 +66,7 @@ class DeclarationsTest {
 
     @Test
     void declareChar() {
-        clearMaps();
+        Mapper.clearMaps();
         ArrayList<Token> line = new ArrayList<>();
 
         line.add(new Token("char", InputType.NORMAL));
@@ -101,7 +90,7 @@ class DeclarationsTest {
 
     @Test
     void declareBoolean() {
-        clearMaps();
+        Mapper.clearMaps();
         ArrayList<Token> line = new ArrayList<>();
 
         line.add(new Token("boolean", InputType.NORMAL));
@@ -127,7 +116,7 @@ class DeclarationsTest {
 
     @Test
     void redefineVariable_int() {
-        clearMaps();
+        Mapper.clearMaps();
         // Define a
         ArrayList<Token> line = new ArrayList<>();
 
@@ -224,16 +213,59 @@ class DeclarationsTest {
     }
 
 
+    @Test
+    void evaluateMath_variable() {
+        Mapper.clearMaps();
+        ArrayList<Token> line = new ArrayList<>();
+
+        line.add(new Token("int", InputType.NORMAL));
+        line.add(new Token("a", InputType.NORMAL));
+        line.add(new Token("=", InputType.NORMAL));
+        line.add(new Token("2", InputType.NORMAL));
+
+        Declarations.declareInteger(line);
+
+        line.clear();
+
+        line.add(new Token("a", InputType.NORMAL));
+        line.add(new Token("+", InputType.NORMAL));
+        line.add(new Token("4", InputType.NORMAL));
+
+        assertEquals(6, Declarations.evaluateMath(line));
+    }
+
+
 
     @Test
     void evaluateBoolean() {
+        ArrayList<Token> line = new ArrayList<>();
+
+        line.add(new Token("true", InputType.NORMAL));
+        line.add(new Token("&", InputType.NORMAL));
+        line.add(new Token("false", InputType.NORMAL));
+
+        assertEquals(false, Declarations.evaluateBoolean(line));
     }
 
     @Test
-    void isNumeric() {
+    void isNumeric_t() {
+        assertTrue(Declarations.isNumeric("5"));
     }
 
     @Test
-    void isBoolean() {
+    void isNumeric_f() {
+        assertFalse(Declarations.isNumeric("five"));
     }
+
+    @Test
+    void isBoolean_t() {
+        assertTrue(Declarations.isBoolean("true"));
+    }
+
+    @Test
+    void isBoolean_f() {
+        assertFalse(Declarations.isBoolean("This is a boolean"));
+    }
+
+
 }

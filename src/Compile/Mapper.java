@@ -88,4 +88,17 @@ public class Mapper {
     }
 
 
+    /**
+     * FOR TESTING PURPOSES ONLY! DO NOT USE
+     */
+    public static void clearMaps() {
+        IntegerMap.clear();
+        BooleanMap.clear();
+        StringMap.clear();
+        CharMap.clear();
+        VoidFunctionMap.clear();
+
+
+    }
+
 }
