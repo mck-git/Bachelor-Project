@@ -1,0 +1,11 @@
+
+
+func int appear () {
+    int a = 5
+
+    return a
+}
+
+
+print "a is:"
+print appear
