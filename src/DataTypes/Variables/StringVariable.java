@@ -1,4 +1,4 @@
-package DataTypes;
+package DataTypes.Variables;
 
 public class StringVariable {
 

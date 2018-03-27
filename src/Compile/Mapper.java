@@ -1,7 +1,18 @@
 package Compile;
 
 import DataTypes.*;
-import Maps.*;
+import DataTypes.Functions.IntegerFunction;
+import DataTypes.Functions.VoidFunction;
+import DataTypes.Variables.BooleanVariable;
+import DataTypes.Variables.CharVariable;
+import DataTypes.Variables.IntegerVariable;
+import DataTypes.Variables.StringVariable;
+import Maps.Functions.IntegerFunctionMap;
+import Maps.Functions.VoidFunctionMap;
+import Maps.Variables.BooleanMap;
+import Maps.Variables.CharMap;
+import Maps.Variables.IntegerMap;
+import Maps.Variables.StringMap;
 
 public class Mapper {
 
@@ -54,9 +65,15 @@ public class Mapper {
 
 
     // VOID FUNCTIONS
-    public static void storeVoidFunction(VoidFunction vf)
+    public static void storeVoidFunction(VoidFunction voidFunction)
     {
-        VoidFunctionMap.add(vf.getName(),vf);
+        VoidFunctionMap.add(voidFunction.getName(),voidFunction);
+    }
+
+    // INT FUNCTIONS
+    public static void storeIntFunction(IntegerFunction integerFunction)
+    {
+        IntegerFunctionMap.add(integerFunction.getName(), integerFunction);
     }
 
     // AUX FUNCTIONS

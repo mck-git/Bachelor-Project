@@ -1,8 +1,9 @@
-package DataTypes;
+package DataTypes.Functions;
 
 import Compile.Mapper;
+import DataTypes.Functions.Function;
+import DataTypes.Token;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class VoidFunction implements Function {

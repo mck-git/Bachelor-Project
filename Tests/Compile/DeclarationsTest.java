@@ -1,10 +1,15 @@
 package Compile;
 
 import DataTypes.*;
-import Maps.*;
+import DataTypes.Variables.BooleanVariable;
+import DataTypes.Variables.CharVariable;
+import DataTypes.Variables.IntegerVariable;
+import DataTypes.Variables.StringVariable;
+import Maps.Variables.BooleanMap;
+import Maps.Variables.CharMap;
+import Maps.Variables.IntegerMap;
+import Maps.Variables.StringMap;
 import SharedResources.InputType;
-import org.junit.Before;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;

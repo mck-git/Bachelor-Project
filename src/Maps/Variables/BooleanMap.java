@@ -1,6 +1,6 @@
-package Maps;
+package Maps.Variables;
 
-import DataTypes.BooleanVariable;
+import DataTypes.Variables.BooleanVariable;
 
 import java.util.HashMap;
 

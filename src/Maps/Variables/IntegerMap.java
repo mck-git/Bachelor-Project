@@ -1,6 +1,6 @@
-package Maps;
+package Maps.Variables;
 
-import DataTypes.IntegerVariable;
+import DataTypes.Variables.IntegerVariable;
 
 import java.util.HashMap;
 

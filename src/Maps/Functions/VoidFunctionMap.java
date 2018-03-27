@@ -1,7 +1,7 @@
-package Maps;
+package Maps.Functions;
 
 import DataTypes.Token;
-import DataTypes.VoidFunction;
+import DataTypes.Functions.VoidFunction;
 
 import java.util.ArrayList;
 import java.util.HashMap;

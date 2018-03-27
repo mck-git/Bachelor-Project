@@ -1,4 +1,6 @@
-package DataTypes;
+package DataTypes.Functions;
+
+import DataTypes.Token;
 
 import java.util.ArrayList;
 
