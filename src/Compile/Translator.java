@@ -16,8 +16,8 @@ public class Translator {
     {
 //        Lexer.read("test_program");
 //        Lexer.read("test_loops");
-//        Lexer.read("test_methods");
-        Lexer.read("quick_test");
+        Lexer.read("test_methods");
+        //Lexer.read("quick_test");
     }
 
     public static void handleLine(ArrayList<Token> tokens) throws InvalidSyntaxException

@@ -1,6 +1,10 @@
+int a = 2
+
 func int helloworld () {
+    a = 3
     print "hello world"
 }
 
 
-helloworld
+helloworld()
+print a
