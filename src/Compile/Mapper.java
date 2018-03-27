@@ -1,10 +1,7 @@
 package Compile;
 
 import DataTypes.*;
-import Maps.BooleanMap;
-import Maps.CharMap;
-import Maps.IntegerMap;
-import Maps.StringMap;
+import Maps.*;
 
 public class Mapper {
 
@@ -55,6 +52,13 @@ public class Mapper {
         BooleanMap.edit(bv.getName(),bv);
     }
 
+
+    // VOID FUNCTIONS
+    public static void storeVoidFunction(VoidFunction vf)
+    {
+        VoidFunctionMap.add(vf.getName(),vf);
+    }
+
     // AUX FUNCTIONS
     public static SearchedVariable findVariable(String varname)
     {
@@ -83,5 +87,18 @@ public class Mapper {
         return null;
     }
 
+
+    /**
+     * FOR TESTING PURPOSES ONLY! DO NOT USE
+     */
+    public static void clearMaps() {
+        IntegerMap.clear();
+        BooleanMap.clear();
+        StringMap.clear();
+        CharMap.clear();
+        VoidFunctionMap.clear();
+
+
+    }
 
 }

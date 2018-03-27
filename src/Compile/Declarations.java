@@ -4,12 +4,16 @@ import Compile.Operations.BooleanNumOperation;
 import Compile.Operations.BooleanOperation;
 import Compile.Operations.MathOperation;
 import DataTypes.*;
+import Errors.InvalidSyntaxException;
+import Parser.Lexer;
+import SharedResources.ExecutionType;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class Declarations {
-    final static int STATEMENT_BODY_START_INDEX = 2;
+    final static int STATEMENT_BODY_START_INDEX = 2; // SHOULD BE 3?
+
+    private static Function functionDeclared;
 
     public static void declareInteger(ArrayList<Token> tokens)
     {
@@ -43,7 +47,6 @@ public class Declarations {
 
     public static void declareBoolean(ArrayList<Token> tokens)
     {
-
         Mapper.addToBooleanMap(
                 new BooleanVariable(
                         tokens.get(1).getContent(),
@@ -51,7 +54,6 @@ public class Declarations {
                 )
         );
     }
-
 
     public static void redefineVariable(ArrayList<Token> tokens)
     {
@@ -106,6 +108,61 @@ public class Declarations {
     }
 
 
+    // FUNCTIONS
+
+    public static void initiateFunctionDeclaration(ArrayList<Token> tokens) throws InvalidSyntaxException
+    {
+        String methodType = tokens.get(1).getContent();
+
+        switch (methodType)
+        {
+            case "void":
+                initiateVoidFunctionDeclaration(tokens);
+                break;
+
+            case "int":
+                //declare
+                break;
+
+            case "string":
+                //declare
+                break;
+
+            case "char":
+                //declare
+                break;
+
+            case "boolean":
+                //declare
+                break;
+
+            default:
+                throw new InvalidSyntaxException(Lexer.getLineNumber());
+
+
+        }
+
+
+    }
+
+
+    private static void initiateVoidFunctionDeclaration(ArrayList<Token> tokens)
+    {
+        String name = tokens.get(2).getContent();
+        functionDeclared = new VoidFunction(name, new ArrayList<ArrayList<Token>>());
+        Translator.setExecutionType(ExecutionType.METHOD);
+    }
+
+    public static void saveLine(ArrayList<Token> tokens)
+    {
+        functionDeclared.addLineOfCode(tokens);
+    }
+
+    public static void storeMethod()
+    {
+        functionDeclared.store();
+    }
+
     // MOVE
     public static int evaluateMath(ArrayList<Token> tokens)
     {
@@ -139,7 +196,7 @@ public class Declarations {
                 if (foundVariable == null || !foundVariable.getType().equals("int") )
                     continue;
 
-                IntegerVariable varValue = (IntegerVariable) foundVariable.getValue();
+                IntegerVariable varValue = (IntegerVariable) foundVariable.getVariable();
 
                 num = applyMathOp(num, op, "" + varValue.getValue());
             }

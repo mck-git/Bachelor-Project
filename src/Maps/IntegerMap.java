@@ -24,4 +24,17 @@ public class IntegerMap {
         return (IntegerVariable) intMap.get(name);
     }
 
+    public static int size()
+    {
+        return intMap.size();
+    }
+
+
+    /**
+     * FOR TESTING PURPOSES ONLY! DO NOT USE
+     */
+    public static void clear()
+    {
+        intMap.clear();
+    }
 }

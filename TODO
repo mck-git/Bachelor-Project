@@ -13,13 +13,14 @@ FEATURES:
 
     Add conditional statements support (if) (DONE)
 
-    Add loop support
+    Add loop support (DONE)
+
+    Add method support
 
     Add ! and () for conditional statements
 
     Add support for lists of ints, chars and Strings
 
-    Add method support
 
 SMALL FEATURES:
 

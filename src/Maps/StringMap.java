@@ -24,5 +24,17 @@ public class StringMap {
         return (StringVariable) stringMap.get(name);
     }
 
+    public static int size()
+    {
+        return stringMap.size();
+    }
+
+    /**
+     * FOR TESTING PURPOSES ONLY! DO NOT USE
+     */
+    public static void clear()
+    {
+        stringMap.clear();
+    }
 
 }

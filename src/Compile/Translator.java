@@ -14,8 +14,10 @@ public class Translator {
 
     public static void main(String[] args) throws Exception
     {
-        Lexer.read("test_program");
+//        Lexer.read("test_program");
 //        Lexer.read("test_loops");
+//        Lexer.read("test_methods");
+        Lexer.read("quick_test");
     }
 
     public static void handleLine(ArrayList<Token> tokens) throws InvalidSyntaxException
@@ -30,10 +32,16 @@ public class Translator {
 
         if (executionType == ExecutionType.WHILE && !firstTokenContent.equals("}"))
         {
-            System.out.println("saving token");
             Loops.saveLine(tokens);
             return;
         }
+
+        if (executionType == ExecutionType.WHILE && !firstTokenContent.equals("}"))
+        {
+            Declarations.saveLine(tokens);
+            return;
+        }
+
 
         switch (firstTokenContent)
         {
@@ -57,14 +65,22 @@ public class Translator {
                 Conditionals.handleIf(tokens);
                 break;
 
-            case "}":
-                if (executionType == ExecutionType.WHILE)
-                    Loops.executeLoop();
-                executionType = ExecutionType.NORMAL;
-                break;
-
             case "while":
                 Loops.initiateWhile(tokens);
+                break;
+
+            case "func":
+                Declarations.initiateFunctionDeclaration(tokens);
+                break;
+
+            case "}":
+                if (executionType == ExecutionType.WHILE) {
+                    Loops.executeLoop();
+                }
+                else if (executionType == ExecutionType.METHOD) {
+                    Declarations.storeMethod();
+                }
+                setExecutionType(ExecutionType.NORMAL);
                 break;
 
             case "print":

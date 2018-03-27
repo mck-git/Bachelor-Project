@@ -1,0 +1,3 @@
+if true | false {
+    print "hello"
+}

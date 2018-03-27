@@ -1,0 +1,6 @@
+func int helloworld () {
+    print "hello world"
+}
+
+
+helloworld

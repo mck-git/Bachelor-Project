@@ -49,28 +49,18 @@ public class Lexer {
         {
             // NORMAL MODE
             if (m == InputType.NORMAL)
-            {
                 readInputNormal(c);
-            }
 
             // ARGUMENT MODE
             else if (m == InputType.ARGUMENTS)
-            {
                 readInputArgument(c);
-            }
 
             // STRING MODE
             else if (m == InputType.STRING)
-            {
                 readInputString(c);
-            }
 
             else if (m == InputType.METHOD)
-            {
                 readInputMethod(c);
-            }
-
-
 
         }
 
@@ -79,9 +69,7 @@ public class Lexer {
 
     private static void readInputNormal(char c) {
         if ( c == ' ' || c == '\n' || c == ';' || c == '\t')
-        {
             endTokenAndSwitchType(InputType.NORMAL);
-        }
 
         // SYMBOLS
         else if ( c == '+' || c == '-' || c == '/' || c == '*'
@@ -102,33 +90,22 @@ public class Lexer {
         }
 
         else if (c == '"')
-        {
             endTokenAndSwitchType(InputType.STRING);
-        }
 
         else
-        {
             buffer += c;
-        }
     }
 
     private static void readInputArgument(char c) {
         if ( c == ',' && m == InputType.ARGUMENTS )
-        {
             endTokenAndSwitchType(InputType.ARGUMENTS);
-        }
     }
 
     private static void readInputString(char c) {
         if (c == '"')
-        {
             endTokenAndSwitchType(InputType.NORMAL);
-        }
-
         else
-        {
             buffer += c;
-        }
     }
 
     private static void readInputMethod(char c) {
@@ -143,6 +120,9 @@ public class Lexer {
         {
             if (tokens.get(i).getContent().equals(""))
                 tokens.remove(i);
+
+            else
+                i++;
         }
 
     }

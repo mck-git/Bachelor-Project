@@ -1,7 +1,6 @@
 package Compile;
 
 import DataTypes.*;
-import Maps.BooleanMap;
 import SharedResources.InputType;
 
 import java.util.ArrayList;
@@ -28,19 +27,19 @@ public class Printer {
                 switch (foundVariable.getType())
                 {
                     case "int" :
-                        printIntVariable(foundVariable.getValue());
+                        printIntVariable(foundVariable.getVariable());
                         break;
 
                     case "char" :
-                        printCharVariable(foundVariable.getValue());
+                        printCharVariable(foundVariable.getVariable());
                         break;
 
                     case "string" :
-                        printStringVariable(foundVariable.getValue());
+                        printStringVariable(foundVariable.getVariable());
                         break;
 
                     case "boolean" :
-                        printBooleanVariable(foundVariable.getValue());
+                        printBooleanVariable(foundVariable.getVariable());
                         break;
                 }
             }

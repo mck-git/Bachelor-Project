@@ -9,7 +9,7 @@ import java.util.ArrayList;
 public class Loops {
     private static ArrayList<Token> conditionalTokens = new ArrayList<>();
 
-    private static ArrayList< ArrayList<Token> > loopTokens = new ArrayList<>();
+    private static ArrayList< ArrayList<Token> > linesOfCodeInLoop = new ArrayList<>();
 
     public static void initiateWhile(ArrayList<Token> tokens) throws InvalidSyntaxException
     {
@@ -22,13 +22,13 @@ public class Loops {
         conditionalTokens = (ArrayList<Token>) tokens.clone();
 
         Translator.setExecutionType(ExecutionType.WHILE);
-        loopTokens.clear();
+        linesOfCodeInLoop.clear();
     }
 
 
     public static void saveLine(ArrayList<Token> tokens)
     {
-        loopTokens.add((ArrayList<Token>) tokens.clone());
+        linesOfCodeInLoop.add((ArrayList<Token>) tokens.clone());
     }
 
     public static void executeLoop() throws InvalidSyntaxException
@@ -36,7 +36,7 @@ public class Loops {
         Translator.setExecutionType(ExecutionType.NORMAL);
         while (Conditionals.evaluateConditionalLine(conditionalTokens) ) // && count < 2
         {
-            for (ArrayList<Token> t : loopTokens) {
+            for (ArrayList<Token> t : linesOfCodeInLoop) {
                 Translator.handleLine(t);
             }
         }
