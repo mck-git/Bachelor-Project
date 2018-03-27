@@ -1,11 +1,11 @@
 package DataTypes;
 
-public class SearchedVariable {
+public class VariableContainer {
 
     String type;
     Object variable;
 
-    public SearchedVariable(String type, Object variable)
+    public VariableContainer(String type, Object variable)
     {
         this.type = type;
         this.variable = variable;

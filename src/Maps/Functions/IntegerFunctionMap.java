@@ -1,30 +1,30 @@
 package Maps.Functions;
 
+import DataTypes.Functions.IntegerFunction;
 import DataTypes.Functions.VoidFunction;
 import DataTypes.Token;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.function.IntFunction;
 
 public class IntegerFunctionMap {
 
-    private static HashMap intFunctionMap = new HashMap<String,ArrayList<ArrayList<Token>>>();
+    private static HashMap integerFunctionMap = new HashMap<String,ArrayList<ArrayList<Token>>>();
 
 
-    public static void add(String name, VoidFunction vf)
+    public static void add(String name, IntegerFunction integerFunction)
     {
-        intFunctionMap.put(name,vf);
+        integerFunctionMap.put(name,integerFunction);
     }
 
-    public static VoidFunction find(String name)
+    public static IntegerFunction find(String name)
     {
-        return (IntFunction) voidFunctionMap.get(name);
+        return (IntegerFunction) integerFunctionMap.get(name);
     }
 
     public static int size()
     {
-        return voidFunctionMap.size();
+        return integerFunctionMap.size();
     }
 
     /**
@@ -32,7 +32,7 @@ public class IntegerFunctionMap {
      */
     public static void clear()
     {
-        voidFunctionMap.clear();
+        integerFunctionMap.clear();
     }
 
 }

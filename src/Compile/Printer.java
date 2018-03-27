@@ -24,7 +24,7 @@ public class Printer {
                 }
 
 
-                SearchedVariable foundVariable = Mapper.findVariable(t.getContent());
+                VariableContainer foundVariable = Mapper.findVariable(t.getContent());
                 if (foundVariable == null)
                     continue;
 

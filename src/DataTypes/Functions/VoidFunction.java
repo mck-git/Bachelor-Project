@@ -1,8 +1,8 @@
 package DataTypes.Functions;
 
 import Compile.Mapper;
-import DataTypes.Functions.Function;
 import DataTypes.Token;
+import DataTypes.VariableContainer;
 
 import java.util.ArrayList;
 
@@ -25,6 +25,11 @@ public class VoidFunction implements Function {
     public void store()
     {
         Mapper.storeVoidFunction(this);
+    }
+
+    public VariableContainer returnValue()
+    {
+        return null;
     }
 
     public String getName() {

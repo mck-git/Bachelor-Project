@@ -2,6 +2,7 @@ package DataTypes.Functions;
 
 import Compile.Mapper;
 import DataTypes.Token;
+import DataTypes.VariableContainer;
 
 import java.util.ArrayList;
 
@@ -24,6 +25,11 @@ public class IntegerFunction implements Function {
     public void store()
     {
         Mapper.storeIntFunction(this);
+    }
+
+    public VariableContainer returnValue()
+    {
+
     }
 
     public String getName() {

@@ -77,29 +77,29 @@ public class Mapper {
     }
 
     // AUX FUNCTIONS
-    public static SearchedVariable findVariable(String varname)
+    public static VariableContainer findVariable(String varname)
     {
         Object result;
 
         result = IntegerMap.find(varname);
 
         if (result != null)
-            return new SearchedVariable("int", result);
+            return new VariableContainer("int", result);
 
         result = CharMap.find(varname);
 
         if (result != null)
-            return new SearchedVariable("char",result);
+            return new VariableContainer("char",result);
 
         result = StringMap.find(varname);
 
         if (result != null)
-            return new SearchedVariable("string",result);
+            return new VariableContainer("string",result);
 
         result = BooleanMap.find(varname);
 
         if (result != null)
-            return new SearchedVariable("boolean",result);
+            return new VariableContainer("boolean",result);
 
         return null;
     }

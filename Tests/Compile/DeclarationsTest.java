@@ -32,7 +32,7 @@ class DeclarationsTest {
 
         assertEquals(1, IntegerMap.size());
 
-        SearchedVariable foundA = Mapper.findVariable("i");
+        VariableContainer foundA = Mapper.findVariable("i");
 
         assert foundA != null;
         assertEquals("int", foundA.getType());
@@ -59,7 +59,7 @@ class DeclarationsTest {
         assertEquals(1, StringMap.size());
 
 
-        SearchedVariable foundA = Mapper.findVariable("s");
+        VariableContainer foundA = Mapper.findVariable("s");
 
         assert foundA != null;
         assertEquals("string", foundA.getType());
@@ -83,7 +83,7 @@ class DeclarationsTest {
 
         assertEquals(1, CharMap.size());
 
-        SearchedVariable foundA = Mapper.findVariable("c");
+        VariableContainer foundA = Mapper.findVariable("c");
 
         assert foundA != null;
         assertEquals("char", foundA.getType());
@@ -107,7 +107,7 @@ class DeclarationsTest {
 
         assertEquals(1, BooleanMap.size());
 
-        SearchedVariable foundA = Mapper.findVariable("bool");
+        VariableContainer foundA = Mapper.findVariable("bool");
 
         assert foundA != null;
         assertEquals("boolean", foundA.getType());
@@ -134,7 +134,7 @@ class DeclarationsTest {
 
         assertEquals(1, IntegerMap.size());
 
-        SearchedVariable foundA = Mapper.findVariable("i2");
+        VariableContainer foundA = Mapper.findVariable("i2");
 
         assert foundA != null;
         assertEquals("int", foundA.getType());

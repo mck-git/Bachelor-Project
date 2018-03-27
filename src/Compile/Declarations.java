@@ -63,7 +63,7 @@ public class Declarations {
 
     public static void redefineVariable(ArrayList<Token> tokens)
     {
-        SearchedVariable val = Mapper.findVariable(tokens.get(0).getContent());
+        VariableContainer val = Mapper.findVariable(tokens.get(0).getContent());
 
         if (val == null)
             return;
@@ -197,7 +197,7 @@ public class Declarations {
 
             else
             {
-                SearchedVariable foundVariable = Mapper.findVariable(tokenContent);
+                VariableContainer foundVariable = Mapper.findVariable(tokenContent);
 
                 if (foundVariable == null || !foundVariable.getType().equals("int") )
                     continue;
