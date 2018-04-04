@@ -4,9 +4,11 @@ import Compile.Operations.BooleanNumOperation;
 import Compile.Operations.BooleanOperation;
 import Compile.Operations.MathOperation;
 import DataTypes.Token;
-import DataTypes.VariableContainer;
+import DataTypes.Variables.VariableContainer;
+import DataTypes.Variables.BooleanVariable;
 import DataTypes.Variables.IntegerVariable;
 import Errors.InvalidSyntaxException;
+import Maps.Variables.TemporaryVariablesMap;
 import Parser.Lexer;
 
 import java.util.ArrayList;
@@ -17,20 +19,32 @@ public class Calculations {
     {
         try
         {
-            evaluateMath(tokens);
+            int returnValue = evaluateMath(tokens);
 
-            
+            TemporaryVariablesMap.add("returnValue", new IntegerVariable(
+                    "returnValue", returnValue
+            ));
 
             return;
-        } catch (InvalidSyntaxException e)
-        {}
+        } catch (InvalidSyntaxException ignored) {}
+
+        try
+        {
+            boolean returnValue = evaluateBoolean(tokens);
+
+            TemporaryVariablesMap.add("returnValue", new BooleanVariable(
+                    "returnValue", returnValue
+            ));
+
+            return;
+        } catch (InvalidSyntaxException ignored) {}
 
 
 
 
 
 
-
+        throw new InvalidSyntaxException(Lexer.getLineNumber());
     }
 
 

@@ -1,10 +1,7 @@
 package Compile;
 
 import DataTypes.*;
-import DataTypes.Variables.BooleanVariable;
-import DataTypes.Variables.CharVariable;
-import DataTypes.Variables.IntegerVariable;
-import DataTypes.Variables.StringVariable;
+import DataTypes.Variables.*;
 import SharedResources.InputType;
 
 import java.util.ArrayList;

@@ -1,11 +1,11 @@
-package DataTypes;
+package DataTypes.Variables;
 
 public class VariableContainer {
 
     String type;
-    Object variable;
+    Variable variable;
 
-    public VariableContainer(String type, Object variable)
+    public VariableContainer(String type, Variable variable)
     {
         this.type = type;
         this.variable = variable;
@@ -15,7 +15,7 @@ public class VariableContainer {
         return type;
     }
 
-    public Object getVariable() {
+    public Variable getVariable() {
         return variable;
     }
 }

@@ -2,7 +2,6 @@ package DataTypes.Functions;
 
 import Compile.Mapper;
 import DataTypes.Token;
-import DataTypes.VariableContainer;
 
 import java.util.ArrayList;
 
@@ -10,8 +9,6 @@ public class IntegerFunction implements Function {
 
     String name;
     ArrayList< ArrayList<Token> > linesOfCodeInMethod;
-
-    VariableContainer returnVariable = null;
 
     public IntegerFunction(String name, ArrayList< ArrayList<Token> > linesOfCodeInMethod)
     {
@@ -29,9 +26,8 @@ public class IntegerFunction implements Function {
         Mapper.storeIntFunction(this);
     }
 
-    public VariableContainer returnValue()
-    {
-        return returnVariable;
+    public ArrayList<ArrayList<Token>> getLinesOfCodeInMethod() {
+        return linesOfCodeInMethod;
     }
 
     public String getName() {

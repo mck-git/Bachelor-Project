@@ -78,12 +78,10 @@ public class Translator {
                 break;
 
             case "}":
-                if (executionType == ExecutionType.WHILE) {
+                if (executionType == ExecutionType.WHILE)
                     Loops.executeLoop();
-                }
-                else if (executionType == ExecutionType.METHOD) {
+                else if (executionType == ExecutionType.METHOD)
                     Declarations.storeMethod();
-                }
                 setExecutionType(ExecutionType.NORMAL);
                 break;
 
@@ -92,7 +90,15 @@ public class Translator {
                 break;
 
             default :
-                Declarations.redefineVariable(tokens);
+                String secondTokenContent = tokens.get(1).getContent();
+
+                if (secondTokenContent.equals("="))
+                    Declarations.redefineVariable(tokens);
+
+                else
+                    FunctionExecutor.findAndRunFunction(tokens);
+
+
         }
 
     }

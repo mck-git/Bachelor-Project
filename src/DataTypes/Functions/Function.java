@@ -1,7 +1,6 @@
 package DataTypes.Functions;
 
 import DataTypes.Token;
-import DataTypes.VariableContainer;
 
 import java.util.ArrayList;
 
@@ -11,5 +10,6 @@ public interface Function {
 
     void store();
 
-    VariableContainer returnValue();
+    ArrayList<ArrayList<Token>> getLinesOfCodeInMethod();
+
 }

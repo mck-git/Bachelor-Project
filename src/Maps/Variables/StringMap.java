@@ -9,14 +9,14 @@ public class StringMap {
     private static HashMap stringMap = new HashMap<String, StringVariable>();
 
 
-    public static void add(String name, StringVariable iv)
+    public static void add(String name, StringVariable stringVariable)
     {
-        stringMap.put(name,iv);
+        stringMap.put(name,stringVariable);
     }
 
-    public static void edit(String name, StringVariable sv)
+    public static void edit(String name, StringVariable stringVariable)
     {
-        stringMap.replace(name, sv);
+        stringMap.replace(name, stringVariable);
     }
 
     public static StringVariable find(String name)

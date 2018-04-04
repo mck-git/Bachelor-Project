@@ -1,12 +1,10 @@
 package Compile;
 
-import DataTypes.*;
+import DataTypes.Functions.Function;
+import DataTypes.Functions.FunctionContainer;
 import DataTypes.Functions.IntegerFunction;
 import DataTypes.Functions.VoidFunction;
-import DataTypes.Variables.BooleanVariable;
-import DataTypes.Variables.CharVariable;
-import DataTypes.Variables.IntegerVariable;
-import DataTypes.Variables.StringVariable;
+import DataTypes.Variables.*;
 import Maps.Functions.IntegerFunctionMap;
 import Maps.Functions.VoidFunctionMap;
 import Maps.Variables.BooleanMap;
@@ -79,12 +77,12 @@ public class Mapper {
     // AUX FUNCTIONS
     public static VariableContainer findVariable(String varname)
     {
-        Object result;
+        Variable result;
 
         result = IntegerMap.find(varname);
 
         if (result != null)
-            return new VariableContainer("int", result);
+            return new VariableContainer("int",result);
 
         result = CharMap.find(varname);
 
@@ -104,6 +102,27 @@ public class Mapper {
         return null;
     }
 
+
+    public static FunctionContainer findFunction(String name)
+    {
+        Function result;
+
+        result = VoidFunctionMap.find(name);
+
+        if (result != null)
+            return new FunctionContainer("void",result);
+
+        result = IntegerFunctionMap.find(name);
+
+        if (result != null)
+            return new FunctionContainer("int",result);
+
+
+
+
+        return null;
+
+    }
 
     /**
      * FOR TESTING PURPOSES ONLY! DO NOT USE

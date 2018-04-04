@@ -10,19 +10,19 @@ public class TemporaryVariablesMap {
     private static HashMap tempVarMap = new HashMap<String, Variable>();
 
 
-    public static void add(String name, StringVariable iv)
+    public static void add(String name, Variable variable)
     {
-        tempVarMap.put(name,iv);
+        tempVarMap.put(name, variable);
     }
 
-    public static void edit(String name, StringVariable sv)
+    public static void edit(String name, Variable variable)
     {
-        tempVarMap.replace(name, sv);
+        tempVarMap.replace(name, variable);
     }
 
     public static Variable find(String name)
     {
-        return (StringVariable) tempVarMap.get(name);
+        return (Variable) tempVarMap.get(name);
     }
 
     public static int size()

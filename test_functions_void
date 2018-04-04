@@ -6,5 +6,4 @@ func int helloworld () {
 }
 
 
-helloworld()
 print a

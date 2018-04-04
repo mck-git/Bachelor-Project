@@ -1,15 +1,9 @@
 package Compile;
 
-import Compile.Operations.BooleanNumOperation;
-import Compile.Operations.BooleanOperation;
-import Compile.Operations.MathOperation;
 import DataTypes.*;
 import DataTypes.Functions.Function;
 import DataTypes.Functions.VoidFunction;
-import DataTypes.Variables.BooleanVariable;
-import DataTypes.Variables.CharVariable;
-import DataTypes.Variables.IntegerVariable;
-import DataTypes.Variables.StringVariable;
+import DataTypes.Variables.*;
 import Errors.InvalidSyntaxException;
 import Parser.Lexer;
 import SharedResources.ExecutionType;
