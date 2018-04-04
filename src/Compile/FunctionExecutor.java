@@ -23,7 +23,6 @@ public class FunctionExecutor {
             Function function = foundFunctionContainer.getFunction();
 
             execute(function);
-
         }
     }
 
@@ -36,8 +35,6 @@ public class FunctionExecutor {
         {
             Translator.handleLine(line);
         }
-
-
     }
 
 }

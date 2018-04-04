@@ -7,10 +7,7 @@ import DataTypes.Functions.VoidFunction;
 import DataTypes.Variables.*;
 import Maps.Functions.IntegerFunctionMap;
 import Maps.Functions.VoidFunctionMap;
-import Maps.Variables.BooleanMap;
-import Maps.Variables.CharMap;
-import Maps.Variables.IntegerMap;
-import Maps.Variables.StringMap;
+import Maps.Variables.*;
 
 public class Mapper {
 
@@ -103,6 +100,16 @@ public class Mapper {
     }
 
 
+    public static VariableContainer findReturnValue()
+    {
+        Variable result = TemporaryVariablesMap.find("returnValue");
+
+        if (result instanceof IntegerFunction)
+            return new VariableContainer("int", result);
+
+        return null;
+    }
+
     public static FunctionContainer findFunction(String name)
     {
         Function result;
@@ -116,9 +123,6 @@ public class Mapper {
 
         if (result != null)
             return new FunctionContainer("int",result);
-
-
-
 
         return null;
 

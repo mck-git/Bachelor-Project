@@ -3,9 +3,10 @@
 func int appear () {
     int a = 5
 
+    print "Working....."
     return a
 }
 
 
 print "a is:"
-print appear
+print appear()
