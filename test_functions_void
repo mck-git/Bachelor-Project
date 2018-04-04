@@ -1,9 +1,10 @@
 int a = 2
 
-func int helloworld () {
+func void helloworld () {
     a = 3
     print "hello world"
 }
 
+helloworld()
 
 print a

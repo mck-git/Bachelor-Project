@@ -18,7 +18,7 @@ public class IntegerFunction implements Function {
 
     public void addLineOfCode(ArrayList<Token> tokens)
     {
-        linesOfCodeInMethod.add(tokens);
+        linesOfCodeInMethod.add( (ArrayList<Token>) tokens.clone() );
     }
 
     public void store()

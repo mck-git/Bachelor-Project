@@ -2,6 +2,7 @@ package Compile;
 
 import DataTypes.*;
 import DataTypes.Functions.Function;
+import DataTypes.Functions.IntegerFunction;
 import DataTypes.Functions.VoidFunction;
 import DataTypes.Variables.*;
 import Errors.InvalidSyntaxException;
@@ -121,7 +122,7 @@ public class Declarations {
                 break;
 
             case "int":
-                //declare
+                initiateIntegerFunctionDeclaration(tokens);
                 break;
 
             case "string":
@@ -150,8 +151,16 @@ public class Declarations {
     {
         String name = tokens.get(2).getContent();
         functionDeclared = new VoidFunction(name, new ArrayList<ArrayList<Token>>());
-        Translator.setExecutionType(ExecutionType.METHOD);
+        Translator.setExecutionType(ExecutionType.FUNCTION);
     }
+
+    private static void initiateIntegerFunctionDeclaration(ArrayList<Token> tokens)
+    {
+        String name = tokens.get(2).getContent();
+        functionDeclared = new IntegerFunction(name, new ArrayList<ArrayList<Token>>());
+        Translator.setExecutionType(ExecutionType.FUNCTION);
+    }
+
 
     public static void saveLine(ArrayList<Token> tokens)
     {

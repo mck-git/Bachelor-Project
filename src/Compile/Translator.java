@@ -36,11 +36,12 @@ public class Translator {
             return;
         }
 
-        if (executionType == ExecutionType.WHILE && !firstTokenContent.equals("}"))
+        if (executionType == ExecutionType.FUNCTION && !firstTokenContent.equals("}"))
         {
             Declarations.saveLine(tokens);
             return;
         }
+
 
 
         switch (firstTokenContent)
@@ -80,7 +81,7 @@ public class Translator {
             case "}":
                 if (executionType == ExecutionType.WHILE)
                     Loops.executeLoop();
-                else if (executionType == ExecutionType.METHOD)
+                else if (executionType == ExecutionType.FUNCTION)
                     Declarations.storeMethod();
                 setExecutionType(ExecutionType.NORMAL);
                 break;
