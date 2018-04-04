@@ -73,6 +73,10 @@ public class Translator {
                 Declarations.initiateFunctionDeclaration(tokens);
                 break;
 
+            case "return":
+                Calculations.evaluateReturn(tokens);
+                break;
+
             case "}":
                 if (executionType == ExecutionType.WHILE) {
                     Loops.executeLoop();

@@ -1,6 +1,6 @@
 package DataTypes.Variables;
 
-public class IntegerVariable {
+public class IntegerVariable implements Variable{
 
     String name;
     int value;

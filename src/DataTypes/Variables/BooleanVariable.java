@@ -1,6 +1,6 @@
 package DataTypes.Variables;
 
-public class BooleanVariable {
+public class BooleanVariable implements Variable{
     String name;
     boolean value;
 

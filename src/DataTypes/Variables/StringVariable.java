@@ -1,6 +1,6 @@
 package DataTypes.Variables;
 
-public class StringVariable {
+public class StringVariable implements Variable{
 
 
     String name;

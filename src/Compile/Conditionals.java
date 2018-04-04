@@ -39,12 +39,12 @@ public class Conditionals {
         {
             tokenContent = tokens.get(i).getContent();
 
-            if ( Declarations.isNumeric(tokenContent) || Declarations.isBoolean(tokenContent)
+            if ( Calculations.isNumeric(tokenContent) || Calculations.isBoolean(tokenContent)
                     || (Mapper.findVariable(tokenContent) != null) )
                 conditionalStart = (conditionalStart == 0? i : conditionalStart);
 
             else if (tokenContent.equals("{"))
-                return Declarations.evaluateBoolean(new ArrayList<>(tokens.subList(conditionalStart,i)));
+                return Calculations.evaluateBoolean(new ArrayList<>(tokens.subList(conditionalStart,i)));
 
         }
         throw new InvalidSyntaxException(Lexer.getLineNumber());

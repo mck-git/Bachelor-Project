@@ -11,6 +11,8 @@ public class IntegerFunction implements Function {
     String name;
     ArrayList< ArrayList<Token> > linesOfCodeInMethod;
 
+    VariableContainer returnVariable = null;
+
     public IntegerFunction(String name, ArrayList< ArrayList<Token> > linesOfCodeInMethod)
     {
         this.name = name;
@@ -29,7 +31,7 @@ public class IntegerFunction implements Function {
 
     public VariableContainer returnValue()
     {
-
+        return returnVariable;
     }
 
     public String getName() {
