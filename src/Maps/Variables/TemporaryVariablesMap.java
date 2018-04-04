@@ -1,10 +1,11 @@
 package Maps.Variables;
 
 import DataTypes.Variables.StringVariable;
+import DataTypes.Variables.Variable;
 
 import java.util.HashMap;
 
-public class TemporaryViarablesMap {
+public class TemporaryVariablesMap {
 
     private static HashMap tempVarMap = new HashMap<String, Variable>();
 
