@@ -33,4 +33,5 @@ public class IntegerFunction implements Function {
     public String getName() {
         return name;
     }
+
 }

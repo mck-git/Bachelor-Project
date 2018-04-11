@@ -33,4 +33,5 @@ public class VoidFunction implements Function {
     public String getName() {
         return name;
     }
+
 }

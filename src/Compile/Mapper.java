@@ -104,7 +104,7 @@ public class Mapper {
     {
         Variable result = TemporaryVariablesMap.find("returnValue");
 
-        if (result instanceof IntegerFunction)
+        if (result instanceof IntegerVariable)
             return new VariableContainer("int", result);
 
         return null;

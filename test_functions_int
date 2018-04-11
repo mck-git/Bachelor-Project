@@ -3,7 +3,6 @@
 func int appear () {
     int a = 5
 
-    print "Working....."
     return a
 }
 

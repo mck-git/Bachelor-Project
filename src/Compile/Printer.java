@@ -131,6 +131,9 @@ public class Printer {
 
         VariableContainer returnValue = Mapper.findReturnValue();
 
+        if (returnValue == null)
+            return;
+
         Variable variable = returnValue.getVariable();
 
         if (variable instanceof IntegerVariable)

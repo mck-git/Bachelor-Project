@@ -12,4 +12,6 @@ public interface Function {
 
     ArrayList<ArrayList<Token>> getLinesOfCodeInMethod();
 
+    String getName();
+
 }
