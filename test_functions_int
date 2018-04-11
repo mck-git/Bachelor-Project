@@ -1,11 +1,13 @@
 
-
 func int appear () {
-    int a = 5
-
-    return a
+    return 2
 }
 
 
 print "a is:"
-print appear()
+
+
+
+int a = 4 + appear()
+
+print a

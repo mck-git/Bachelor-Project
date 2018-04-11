@@ -28,6 +28,8 @@ SMALL FEATURES:
 
     Fix mismatch in boolean statements (such as 'true & 5')
 
+    Weird bug going on in Calculations.evaluateMath
+
 
 REFACTORING:
 
