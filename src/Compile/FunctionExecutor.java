@@ -9,6 +9,11 @@ import java.util.ArrayList;
 
 public class FunctionExecutor {
 
+    /**
+     * Takes tokens and executes any function found within
+     * @param tokens Tokens to read through
+     * @throws InvalidSyntaxException Thrown if the function contains invalid syntax
+     */
     public static void findAndRunFunction(ArrayList<Token> tokens) throws InvalidSyntaxException
     {
         for (Token token : tokens)
@@ -26,7 +31,11 @@ public class FunctionExecutor {
         }
     }
 
-
+    /**
+     * Executes the given function by calling the Translator
+     * @param function Function to execute
+     * @throws InvalidSyntaxException Thrown if the function contains invalid syntax
+     */
     public static void execute(Function function) throws InvalidSyntaxException
     {
         ArrayList<ArrayList<Token>> lines = function.getLinesOfCodeInMethod();

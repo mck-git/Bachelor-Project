@@ -17,6 +17,11 @@ import java.util.ArrayList;
 
 public class Calculations {
 
+    /**
+     * Evaluate the returnvalue of a function and store it in the TemporaryVariablesMap
+     * @param tokens Tokens describing the value to be evaluated and stored
+     * @throws InvalidSyntaxException If the return statement contains illegal symbols or variables
+     */
     public static void evaluateReturn(ArrayList<Token> tokens) throws InvalidSyntaxException
     {
         try
@@ -42,15 +47,17 @@ public class Calculations {
             return;
         } catch (InvalidSyntaxException ignored) {}
 
-
-
-
-
-
         throw new InvalidSyntaxException(Lexer.getLineNumber());
     }
 
 
+    /**
+     * Takes an ArrayList of Tokens and calcualtes the math expression they describe
+     *
+     * @param tokens Tokens read from the code
+     * @return Returns the calculated value of the tokens
+     * @throws InvalidSyntaxException If the math expression contains illegal symbols or variables
+     */
     public static int evaluateMath(ArrayList<Token> tokens) throws InvalidSyntaxException
     {
         int num = 0;
@@ -132,6 +139,13 @@ public class Calculations {
         return num;
     }
 
+    /**
+     * Parses a string to an integer, and applies the given MathOperation to that and the given number
+     * @param num Integer to apply the String number to. Used as the result to be updated
+     * @param op The operation to perform on the two numbers
+     * @param s A number represented as a String. Used as the new number to apply to the current result
+     * @return The result from applying the MathOperation to the two numbers
+     */
     private static int applyMathOp(int num, MathOperation op, String s) {
         switch (op)
         {
@@ -151,6 +165,12 @@ public class Calculations {
         return num;
     }
 
+    /**
+     * Takes an ArrayList of Tokens and evaluates the boolean expression they describe
+     * @param tokens Tokens read from the code
+     * @return Returns the calculated boolean value of the tokens
+     * @throws InvalidSyntaxException If the boolean expression contains illegal symbols or variables
+     */
     public static boolean evaluateBoolean(ArrayList<Token> tokens) throws InvalidSyntaxException
     {
         boolean result = true;
@@ -271,6 +291,14 @@ public class Calculations {
         return result;
     }
 
+
+    /**
+     * Parses a string to a boolean, and applies the given BooleanOperation to that and the given boolean
+     * @param result The current result to apply the operation to
+     * @param op The boolean operation
+     * @param s The string to parse to a boolean and apply the boolean operation to
+     * @return The result of applying the boolean operation on the two given booleans
+     */
     private static boolean applyBooleanOp(boolean result, BooleanOperation op, String s) {
         switch (op)
         {
@@ -286,6 +314,15 @@ public class Calculations {
 
     }
 
+    /**
+     * Compares two numbers according to the given BooleanNumOperation, and applies the given BooleanOperation to the result and the given boolean
+     * @param result The current result boolean to apply the BooleanOperation to
+     * @param op The BooleanOperation to apply to the boolean values
+     * @param numOp The comparison between the two given numbers
+     * @param num1 The first number in the comparison
+     * @param num2 The second number in the comparison
+     * @return The result of comparing the two boolean values
+     */
     private static boolean applyBooleanNumOp(boolean result, BooleanOperation op, BooleanNumOperation numOp, int num1, int num2) {
         switch (numOp)
         {
@@ -310,6 +347,11 @@ public class Calculations {
     }
 
 
+    /**
+     * Checks if the given string represents an integer
+     * @param s String to check
+     * @return Boolean value represeting whether the string represents an integer
+     */
     public static boolean isNumeric(String s)
     {
         try {
@@ -321,6 +363,11 @@ public class Calculations {
     }
 
 
+    /**
+     * Checks if the given string represents a boolean
+     * @param s String to check
+     * @return Boolean value representing whether the string represents a boolean.
+     */
     public static boolean isBoolean(String s)
     {
         return (s.equals("true") || s.equals("false"));
