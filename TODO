@@ -15,7 +15,7 @@ FEATURES:
 
     Add loop support (DONE)
 
-    Add method support
+    Add method support (DONE ISH)
 
     Add ! and () for conditional statements
 
@@ -33,6 +33,6 @@ SMALL FEATURES:
 
 REFACTORING:
 
-    Reevaluate method placements (such as evaluateBoolean and the like)
+    Reevaluate method placements (such as evaluateBoolean and the like) (DONE)
 
-    Integrate errors
+    Integrate errors (DONE - COULD BE BETTER)

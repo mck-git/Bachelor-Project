@@ -2,9 +2,8 @@ package Compile;
 
 import DataTypes.Token;
 import SharedResources.InputType;
-import javafx.scene.effect.SepiaTone;
+import org.junit.jupiter.api.Test;
 
-import java.text.Normalizer;
 import java.util.ArrayList;
 
 import static org.junit.Assert.assertTrue;
@@ -214,4 +213,14 @@ class ConditionalsTest {
         assertTrue(result);
     }
 
+    static class FunctionExecutorTest {
+
+        @Test
+        void findAndRunFunction() {
+        }
+
+        @Test
+        void execute() {
+        }
+    }
 }

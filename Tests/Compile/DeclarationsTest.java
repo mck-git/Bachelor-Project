@@ -123,41 +123,44 @@ class DeclarationsTest {
         ArrayList<Token> line = new ArrayList<>();
 
         line.add(new Token("int", InputType.NORMAL));
-        line.add(new Token("i2", InputType.NORMAL));
+        line.add(new Token("i", InputType.NORMAL));
         line.add(new Token("=", InputType.NORMAL));
-        line.add(new Token("5", InputType.NORMAL));
+        line.add(new Token("3", InputType.NORMAL));
 
         Declarations.declareInteger(line);
 
         assertEquals(1, IntegerMap.size());
 
-        VariableContainer foundA = Mapper.findVariable("i2");
+        VariableContainer foundA = Mapper.findVariable("i");
 
         assert foundA != null;
         assertEquals("int", foundA.getType());
 
         IntegerVariable var = (IntegerVariable) foundA.getVariable();
 
-        assertEquals(5, var.getValue());
+        assertEquals(3, var.getValue());
 
         // Redefine a
 
         line.clear();
 
-        line.add(new Token("i2", InputType.NORMAL));
+        line.add(new Token("i", InputType.NORMAL));
         line.add(new Token("=", InputType.NORMAL));
         line.add(new Token("3", InputType.NORMAL));
+
 
         Declarations.redefineVariable(line);
 
         assertEquals(IntegerMap.size(),1);
 
-        foundA = Mapper.findVariable("i2");
+        foundA = Mapper.findVariable("i");
 
         assert foundA != null;
         assertEquals("int", foundA.getType());
 
+
         var = (IntegerVariable) foundA.getVariable();
+
 
         assertEquals(3, var.getValue());
 

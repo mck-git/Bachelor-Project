@@ -67,7 +67,6 @@ public class Calculations {
         for (Token token : tokens) {
             String tokenContent = token.getContent();
 
-            System.out.println(tokenContent);
             if (tokenContent.equals("+"))
                 op = MathOperation.PLUS;
 
@@ -89,53 +88,54 @@ public class Calculations {
             else if (tokenContent.equals("=") || tokenContent.equals("(") || tokenContent.equals(")"))
                 continue;
 
-            else {
-                int varValue;
 
-                try
-                {
-                    VariableContainer foundVariableContainer = Mapper.findVariable(tokenContent);
-                    if (foundVariableContainer == null || !foundVariableContainer.getType().equals("int"))
-                        throw new InvalidSyntaxException(Lexer.getLineNumber());
+            int varValue;
 
-                    IntegerVariable foundVariable = (IntegerVariable) foundVariableContainer.getVariable();
+            try
+            {
+                VariableContainer foundVariableContainer = Mapper.findVariable(tokenContent);
+                if (foundVariableContainer == null || !foundVariableContainer.getType().equals("int"))
+                    throw new InvalidSyntaxException(Lexer.getLineNumber());
 
-                    varValue = foundVariable.getValue();
+                IntegerVariable foundVariable = (IntegerVariable) foundVariableContainer.getVariable();
 
-                    num = applyMathOp(num, op, "" + varValue);
+                varValue = foundVariable.getValue();
 
-                    continue;
-                } catch (InvalidSyntaxException ignored) {}
+                num = applyMathOp(num, op, "" + varValue);
 
-
-                try
-                {
-                    FunctionContainer foundFunction = Mapper.findFunction(tokenContent);
-
-                    if (foundFunction == null || !(foundFunction.getFunction() instanceof IntegerFunction))
-                        throw new InvalidSyntaxException(Lexer.getLineNumber());
-
-                    FunctionExecutor.execute(foundFunction.getFunction());
-
-                    VariableContainer returnValue = Mapper.findReturnValue();
-
-                    if (returnValue == null || !(returnValue.getVariable() instanceof IntegerVariable))
-                        throw new InvalidSyntaxException(Lexer.getLineNumber());
-
-                    IntegerVariable returnValueVariable = (IntegerVariable) returnValue.getVariable();
-
-                    varValue = returnValueVariable.getValue();
-
-                    num = applyMathOp(num, op, "" + varValue);
-
-                    continue;
-
-                } catch (InvalidSyntaxException ignored) {}
+                continue;
+            } catch (InvalidSyntaxException ignored) {}
 
 
-//                throw new InvalidSyntaxException(Lexer.getLineNumber());
-            }
+            try
+            {
+                FunctionContainer foundFunction = Mapper.findFunction(tokenContent);
+
+                if (foundFunction == null || !(foundFunction.getFunction() instanceof IntegerFunction))
+                    throw new InvalidSyntaxException(Lexer.getLineNumber());
+
+                FunctionExecutor.execute(foundFunction.getFunction());
+
+                VariableContainer returnValue = Mapper.findReturnValue();
+
+                if (returnValue == null || !(returnValue.getVariable() instanceof IntegerVariable))
+                    throw new InvalidSyntaxException(Lexer.getLineNumber());
+
+                IntegerVariable returnValueVariable = (IntegerVariable) returnValue.getVariable();
+
+                varValue = returnValueVariable.getValue();
+
+                num = applyMathOp(num, op, "" + varValue);
+
+                continue;
+
+            } catch (InvalidSyntaxException ignored) {}
+
+
+//            throw new InvalidSyntaxException(Lexer.getLineNumber());
+
         }
+
         return num;
     }
 

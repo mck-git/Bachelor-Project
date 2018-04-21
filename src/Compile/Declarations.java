@@ -12,13 +12,14 @@ import SharedResources.ExecutionType;
 import java.util.ArrayList;
 
 public class Declarations {
-    final static int STATEMENT_BODY_START_INDEX = 3; // SHOULD BE 3?
+    final static int DECLARATION_STATEMENT_BODY_START_INDEX = 3; // SHOULD BE 3?
+    final static int STATEMENT_BODY_START_INDEX = 2;
 
     private static Function functionDeclared;
 
     public static void declareInteger(ArrayList<Token> tokens) throws InvalidSyntaxException
     {
-        ArrayList<Token> body = new ArrayList<>(tokens.subList(STATEMENT_BODY_START_INDEX,tokens.size()));
+        ArrayList<Token> body = new ArrayList<>(tokens.subList(DECLARATION_STATEMENT_BODY_START_INDEX,tokens.size()));
 
         Mapper.addToIntMap(
                 new IntegerVariable(
