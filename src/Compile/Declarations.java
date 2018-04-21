@@ -64,7 +64,7 @@ public class Declarations {
         VariableContainer val = Mapper.findVariable(tokens.get(0).getContent());
 
         if (val == null)
-            return;
+            throw new InvalidSyntaxException(Lexer.getLineNumber());
 
         ArrayList<Token> body = new ArrayList<>(tokens.subList(STATEMENT_BODY_START_INDEX, tokens.size()));
 

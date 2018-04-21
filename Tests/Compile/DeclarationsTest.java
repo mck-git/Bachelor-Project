@@ -25,7 +25,8 @@ class DeclarationsTest {
         line.add(new Token("=", InputType.NORMAL));
         line.add(new Token("2", InputType.NORMAL));
 
-        Declarations.declareInteger(line);
+        Translator.handleLine(line);
+//        Declarations.declareInteger(line);
 
         assertEquals(1, IntegerMap.size());
 
@@ -42,7 +43,7 @@ class DeclarationsTest {
     }
 
     @Test
-    void declareString() {
+    void declareString() throws Exception {
         Mapper.clearMaps();
         ArrayList<Token> line = new ArrayList<>();
 
@@ -51,7 +52,8 @@ class DeclarationsTest {
         line.add(new Token("=", InputType.NORMAL));
         line.add(new Token("Hello World!", InputType.STRING));
 
-        Declarations.declareString(line);
+        Translator.handleLine(line);
+//        Declarations.declareString(line);
 
         assertEquals(1, StringMap.size());
 
@@ -67,7 +69,7 @@ class DeclarationsTest {
     }
 
     @Test
-    void declareChar() {
+    void declareChar() throws Exception {
         Mapper.clearMaps();
         ArrayList<Token> line = new ArrayList<>();
 
@@ -76,7 +78,8 @@ class DeclarationsTest {
         line.add(new Token("=", InputType.NORMAL));
         line.add(new Token("d", InputType.NORMAL));
 
-        Declarations.declareChar(line);
+        Translator.handleLine(line);
+//        Declarations.declareChar(line);
 
         assertEquals(1, CharMap.size());
 
@@ -100,7 +103,8 @@ class DeclarationsTest {
         line.add(new Token("=", InputType.NORMAL));
         line.add(new Token("true", InputType.NORMAL));
 
-        Declarations.declareBoolean(line);
+        Translator.handleLine(line);
+//        Declarations.declareBoolean(line);
 
         assertEquals(1, BooleanMap.size());
 
@@ -127,7 +131,8 @@ class DeclarationsTest {
         line.add(new Token("=", InputType.NORMAL));
         line.add(new Token("3", InputType.NORMAL));
 
-        Declarations.declareInteger(line);
+        Translator.handleLine(line);
+//        Declarations.declareInteger(line);
 
         assertEquals(1, IntegerMap.size());
 
@@ -149,7 +154,8 @@ class DeclarationsTest {
         line.add(new Token("3", InputType.NORMAL));
 
 
-        Declarations.redefineVariable(line);
+        Translator.handleLine(line);
+//        Declarations.redefineVariable(line);
 
         assertEquals(IntegerMap.size(),1);
 

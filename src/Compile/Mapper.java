@@ -137,6 +137,7 @@ public class Mapper {
         StringMap.clear();
         CharMap.clear();
         VoidFunctionMap.clear();
+        IntegerFunctionMap.clear();
 
 
     }

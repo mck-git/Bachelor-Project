@@ -4,6 +4,7 @@ import DataTypes.Functions.Function;
 import DataTypes.Functions.FunctionContainer;
 import DataTypes.Token;
 import Errors.InvalidSyntaxException;
+import Parser.Lexer;
 
 import java.util.ArrayList;
 
@@ -16,6 +17,7 @@ public class FunctionExecutor {
      */
     public static void findAndRunFunction(ArrayList<Token> tokens) throws InvalidSyntaxException
     {
+        boolean functionFound = false;
         for (Token token : tokens)
         {
             String tokenContent = token.getContent();
@@ -28,7 +30,12 @@ public class FunctionExecutor {
             Function function = foundFunctionContainer.getFunction();
 
             execute(function);
+            functionFound = true;
         }
+
+        if (!functionFound)
+            throw new InvalidSyntaxException(Lexer.getLineNumber());
+
     }
 
     /**
