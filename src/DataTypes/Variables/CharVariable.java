@@ -9,6 +9,11 @@ public class CharVariable extends Variable{
         this.value = value;
     }
 
+    public CharVariable(String name)
+    {
+        super(name);
+    }
+
     public char getValue() {
         return this.value;
     }

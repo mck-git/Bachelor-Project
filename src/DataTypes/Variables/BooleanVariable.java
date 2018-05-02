@@ -9,6 +9,11 @@ public class BooleanVariable extends Variable{
         this.value = value;
     }
 
+    public BooleanVariable(String name)
+    {
+        super(name);
+    }
+
     public boolean getValue()
     {
         return this.value;

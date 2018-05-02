@@ -10,6 +10,11 @@ public class StringVariable extends Variable{
         this.value = value;
     }
 
+    public StringVariable(String name)
+    {
+        super(name);
+    }
+
     public String getValue() {
         return this.value;
     }

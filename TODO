@@ -36,3 +36,5 @@ REFACTORING:
     Reevaluate method placements (such as evaluateBoolean and the like) (DONE)
 
     Integrate errors (DONE - COULD BE BETTER)
+
+    Refactor VariableContainer to use instanceof instead of getType

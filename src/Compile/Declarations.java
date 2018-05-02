@@ -154,6 +154,23 @@ public class Declarations {
     {
         String name = tokens.get(2).getContent();
         functionDeclared = new VoidFunction(name, new ArrayList<ArrayList<Token>>());
+
+        boolean argumentsStarted = false;
+
+
+
+        for (Token t: tokens)
+        {
+            if (t.getContent().equals("("))
+                argumentsStarted = true;
+
+            if (!argumentsStarted)
+                continue;
+
+
+
+        }
+
         Translator.setExecutionType(ExecutionType.FUNCTION);
     }
 
