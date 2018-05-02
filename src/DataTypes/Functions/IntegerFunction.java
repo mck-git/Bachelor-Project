@@ -5,33 +5,16 @@ import DataTypes.Token;
 
 import java.util.ArrayList;
 
-public class IntegerFunction implements Function {
-
-    String name;
-    ArrayList< ArrayList<Token> > linesOfCodeInMethod;
+public class IntegerFunction extends Function {
 
     public IntegerFunction(String name, ArrayList< ArrayList<Token> > linesOfCodeInMethod)
     {
-        this.name = name;
-        this.linesOfCodeInMethod = linesOfCodeInMethod;
-    }
-
-    public void addLineOfCode(ArrayList<Token> tokens)
-    {
-        linesOfCodeInMethod.add( (ArrayList<Token>) tokens.clone() );
+        super(name, linesOfCodeInMethod);
     }
 
     public void store()
     {
         Mapper.storeIntFunction(this);
-    }
-
-    public ArrayList<ArrayList<Token>> getLinesOfCodeInMethod() {
-        return linesOfCodeInMethod;
-    }
-
-    public String getName() {
-        return name;
     }
 
 }

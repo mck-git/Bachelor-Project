@@ -1,20 +1,13 @@
 package DataTypes.Variables;
 
-public class IntegerVariable implements Variable{
+public class IntegerVariable extends Variable{
 
-    String name;
     int value;
 
     public IntegerVariable(String name, int value)
     {
-        this.name = name;
+        super(name);
         this.value = value;
-    }
-
-
-    public String getName()
-    {
-        return this.name;
     }
 
     public int getValue() {

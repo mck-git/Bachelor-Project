@@ -1,21 +1,13 @@
 package DataTypes.Variables;
 
-public class StringVariable implements Variable{
+public class StringVariable extends Variable{
 
-
-    String name;
-    String value;
+    private String value;
 
     public StringVariable(String name, String value)
     {
-        this.name = name;
+        super(name);
         this.value = value;
-    }
-
-
-    public String getName()
-    {
-        return this.name;
     }
 
     public String getValue() {

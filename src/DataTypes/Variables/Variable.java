@@ -1,10 +1,18 @@
 package DataTypes.Variables;
 
-public interface Variable {
+public abstract class Variable {
 
-    String getName();
+    private String name;
+
+    Variable(String name)
+    {
+        this.name = name;
+    }
 
 
-
+    public String getName()
+    {
+        return this.name;
+    }
 
 }

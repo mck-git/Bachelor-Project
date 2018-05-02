@@ -1,18 +1,12 @@
 package DataTypes.Variables;
 
-public class BooleanVariable implements Variable{
-    String name;
+public class BooleanVariable extends Variable{
     boolean value;
 
     public BooleanVariable(String name, boolean value)
     {
-        this.name = name;
+        super(name);
         this.value = value;
-    }
-
-    public String getName()
-    {
-        return this.name;
     }
 
     public boolean getValue()
