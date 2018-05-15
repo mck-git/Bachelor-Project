@@ -4,7 +4,7 @@ public abstract class Variable {
 
     private String name;
 
-    Variable(String name)
+    public Variable(String name)
     {
         this.name = name;
     }

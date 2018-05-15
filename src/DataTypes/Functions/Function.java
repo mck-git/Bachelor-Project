@@ -31,6 +31,11 @@ public abstract class Function {
         argumentVariables.addAll( (ArrayList<Variable>) arguments.clone() );
     }
 
+    public void addArgument(Variable argument)
+    {
+        argumentVariables.add(argument);
+    }
+
     public ArrayList<ArrayList<Token>> getLinesOfCodeInMethod()
     {
         return linesOfCodeInMethod;

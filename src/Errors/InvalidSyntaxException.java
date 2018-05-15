@@ -9,6 +9,11 @@ public class InvalidSyntaxException extends Exception {
         this.lineNumber = lineNumber;
     }
 
+    public InvalidSyntaxException(String message)
+    {
+        super(message);
+    }
+
     public String getMessage() {
         return "Syntax error at line: " + lineNumber;
     }

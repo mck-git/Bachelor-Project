@@ -150,25 +150,74 @@ public class Declarations {
     }
 
 
-    private static void initiateVoidFunctionDeclaration(ArrayList<Token> tokens)
+    private static void initiateVoidFunctionDeclaration(ArrayList<Token> tokens) throws Exception
     {
         String name = tokens.get(2).getContent();
         functionDeclared = new VoidFunction(name, new ArrayList<ArrayList<Token>>());
 
         boolean argumentsStarted = false;
-
-
+        boolean expectingArgumentName = false;
+        String argumentType = "";
 
         for (Token t: tokens)
         {
-            if (t.getContent().equals("("))
+            String tokenContent = t.getContent();
+
+            if (tokenContent.equals("("))
                 argumentsStarted = true;
 
             if (!argumentsStarted)
                 continue;
 
+            switch (tokenContent)
+            {
+                case "int":
+                    if (expectingArgumentName)
+                        throw new InvalidSyntaxException("Cannot name a variable '" + tokenContent + "'! At " + Lexer.getLineNumber());
+                    expectingArgumentName = true;
+                    argumentType = tokenContent;
+                    break;
 
+                case "boolean":
+                    if (expectingArgumentName)
+                        throw new InvalidSyntaxException("Cannot name a variable '" + tokenContent + "'! At " + Lexer.getLineNumber());
+                    expectingArgumentName = true;
+                    argumentType = tokenContent;
+                    break;
 
+                case "char":
+                    if (expectingArgumentName)
+                        throw new InvalidSyntaxException("Cannot name a variable '" + tokenContent + "'! At " + Lexer.getLineNumber());
+                    expectingArgumentName = true;
+                    argumentType = tokenContent;
+                    break;
+
+                case "String":
+                    if (expectingArgumentName)
+                        throw new InvalidSyntaxException("Cannot name a variable '" + tokenContent + "'! At " + Lexer.getLineNumber());
+                    expectingArgumentName = true;
+                    argumentType = tokenContent;
+                    break;
+
+                default:
+                    if (Calculations.isNumeric(tokenContent) || Calculations.isBoolean(tokenContent))
+                        throw new InvalidSyntaxException("Cannot name a variable '" + tokenContent + "'! At " + Lexer.getLineNumber());
+
+                    switch (argumentType) {
+                        case "int":
+                            functionDeclared.addArgument(new IntegerVariable(tokenContent));
+                            break;
+                        case "boolean":
+                            functionDeclared.addArgument(new BooleanVariable(tokenContent));
+                            break;
+                        case "char":
+                            functionDeclared.addArgument(new CharVariable(tokenContent));
+                            break;
+                        case "String":
+                            functionDeclared.addArgument(new StringVariable(tokenContent));
+                            break;
+                    }
+            }
         }
 
         Translator.setExecutionType(ExecutionType.FUNCTION);
