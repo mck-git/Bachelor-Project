@@ -150,11 +150,27 @@ public class Declarations {
     }
 
 
-    private static void initiateVoidFunctionDeclaration(ArrayList<Token> tokens) throws Exception
+    private static void initiateVoidFunctionDeclaration(ArrayList<Token> tokens) throws InvalidSyntaxException
     {
         String name = tokens.get(2).getContent();
         functionDeclared = new VoidFunction(name, new ArrayList<ArrayList<Token>>());
 
+        extractAndAddArguments(tokens);
+
+        Translator.setExecutionType(ExecutionType.FUNCTION);
+    }
+
+    private static void initiateIntegerFunctionDeclaration(ArrayList<Token> tokens) throws InvalidSyntaxException
+    {
+        String name = tokens.get(2).getContent();
+        functionDeclared = new IntegerFunction(name, new ArrayList<ArrayList<Token>>());
+
+        extractAndAddArguments(tokens);
+
+        Translator.setExecutionType(ExecutionType.FUNCTION);
+    }
+
+    private static void extractAndAddArguments(ArrayList<Token> tokens) throws InvalidSyntaxException {
         boolean argumentsStarted = false;
         boolean expectingArgumentName = false;
         String argumentType = "";
@@ -219,15 +235,6 @@ public class Declarations {
                     }
             }
         }
-
-        Translator.setExecutionType(ExecutionType.FUNCTION);
-    }
-
-    private static void initiateIntegerFunctionDeclaration(ArrayList<Token> tokens)
-    {
-        String name = tokens.get(2).getContent();
-        functionDeclared = new IntegerFunction(name, new ArrayList<ArrayList<Token>>());
-        Translator.setExecutionType(ExecutionType.FUNCTION);
     }
 
 
@@ -240,6 +247,8 @@ public class Declarations {
     {
         functionDeclared.store();
     }
+
+
 
 
 }
