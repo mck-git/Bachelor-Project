@@ -17,6 +17,7 @@ public abstract class Function {
     {
         this.name = name;
         this.linesOfCodeInMethod = linesOfCodeInMethod;
+        this.argumentVariables = new ArrayList<>();
     }
 
     public abstract void store();
@@ -46,4 +47,7 @@ public abstract class Function {
         return name;
     }
 
+    public ArrayList<Variable> getArgumentVariables() {
+        return argumentVariables;
+    }
 }

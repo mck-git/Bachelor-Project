@@ -1,7 +1,11 @@
 package Compile;
 
 import DataTypes.*;
+import DataTypes.Functions.Function;
+import DataTypes.Functions.FunctionContainer;
+import DataTypes.Functions.VoidFunction;
 import DataTypes.Variables.*;
+import Errors.InvalidSyntaxException;
 import Maps.Variables.BooleanMap;
 import Maps.Variables.CharMap;
 import Maps.Variables.IntegerMap;
@@ -116,6 +120,141 @@ class DeclarationsTest {
         BooleanVariable var = (BooleanVariable) foundA.getVariable();
 
         assertEquals(true, var.getValue());
+    }
+
+
+    @Test
+    void declareVoidFunction() throws InvalidSyntaxException
+    {
+        Mapper.clearMaps();
+        ArrayList<Token> line1 = new ArrayList<>();
+        ArrayList<Token> line2 = new ArrayList<>();
+        ArrayList<Token> line3 = new ArrayList<>();
+
+        line1.add(new Token("func", InputType.NORMAL));
+        line1.add(new Token("void", InputType.NORMAL));
+        line1.add(new Token("test", InputType.NORMAL));
+        line1.add(new Token("(", InputType.NORMAL));
+        line1.add(new Token(")", InputType.NORMAL));
+
+        line2.add(new Token("print", InputType.NORMAL));
+        line2.add(new Token("Hello World", InputType.STRING));
+
+        line3.add(new Token("}", InputType.NORMAL));
+
+
+        Compile.Translator.handleLine(line1);
+        Compile.Translator.handleLine(line2);
+        Compile.Translator.handleLine(line3);
+
+        assertEquals(1, Maps.Functions.VoidFunctionMap.size());
+    }
+
+    @Test void declareVoidFunctionWithArguments() throws InvalidSyntaxException
+    {
+        Mapper.clearMaps();
+        ArrayList<Token> line1 = new ArrayList<>();
+        ArrayList<Token> line2 = new ArrayList<>();
+        ArrayList<Token> line3 = new ArrayList<>();
+
+        line1.add(new Token("func", InputType.NORMAL));
+        line1.add(new Token("void", InputType.NORMAL));
+        line1.add(new Token("test", InputType.NORMAL));
+        line1.add(new Token("(", InputType.NORMAL));
+        line1.add(new Token("int", InputType.NORMAL));
+        line1.add(new Token("a", InputType.NORMAL));
+        line1.add(new Token(")", InputType.NORMAL));
+
+        line2.add(new Token("print", InputType.NORMAL));
+        line2.add(new Token("Hello World", InputType.STRING));
+
+        line3.add(new Token("}", InputType.NORMAL));
+
+
+        Compile.Translator.handleLine(line1);
+        Compile.Translator.handleLine(line2);
+        Compile.Translator.handleLine(line3);
+
+        assertEquals(1, Maps.Functions.VoidFunctionMap.size());
+
+        FunctionContainer fcTest = Mapper.findFunction("test");
+
+        Function test = fcTest.getFunction();
+
+        ArrayList<Variable> args = test.getArgumentVariables();
+
+        assertEquals(1, args.size());
+    }
+
+    @Test
+    void declareIntegerFunction() throws InvalidSyntaxException
+    {
+        Mapper.clearMaps();
+        ArrayList<Token> line1 = new ArrayList<>();
+        ArrayList<Token> line2 = new ArrayList<>();
+        ArrayList<Token> line3 = new ArrayList<>();
+
+        line1.add(new Token("func", InputType.NORMAL));
+        line1.add(new Token("int", InputType.NORMAL));
+        line1.add(new Token("test", InputType.NORMAL));
+        line1.add(new Token("(", InputType.NORMAL));
+        line1.add(new Token(")", InputType.NORMAL));
+
+        line2.add(new Token("return", InputType.NORMAL));
+        line2.add(new Token("2", InputType.NORMAL));
+
+        line3.add(new Token("}", InputType.NORMAL));
+
+
+        Compile.Translator.handleLine(line1);
+        Compile.Translator.handleLine(line2);
+        Compile.Translator.handleLine(line3);
+
+        assertEquals(1, Maps.Functions.IntegerFunctionMap.size());
+
+
+    }
+
+    @Test void declareIntegerFunctionWithArguments() throws InvalidSyntaxException
+    {
+        Mapper.clearMaps();
+        ArrayList<Token> line1 = new ArrayList<>();
+        ArrayList<Token> line2 = new ArrayList<>();
+        ArrayList<Token> line3 = new ArrayList<>();
+        ArrayList<Token> line4 = new ArrayList<>();
+
+        line1.add(new Token("func", InputType.NORMAL));
+        line1.add(new Token("int", InputType.NORMAL));
+        line1.add(new Token("test", InputType.NORMAL));
+        line1.add(new Token("(", InputType.NORMAL));
+        line1.add(new Token("int", InputType.NORMAL));
+        line1.add(new Token("a", InputType.NORMAL));
+        line1.add(new Token(")", InputType.NORMAL));
+
+        line2.add(new Token("print", InputType.NORMAL));
+        line2.add(new Token("Hello World", InputType.STRING));
+
+        line3.add(new Token("return", InputType.NORMAL));
+        line3.add(new Token("0", InputType.NORMAL));
+
+
+        line4.add(new Token("}", InputType.NORMAL));
+
+
+        Compile.Translator.handleLine(line1);
+        Compile.Translator.handleLine(line2);
+        Compile.Translator.handleLine(line3);
+        Compile.Translator.handleLine(line4);
+
+        assertEquals(1, Maps.Functions.IntegerFunctionMap.size());
+
+        FunctionContainer fcTest = Mapper.findFunction("test");
+
+        Function test = fcTest.getFunction();
+
+        ArrayList<Variable> args = test.getArgumentVariables();
+
+        assertEquals(1, args.size());
     }
 
     //// REDEFINE ////
@@ -248,7 +387,8 @@ class DeclarationsTest {
 
 
     @Test
-    void evaluateBoolean() throws Exception {
+    void evaluateBoolean() throws Exception
+    {
         ArrayList<Token> line = new ArrayList<>();
 
         line.add(new Token("true", InputType.NORMAL));
@@ -256,6 +396,27 @@ class DeclarationsTest {
         line.add(new Token("false", InputType.NORMAL));
 
         assertEquals(false, Calculations.evaluateBoolean(line));
+    }
+
+    @Test
+    void evaluateBooleanFail() throws Exception
+    {
+
+        Mapper.clearMaps();
+        ArrayList<Token> line1 = new ArrayList<>();
+
+        line1.add(new Token("hello",InputType.NORMAL));
+        try
+        {
+            Compile.Calculations.evaluateBoolean(line1);
+
+            //fail("Should not be able to parse list containing no booleans");
+        } catch (InvalidSyntaxException ignored)
+        {
+
+        }
+
+
     }
 
     @Test
@@ -277,6 +438,5 @@ class DeclarationsTest {
     void isBoolean_f() {
         assertFalse(Calculations.isBoolean("This is a boolean"));
     }
-
 
 }

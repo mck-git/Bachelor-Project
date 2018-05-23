@@ -1,0 +1,10 @@
+int a = 2
+
+func void helloworld (int fdfs) {
+    a = 3
+    print "hello world"
+}
+
+helloworld()
+
+print a

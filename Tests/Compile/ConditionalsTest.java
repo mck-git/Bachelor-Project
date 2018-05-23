@@ -213,14 +213,4 @@ class ConditionalsTest {
         assertTrue(result);
     }
 
-    static class FunctionExecutorTest {
-
-        @Test
-        void findAndRunFunction() {
-        }
-
-        @Test
-        void execute() {
-        }
-    }
 }

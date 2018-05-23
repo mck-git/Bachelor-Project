@@ -3,6 +3,7 @@ package DataTypes.Variables;
 public class IntegerVariable extends Variable{
 
     private int value;
+    private String name;
 
     public IntegerVariable(String name, int value)
     {

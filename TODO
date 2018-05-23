@@ -21,6 +21,7 @@ FEATURES:
 
     Add support for lists of ints, chars and Strings
 
+    Add arguments to be fetchable for calculations and printing
 
 SMALL FEATURES:
 

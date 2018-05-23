@@ -58,10 +58,6 @@ public class Lexer {
             // STRING MODE
             else if (m == InputType.STRING)
                 readInputString(c);
-
-            else if (m == InputType.METHOD)
-                readInputMethod(c);
-
         }
 
         endTokenAndSwitchType(InputType.NORMAL);
@@ -106,10 +102,6 @@ public class Lexer {
             endTokenAndSwitchType(InputType.NORMAL);
         else
             buffer += c;
-    }
-
-    private static void readInputMethod(char c) {
-
     }
 
     private static void clearBlankTokens()

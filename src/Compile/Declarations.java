@@ -219,6 +219,9 @@ public class Declarations {
                     if (Calculations.isNumeric(tokenContent) || Calculations.isBoolean(tokenContent))
                         throw new InvalidSyntaxException("Cannot name a variable '" + tokenContent + "'! At " + Lexer.getLineNumber());
 
+                    else if (tokenContent.equals(")"))
+                        continue;
+
                     switch (argumentType) {
                         case "int":
                             functionDeclared.addArgument(new IntegerVariable(tokenContent));
