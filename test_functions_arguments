@@ -1,10 +1,10 @@
 int a = 2
 
-func void helloworld (int fdfs) {
-    a = 3
+func void helloworld (int test) {
+    a = test
     print "hello world"
 }
 
-helloworld()
+helloworld(3)
 
 print a

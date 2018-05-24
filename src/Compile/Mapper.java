@@ -8,6 +8,12 @@ import DataTypes.Variables.*;
 import Maps.Functions.IntegerFunctionMap;
 import Maps.Functions.VoidFunctionMap;
 import Maps.Variables.*;
+import com.sun.jdi.connect.Connector;
+
+import java.util.ArrayList;
+import java.util.NoSuchElementException;
+
+import static Compile.FunctionExecutor.functionsExecuting;
 
 public class Mapper {
 
@@ -95,6 +101,20 @@ public class Mapper {
 
         if (result != null)
             return new VariableContainer("boolean",result);
+
+        try
+        {
+            Function fc = functionsExecuting.getFirst();
+
+            ArrayList<Variable> arguments = fc.getArgumentVariables();
+
+            for (Variable v : arguments)
+            {
+
+            }
+
+
+        } catch (NoSuchElementException ignored) {}
 
         return null;
     }

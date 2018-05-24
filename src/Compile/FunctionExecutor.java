@@ -7,8 +7,13 @@ import Errors.InvalidSyntaxException;
 import Parser.Lexer;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.Queue;
 
 public class FunctionExecutor {
+
+    public static LinkedList<Function> functionsExecuting = new LinkedList<>();
+
 
     /**
      * Takes tokens and executes any function found within
@@ -45,12 +50,13 @@ public class FunctionExecutor {
      */
     public static void execute(Function function) throws InvalidSyntaxException
     {
+        functionsExecuting.push(function);
         ArrayList<ArrayList<Token>> lines = function.getLinesOfCodeInMethod();
 
         for (ArrayList<Token> line : lines)
-        {
             Translator.handleLine(line);
-        }
+
+        functionsExecuting.pop();
     }
 
 }
