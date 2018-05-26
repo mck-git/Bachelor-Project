@@ -23,24 +23,57 @@ public class FunctionExecutor {
     public static void findAndRunFunction(ArrayList<Token> tokens) throws InvalidSyntaxException
     {
         boolean functionFound = false;
+        boolean arguments = false;
+        FunctionContainer foundFunctionContainer = null;
+        Function function = null;
+
         for (Token token : tokens)
         {
             String tokenContent = token.getContent();
 
-            FunctionContainer foundFunctionContainer = Mapper.findFunction(tokenContent);
 
-            if (foundFunctionContainer == null)
-                continue;
+            if (!functionFound)
+            {
+                foundFunctionContainer = Mapper.findFunction(tokenContent);
 
-            Function function = foundFunctionContainer.getFunction();
+                if (foundFunctionContainer == null) {
+                    continue;
+                }
 
-            execute(function);
-            functionFound = true;
+
+                function = foundFunctionContainer.getFunction();
+                functionFound = true;
+            }
+
+            else
+            {
+                if (tokenContent.equals("("))
+                    continue;
+
+                else if (tokenContent.equals(")"))
+                    break;
+
+
+
+
+
+            }
+
+
+            // Retrieve argument names and save the given values in TemporaryVariables map
+
+
         }
 
-        if (!functionFound)
-            throw new InvalidSyntaxException(Lexer.getLineNumber());
 
+        if (functionFound)
+        {
+
+            execute(function);
+            return;
+        }
+
+        throw new InvalidSyntaxException(Lexer.getLineNumber());
     }
 
     /**

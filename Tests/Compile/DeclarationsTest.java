@@ -20,7 +20,8 @@ import static org.junit.jupiter.api.Assertions.*;
 class DeclarationsTest {
 
     @Test
-    void declareInteger() throws Exception {
+    void declareInteger() throws Exception
+    {
         Mapper.clearMaps();
         ArrayList<Token> line = new ArrayList<>();
 
@@ -47,7 +48,8 @@ class DeclarationsTest {
     }
 
     @Test
-    void declareString() throws Exception {
+    void declareString() throws Exception
+    {
         Mapper.clearMaps();
         ArrayList<Token> line = new ArrayList<>();
 
@@ -73,7 +75,8 @@ class DeclarationsTest {
     }
 
     @Test
-    void declareChar() throws Exception {
+    void declareChar() throws Exception
+    {
         Mapper.clearMaps();
         ArrayList<Token> line = new ArrayList<>();
 
@@ -98,7 +101,8 @@ class DeclarationsTest {
     }
 
     @Test
-    void declareBoolean() throws Exception {
+    void declareBoolean() throws Exception
+    {
         Mapper.clearMaps();
         ArrayList<Token> line = new ArrayList<>();
 
@@ -262,7 +266,8 @@ class DeclarationsTest {
     //// REDEFINE ////
 
     @Test
-    void redefineVariable_int() throws Exception {
+    void redefineVariable_int() throws Exception
+    {
         Mapper.clearMaps();
         // Define a
         ArrayList<Token> line = new ArrayList<>();
@@ -273,7 +278,6 @@ class DeclarationsTest {
         line.add(new Token("3", InputType.NORMAL));
 
         Translator.handleLine(line);
-//        Declarations.declareInteger(line);
 
         assertEquals(1, IntegerMap.size());
 
@@ -296,7 +300,6 @@ class DeclarationsTest {
 
 
         Translator.handleLine(line);
-//        Declarations.redefineVariable(line);
 
         assertEquals(IntegerMap.size(),1);
 
