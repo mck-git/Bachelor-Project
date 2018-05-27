@@ -70,15 +70,8 @@ public class Calculations {
             String tokenContent = token.getContent();
             int varValue;
 
-            if (tokenContent.equals(")"))
-                System.out.println("Found function is " +  (foundFunction != null));
-
             if (tokenContent.equals(")") && foundFunction != null)
             {
-                for (Token t: functionToExecute) {
-                    System.out.println(t.getContent());
-                }
-
                 FunctionExecutor.findAndRunFunction(functionToExecute);
 
                 VariableContainer returnValue = Mapper.findReturnValue();
@@ -90,7 +83,6 @@ public class Calculations {
 
                 varValue = returnValueVariable.getValue();
 
-                System.out.println(varValue);
                 num = applyMathOp(num, op, "" + varValue);
 
                 foundFunction = null;

@@ -1,9 +1,7 @@
 package Compile;
 
 import DataTypes.*;
-import DataTypes.Functions.Function;
-import DataTypes.Functions.IntegerFunction;
-import DataTypes.Functions.VoidFunction;
+import DataTypes.Functions.*;
 import DataTypes.Variables.*;
 import Errors.InvalidSyntaxException;
 import Parser.Lexer;
@@ -129,15 +127,15 @@ public class Declarations {
                 break;
 
             case "string":
-                //declare
+                initiateStringFunctionDeclaration(tokens);
                 break;
 
             case "char":
-                //declare
+                initiateIntegerFunctionDeclaration(tokens);
                 break;
 
             case "boolean":
-                //declare
+                initiateBooleanFunctionDeclaration(tokens);
                 break;
 
             default:
@@ -169,6 +167,37 @@ public class Declarations {
 
         Translator.setExecutionType(ExecutionType.FUNCTION);
     }
+
+    private static void initiateCharFunctionDeclaration(ArrayList<Token> tokens) throws InvalidSyntaxException
+    {
+        String name = tokens.get(2).getContent();
+        functionDeclared = new CharFunction(name, new ArrayList<ArrayList<Token>>());
+
+        extractAndAddArguments(tokens);
+
+        Translator.setExecutionType(ExecutionType.FUNCTION);
+    }
+
+    private static void initiateBooleanFunctionDeclaration(ArrayList<Token> tokens) throws InvalidSyntaxException
+    {
+        String name = tokens.get(2).getContent();
+        functionDeclared = new BooleanFunction(name, new ArrayList<ArrayList<Token>>());
+
+        extractAndAddArguments(tokens);
+
+        Translator.setExecutionType(ExecutionType.FUNCTION);
+    }
+
+    private static void initiateStringFunctionDeclaration(ArrayList<Token> tokens) throws InvalidSyntaxException
+    {
+        String name = tokens.get(2).getContent();
+        functionDeclared = new StringFunction(name, new ArrayList<ArrayList<Token>>());
+
+        extractAndAddArguments(tokens);
+
+        Translator.setExecutionType(ExecutionType.FUNCTION);
+    }
+
 
     private static void extractAndAddArguments(ArrayList<Token> tokens) throws InvalidSyntaxException {
         boolean argumentsStarted = false;

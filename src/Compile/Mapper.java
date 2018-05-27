@@ -1,12 +1,8 @@
 package Compile;
 
-import DataTypes.Functions.Function;
-import DataTypes.Functions.FunctionContainer;
-import DataTypes.Functions.IntegerFunction;
-import DataTypes.Functions.VoidFunction;
+import DataTypes.Functions.*;
 import DataTypes.Variables.*;
-import Maps.Functions.IntegerFunctionMap;
-import Maps.Functions.VoidFunctionMap;
+import Maps.Functions.*;
 import Maps.Variables.*;
 
 import java.util.ArrayList;
@@ -74,6 +70,24 @@ public class Mapper {
     public static void storeIntFunction(IntegerFunction integerFunction)
     {
         IntegerFunctionMap.add(integerFunction.getName(), integerFunction);
+    }
+
+    // CHAR FUNCTIONS
+    public static void storeCharFunction(CharFunction charFunction)
+    {
+        CharFunctionMap.add(charFunction.getName(), charFunction);
+    }
+
+    // STRING FUNCTIONS
+    public static void storeStringFunction(StringFunction stringFunction)
+    {
+        StringFunctionMap.add(stringFunction.getName(), stringFunction);
+    }
+
+    // BOOLEAN FUNCTIONS
+    public static void storeBooleanFunction(BooleanFunction booleanFunction)
+    {
+        BooleanFunctionMap.add(booleanFunction.getName(), booleanFunction);
     }
 
     // AUX FUNCTIONS
@@ -176,8 +190,9 @@ public class Mapper {
         CharMap.clear();
         VoidFunctionMap.clear();
         IntegerFunctionMap.clear();
-
-
+        CharFunctionMap.clear();
+        BooleanFunctionMap.clear();
+        StringFunctionMap.clear();
     }
 
 }
