@@ -103,13 +103,32 @@ public class Mapper {
 
         try
         {
+
             Function fc = functionsExecuting.getFirst();
 
             ArrayList<Variable> arguments = fc.getArgumentVariables();
 
             for (Variable v : arguments)
             {
+                if (v.getName().equals(varname)) {
+                    result = TemporaryVariablesMap.find(varname);
+                }
+            }
 
+
+            if (result != null)
+            {
+                if (result instanceof IntegerVariable)
+                    return new VariableContainer("int",result);
+
+                if (result instanceof CharVariable)
+                    return new VariableContainer("char",result);
+
+                if (result instanceof BooleanVariable)
+                    return new VariableContainer("boolean",result);
+
+                if (result instanceof StringVariable)
+                    return new VariableContainer("string",result);
             }
 
 

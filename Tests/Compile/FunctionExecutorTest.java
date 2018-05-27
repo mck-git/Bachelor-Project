@@ -170,6 +170,7 @@ class FunctionExecutorTest {
         line1.add(new Token("int", InputType.NORMAL));
         line1.add(new Token("b", InputType.NORMAL));
         line1.add(new Token(")", InputType.NORMAL));
+        line1.add(new Token("{", InputType.NORMAL));
 
         line2.add(new Token("a", InputType.NORMAL));
         line2.add(new Token("=", InputType.NORMAL));
@@ -211,7 +212,7 @@ class FunctionExecutorTest {
     }
 
     @Test
-    void findAndRunVoidFunctionWithArguments() throws Exception
+    void findAndRunIntFunctionWithArguments() throws Exception
     {
         Mapper.clearMaps();
         ArrayList<Token> line0 = new ArrayList<>();
@@ -234,9 +235,13 @@ class FunctionExecutorTest {
         line1.add(new Token("int", InputType.NORMAL));
         line1.add(new Token("b", InputType.NORMAL));
         line1.add(new Token(")", InputType.NORMAL));
+        line1.add(new Token("{", InputType.NORMAL));
 
         line2.add(new Token("return", InputType.NORMAL));
-        line2.add(new Token("b+1", InputType.NORMAL));
+        line2.add(new Token("b", InputType.NORMAL));
+        line2.add(new Token("+", InputType.NORMAL));
+        line2.add(new Token("1", InputType.NORMAL));
+
 
         line3.add(new Token("}", InputType.NORMAL));
 
@@ -263,7 +268,7 @@ class FunctionExecutorTest {
         line4.add(new Token(")", InputType.NORMAL));
 
         Translator.handleLine(line4);
-        assertEquals(0, TemporaryVariablesMap.size());
+        assertEquals(1, TemporaryVariablesMap.size());
 
         assertEquals(1, IntegerMap.size());
 

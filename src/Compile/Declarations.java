@@ -182,6 +182,9 @@ public class Declarations {
             if (tokenContent.equals("("))
                 argumentsStarted = true;
 
+            else if (tokenContent.equals(")"))
+                break;
+
             if (!argumentsStarted)
                 continue;
 

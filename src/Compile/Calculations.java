@@ -63,11 +63,48 @@ public class Calculations {
         int num = 0;
         MathOperation op = MathOperation.PLUS;
 
+        FunctionContainer foundFunction = null;
+        ArrayList<Token> functionToExecute = new ArrayList<>();
 
         for (Token token : tokens) {
             String tokenContent = token.getContent();
+            int varValue;
 
-            if (tokenContent.equals("+"))
+            if (tokenContent.equals(")"))
+                System.out.println("Found function is " +  (foundFunction != null));
+
+            if (tokenContent.equals(")") && foundFunction != null)
+            {
+                for (Token t: functionToExecute) {
+                    System.out.println(t.getContent());
+                }
+
+                FunctionExecutor.findAndRunFunction(functionToExecute);
+
+                VariableContainer returnValue = Mapper.findReturnValue();
+
+                if (returnValue == null || !(returnValue.getVariable() instanceof IntegerVariable))
+                    throw new InvalidSyntaxException(Lexer.getLineNumber());
+
+                IntegerVariable returnValueVariable = (IntegerVariable) returnValue.getVariable();
+
+                varValue = returnValueVariable.getValue();
+
+                System.out.println(varValue);
+                num = applyMathOp(num, op, "" + varValue);
+
+                foundFunction = null;
+                functionToExecute.clear();
+                continue;
+            }
+
+            else if (foundFunction != null)
+            {
+                functionToExecute.add(token);
+                continue;
+            }
+
+            else if (tokenContent.equals("+"))
                 op = MathOperation.PLUS;
 
             else if (tokenContent.equals("-"))
@@ -85,11 +122,8 @@ public class Calculations {
             else if (tokenContent.equals("&") || tokenContent.equals("|") || tokenContent.equals("=="))
                 throw new InvalidSyntaxException(Lexer.getLineNumber());
 
-            else if (tokenContent.equals("=") || tokenContent.equals("(") || tokenContent.equals(")"))
+            else if (tokenContent.equals("="))
                 continue;
-
-
-            int varValue;
 
             try
             {
@@ -109,25 +143,15 @@ public class Calculations {
 
             try
             {
-                FunctionContainer foundFunction = Mapper.findFunction(tokenContent);
+                if (foundFunction != null)
+                    System.out.println("why " + tokenContent);
+
+                foundFunction = Mapper.findFunction(tokenContent);
 
                 if (foundFunction == null || !(foundFunction.getFunction() instanceof IntegerFunction))
                     throw new InvalidSyntaxException(Lexer.getLineNumber());
 
-                FunctionExecutor.execute(foundFunction.getFunction());
-
-                VariableContainer returnValue = Mapper.findReturnValue();
-
-                if (returnValue == null || !(returnValue.getVariable() instanceof IntegerVariable))
-                    throw new InvalidSyntaxException(Lexer.getLineNumber());
-
-                IntegerVariable returnValueVariable = (IntegerVariable) returnValue.getVariable();
-
-                varValue = returnValueVariable.getValue();
-
-                num = applyMathOp(num, op, "" + varValue);
-
-                continue;
+                functionToExecute.add(token);
 
             } catch (InvalidSyntaxException ignored) {}
 

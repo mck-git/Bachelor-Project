@@ -62,7 +62,6 @@ public class FunctionExecutor {
                 else if (tokenContent.equals(")"))
                     break;
 
-
                 Variable arg = argumentNames.get(argumentIndex);
 
                 if ( (arg instanceof IntegerVariable) && Calculations.isNumeric(tokenContent) )
@@ -76,9 +75,6 @@ public class FunctionExecutor {
 
                 else if ( (arg instanceof CharVariable) && tokenContent.length() == 1 && Character.isLetter(tokenContent.charAt(0)))
                     TemporaryVariablesMap.add(arg.getName(), new CharVariable(arg.getName(), tokenContent.charAt(0)));
-
-
-
             }
 
             // Retrieve argument names and save the given values in TemporaryVariables map
@@ -87,7 +83,6 @@ public class FunctionExecutor {
 
         if (functionFound)
         {
-
             execute(function);
             return;
         }
@@ -109,6 +104,7 @@ public class FunctionExecutor {
             Translator.handleLine(line);
 
         functionsExecuting.pop();
+        TemporaryVariablesMap.removeVariables(function.getArgumentVariables());
     }
 
 }

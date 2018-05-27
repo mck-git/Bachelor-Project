@@ -2,6 +2,7 @@ package Maps.Variables;
 
 import DataTypes.Variables.Variable;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class TemporaryVariablesMap {
@@ -27,6 +28,12 @@ public class TemporaryVariablesMap {
     public static int size()
     {
         return tempVarMap.size();
+    }
+
+    public static void removeVariables(ArrayList<Variable> variables)
+    {
+        for (Variable v : variables)
+            tempVarMap.remove(v.getName());
     }
 
     /**
