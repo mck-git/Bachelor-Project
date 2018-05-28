@@ -176,6 +176,22 @@ public class Mapper {
         if (result != null)
             return new FunctionContainer("int",result);
 
+        result = BooleanFunctionMap.find(name);
+
+        if (result != null)
+            return new FunctionContainer("boolean",result);
+
+        result = StringFunctionMap.find(name);
+
+        if (result != null)
+            return new FunctionContainer("string",result);
+
+        result = CharFunctionMap.find(name);
+
+        if (result != null)
+            return new FunctionContainer("char",result);
+
+
         return null;
 
     }
@@ -188,11 +204,14 @@ public class Mapper {
         BooleanMap.clear();
         StringMap.clear();
         CharMap.clear();
+        TemporaryVariablesMap.clear();
+
         VoidFunctionMap.clear();
         IntegerFunctionMap.clear();
         CharFunctionMap.clear();
         BooleanFunctionMap.clear();
         StringFunctionMap.clear();
+
     }
 
 }

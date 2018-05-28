@@ -124,9 +124,6 @@ class FunctionExecutorTest {
         assertEquals(5,a.getValue());
     }
 
-
-
-
     @Test
     void findAndRunNonexistingFunction() throws Exception
     {

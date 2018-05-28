@@ -131,7 +131,7 @@ public class Declarations {
                 break;
 
             case "char":
-                initiateIntegerFunctionDeclaration(tokens);
+                initiateCharFunctionDeclaration(tokens);
                 break;
 
             case "boolean":
@@ -199,7 +199,8 @@ public class Declarations {
     }
 
 
-    private static void extractAndAddArguments(ArrayList<Token> tokens) throws InvalidSyntaxException {
+    private static void extractAndAddArguments(ArrayList<Token> tokens) throws InvalidSyntaxException
+    {
         boolean argumentsStarted = false;
         boolean expectingArgumentName = false;
         String argumentType = "";
@@ -219,6 +220,9 @@ public class Declarations {
 
             switch (tokenContent)
             {
+                case ",":
+                    continue;
+
                 case "int":
                     if (expectingArgumentName)
                         throw new InvalidSyntaxException("Cannot name a variable '" + tokenContent + "'! At " + Lexer.getLineNumber());
@@ -240,7 +244,7 @@ public class Declarations {
                     argumentType = tokenContent;
                     break;
 
-                case "String":
+                case "string":
                     if (expectingArgumentName)
                         throw new InvalidSyntaxException("Cannot name a variable '" + tokenContent + "'! At " + Lexer.getLineNumber());
                     expectingArgumentName = true;
@@ -264,7 +268,7 @@ public class Declarations {
                         case "char":
                             functionDeclared.addArgument(new CharVariable(tokenContent));
                             break;
-                        case "String":
+                        case "string":
                             functionDeclared.addArgument(new StringVariable(tokenContent));
                             break;
                     }

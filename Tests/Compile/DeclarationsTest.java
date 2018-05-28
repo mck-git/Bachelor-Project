@@ -140,6 +140,7 @@ class DeclarationsTest {
         line1.add(new Token("test", InputType.NORMAL));
         line1.add(new Token("(", InputType.NORMAL));
         line1.add(new Token(")", InputType.NORMAL));
+        line1.add(new Token("{", InputType.NORMAL));
 
         line2.add(new Token("print", InputType.NORMAL));
         line2.add(new Token("Hello World", InputType.STRING));
@@ -169,6 +170,7 @@ class DeclarationsTest {
         line1.add(new Token("int", InputType.NORMAL));
         line1.add(new Token("a", InputType.NORMAL));
         line1.add(new Token(")", InputType.NORMAL));
+        line1.add(new Token("{", InputType.NORMAL));
 
         line2.add(new Token("print", InputType.NORMAL));
         line2.add(new Token("Hello World", InputType.STRING));
@@ -204,6 +206,7 @@ class DeclarationsTest {
         line1.add(new Token("test", InputType.NORMAL));
         line1.add(new Token("(", InputType.NORMAL));
         line1.add(new Token(")", InputType.NORMAL));
+        line1.add(new Token("{", InputType.NORMAL));
 
         line2.add(new Token("return", InputType.NORMAL));
         line2.add(new Token("2", InputType.NORMAL));
@@ -216,8 +219,6 @@ class DeclarationsTest {
         Compile.Translator.handleLine(line3);
 
         assertEquals(1, Maps.Functions.IntegerFunctionMap.size());
-
-
     }
 
     @Test
@@ -236,6 +237,7 @@ class DeclarationsTest {
         line1.add(new Token("int", InputType.NORMAL));
         line1.add(new Token("a", InputType.NORMAL));
         line1.add(new Token(")", InputType.NORMAL));
+        line1.add(new Token("{", InputType.NORMAL));
 
         line2.add(new Token("print", InputType.NORMAL));
         line2.add(new Token("Hello World", InputType.STRING));
@@ -261,6 +263,278 @@ class DeclarationsTest {
         ArrayList<Variable> args = test.getArgumentVariables();
 
         assertEquals(1, args.size());
+    }
+
+    @Test
+    void declareBooleanFunction() throws InvalidSyntaxException
+    {
+        Mapper.clearMaps();
+        ArrayList<Token> line1 = new ArrayList<>();
+        ArrayList<Token> line2 = new ArrayList<>();
+        ArrayList<Token> line3 = new ArrayList<>();
+
+        line1.add(new Token("func", InputType.NORMAL));
+        line1.add(new Token("boolean", InputType.NORMAL));
+        line1.add(new Token("test", InputType.NORMAL));
+        line1.add(new Token("(", InputType.NORMAL));
+        line1.add(new Token(")", InputType.NORMAL));
+        line1.add(new Token("{", InputType.NORMAL));
+
+        line2.add(new Token("return", InputType.NORMAL));
+        line2.add(new Token("true", InputType.NORMAL));
+
+        line3.add(new Token("}", InputType.NORMAL));
+
+
+        Compile.Translator.handleLine(line1);
+        Compile.Translator.handleLine(line2);
+        Compile.Translator.handleLine(line3);
+
+        assertEquals(1, Maps.Functions.BooleanFunctionMap.size());
+    }
+
+    @Test
+    void declareBooleanFunctionWithArguments() throws InvalidSyntaxException
+    {
+        Mapper.clearMaps();
+        ArrayList<Token> line1 = new ArrayList<>();
+        ArrayList<Token> line2 = new ArrayList<>();
+        ArrayList<Token> line3 = new ArrayList<>();
+
+        line1.add(new Token("func", InputType.NORMAL));
+        line1.add(new Token("boolean", InputType.NORMAL));
+        line1.add(new Token("test", InputType.NORMAL));
+        line1.add(new Token("(", InputType.NORMAL));
+        line1.add(new Token("int", InputType.NORMAL));
+        line1.add(new Token("b", InputType.NORMAL));
+        line1.add(new Token(")", InputType.NORMAL));
+        line1.add(new Token("{", InputType.NORMAL));
+
+        line2.add(new Token("return", InputType.NORMAL));
+        line2.add(new Token("true", InputType.NORMAL));
+
+        line3.add(new Token("}", InputType.NORMAL));
+
+
+        Compile.Translator.handleLine(line1);
+        Compile.Translator.handleLine(line2);
+        Compile.Translator.handleLine(line3);
+
+        assertEquals(1, Maps.Functions.BooleanFunctionMap.size());
+
+
+        FunctionContainer fcTest = Mapper.findFunction("test");
+
+        Function test = fcTest.getFunction();
+
+        ArrayList<Variable> args = test.getArgumentVariables();
+
+        assertEquals(1, args.size());
+    }
+
+
+    @Test
+    void declareStringFunction() throws InvalidSyntaxException
+    {
+        Mapper.clearMaps();
+        ArrayList<Token> line1 = new ArrayList<>();
+        ArrayList<Token> line2 = new ArrayList<>();
+        ArrayList<Token> line3 = new ArrayList<>();
+
+        line1.add(new Token("func", InputType.NORMAL));
+        line1.add(new Token("string", InputType.NORMAL));
+        line1.add(new Token("test", InputType.NORMAL));
+        line1.add(new Token("(", InputType.NORMAL));
+        line1.add(new Token(")", InputType.NORMAL));
+        line1.add(new Token("{", InputType.NORMAL));
+
+        line2.add(new Token("return", InputType.NORMAL));
+        line2.add(new Token("hello", InputType.STRING));
+
+        line3.add(new Token("}", InputType.NORMAL));
+
+
+        Compile.Translator.handleLine(line1);
+        Compile.Translator.handleLine(line2);
+        Compile.Translator.handleLine(line3);
+
+        assertEquals(1, Maps.Functions.StringFunctionMap.size());
+    }
+
+    @Test
+    void declareStringFunctionWithArguments() throws InvalidSyntaxException
+    {
+        Mapper.clearMaps();
+        ArrayList<Token> line1 = new ArrayList<>();
+        ArrayList<Token> line2 = new ArrayList<>();
+        ArrayList<Token> line3 = new ArrayList<>();
+
+        line1.add(new Token("func", InputType.NORMAL));
+        line1.add(new Token("string", InputType.NORMAL));
+        line1.add(new Token("test", InputType.NORMAL));
+        line1.add(new Token("(", InputType.NORMAL));
+        line1.add(new Token("string", InputType.NORMAL));
+        line1.add(new Token("a", InputType.NORMAL));
+        line1.add(new Token(")", InputType.NORMAL));
+        line1.add(new Token("{", InputType.NORMAL));
+
+        line2.add(new Token("return", InputType.NORMAL));
+        line2.add(new Token("a", InputType.NORMAL));
+
+        line3.add(new Token("}", InputType.NORMAL));
+
+
+        Compile.Translator.handleLine(line1);
+        Compile.Translator.handleLine(line2);
+        Compile.Translator.handleLine(line3);
+
+        assertEquals(1, Maps.Functions.StringFunctionMap.size());
+
+
+        FunctionContainer fcTest = Mapper.findFunction("test");
+
+        Function test = fcTest.getFunction();
+
+        ArrayList<Variable> args = test.getArgumentVariables();
+
+        assertEquals(1, args.size());
+    }
+
+    @Test
+    void declareCharFunction() throws InvalidSyntaxException
+    {
+        Mapper.clearMaps();
+        ArrayList<Token> line1 = new ArrayList<>();
+        ArrayList<Token> line2 = new ArrayList<>();
+        ArrayList<Token> line3 = new ArrayList<>();
+
+        line1.add(new Token("func", InputType.NORMAL));
+        line1.add(new Token("char", InputType.NORMAL));
+        line1.add(new Token("test", InputType.NORMAL));
+        line1.add(new Token("(", InputType.NORMAL));
+        line1.add(new Token(")", InputType.NORMAL));
+        line1.add(new Token("{", InputType.NORMAL));
+
+        line2.add(new Token("return", InputType.NORMAL));
+        line2.add(new Token("c", InputType.NORMAL));
+
+        line3.add(new Token("}", InputType.NORMAL));
+
+
+        Compile.Translator.handleLine(line1);
+        Compile.Translator.handleLine(line2);
+        Compile.Translator.handleLine(line3);
+
+        assertEquals(1, Maps.Functions.CharFunctionMap.size());
+    }
+
+    @Test
+    void declareCharFunctionWithArguments() throws InvalidSyntaxException
+    {
+        Mapper.clearMaps();
+        ArrayList<Token> line1 = new ArrayList<>();
+        ArrayList<Token> line2 = new ArrayList<>();
+        ArrayList<Token> line3 = new ArrayList<>();
+
+        line1.add(new Token("func", InputType.NORMAL));
+        line1.add(new Token("char", InputType.NORMAL));
+        line1.add(new Token("test", InputType.NORMAL));
+        line1.add(new Token("(", InputType.NORMAL));
+        line1.add(new Token("char", InputType.NORMAL));
+        line1.add(new Token("a", InputType.NORMAL));
+        line1.add(new Token(")", InputType.NORMAL));
+        line1.add(new Token("{", InputType.NORMAL));
+
+        line2.add(new Token("return", InputType.NORMAL));
+        line2.add(new Token("a", InputType.NORMAL));
+
+        line3.add(new Token("}", InputType.NORMAL));
+
+
+        Compile.Translator.handleLine(line1);
+        Compile.Translator.handleLine(line2);
+        Compile.Translator.handleLine(line3);
+
+        assertEquals(1, Maps.Functions.CharFunctionMap.size());
+
+
+        FunctionContainer fcTest = Mapper.findFunction("test");
+
+        Function test = fcTest.getFunction();
+
+        ArrayList<Variable> args = test.getArgumentVariables();
+
+        assertEquals(1, args.size());
+    }
+
+    @Test
+    void declareInvalidFunction() throws InvalidSyntaxException
+    {
+        Mapper.clearMaps();
+        ArrayList<Token> line1 = new ArrayList<>();
+        ArrayList<Token> line2 = new ArrayList<>();
+        ArrayList<Token> line3 = new ArrayList<>();
+
+        line1.add(new Token("func", InputType.NORMAL));
+        line1.add(new Token("asdasdasdasd", InputType.NORMAL));
+        line1.add(new Token("test", InputType.NORMAL));
+        line1.add(new Token("(", InputType.NORMAL));
+        line1.add(new Token(")", InputType.NORMAL));
+        line1.add(new Token("{", InputType.NORMAL));
+
+        line2.add(new Token("return", InputType.NORMAL));
+        line2.add(new Token("c", InputType.NORMAL));
+
+        line3.add(new Token("}", InputType.NORMAL));
+
+        try
+        {
+            Compile.Translator.handleLine(line1);
+            Compile.Translator.handleLine(line2);
+            Compile.Translator.handleLine(line3);
+
+            fail("Function requires an actual type!");
+        } catch (InvalidSyntaxException ignored) {}
+
+
+        assertEquals(0, Maps.Functions.CharFunctionMap.size());
+
+    }
+
+    @Test
+    void declareFunctionInvalidArgumentType() throws InvalidSyntaxException
+    {
+        Mapper.clearMaps();
+        ArrayList<Token> line1 = new ArrayList<>();
+        ArrayList<Token> line2 = new ArrayList<>();
+        ArrayList<Token> line3 = new ArrayList<>();
+
+        line1.add(new Token("func", InputType.NORMAL));
+        line1.add(new Token("void", InputType.NORMAL));
+        line1.add(new Token("test", InputType.NORMAL));
+        line1.add(new Token("(", InputType.NORMAL));
+        line1.add(new Token("int", InputType.NORMAL));
+        line1.add(new Token("b", InputType.NORMAL));
+        line1.add(new Token(")", InputType.NORMAL));
+        line1.add(new Token("{", InputType.NORMAL));
+
+        line2.add(new Token("return", InputType.NORMAL));
+        line2.add(new Token("c", InputType.NORMAL));
+
+        line3.add(new Token("}", InputType.NORMAL));
+
+        try
+        {
+            Compile.Translator.handleLine(line1);
+            Compile.Translator.handleLine(line2);
+            Compile.Translator.handleLine(line3);
+
+//            fail("Function requires an actual type!");
+        } catch (InvalidSyntaxException ignored) {}
+
+
+        assertEquals(0, Maps.Functions.CharFunctionMap.size());
+
     }
 
     //// REDEFINE ////
