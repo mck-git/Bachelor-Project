@@ -3,9 +3,11 @@ package Compile;
 import Compile.Operations.BooleanNumOperation;
 import Compile.Operations.BooleanOperation;
 import Compile.Operations.MathOperation;
+import DataTypes.Functions.Function;
 import DataTypes.Functions.FunctionContainer;
 import DataTypes.Functions.IntegerFunction;
 import DataTypes.Token;
+import DataTypes.Variables.Variable;
 import DataTypes.Variables.VariableContainer;
 import DataTypes.Variables.BooleanVariable;
 import DataTypes.Variables.IntegerVariable;
@@ -199,6 +201,11 @@ public class Calculations {
 
         int numBuffer = 0;
 
+        int intVarValue = 0;
+        boolean booleanVarValue = false;
+
+        FunctionContainer foundFunction = null;
+
 
         for (int i = 0; i < tokens.size(); i++)
         {
@@ -293,6 +300,58 @@ public class Calculations {
                 numIndexStart = i;
                 numberSequence = true;
             }
+
+            try
+            {
+                VariableContainer foundVariableContainer = Mapper.findVariable(tokenContent);
+                if (foundVariableContainer == null || !foundVariableContainer.getType().equals("int")
+                        || !foundVariableContainer.getType().equals("boolean"))
+                    throw new InvalidSyntaxException(Lexer.getLineNumber());
+
+
+                Variable foundVariable = foundVariableContainer.getVariable();
+
+                if (foundVariable instanceof IntegerVariable)
+                {
+                    intVarValue = ((IntegerVariable) foundVariable).getValue();
+
+                }
+
+                else if (foundVariable instanceof BooleanVariable)
+                {
+                    booleanVarValue = ((BooleanVariable) foundVariable).getValue();
+
+                    result = applyBooleanOp(
+                            result, op, "" + booleanVarValue
+                    );
+
+                    continue;
+
+                }
+
+
+
+
+                continue;
+            } catch (InvalidSyntaxException ignored) {}
+
+
+//            try
+//            {
+//                if (foundFunction != null)
+//                    System.out.println("why " + tokenContent);
+//
+//                foundFunction = Mapper.findFunction(tokenContent);
+//
+//                if (foundFunction == null || !(foundFunction.getFunction() instanceof IntegerFunction))
+//                    throw new InvalidSyntaxException(Lexer.getLineNumber());
+//
+//                functionToExecute.add(token);
+//
+//            } catch (InvalidSyntaxException ignored) {}
+
+
+
 
         }
 
