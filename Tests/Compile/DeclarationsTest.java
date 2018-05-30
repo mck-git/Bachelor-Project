@@ -4,8 +4,14 @@ import DataTypes.*;
 import DataTypes.Functions.Function;
 import DataTypes.Functions.FunctionContainer;
 import DataTypes.Functions.VoidFunction;
+import DataTypes.Lists.IntegerList;
+import DataTypes.Lists.List;
 import DataTypes.Variables.*;
 import Errors.InvalidSyntaxException;
+import Maps.Lists.BooleanListMap;
+import Maps.Lists.CharListMap;
+import Maps.Lists.IntegerListMap;
+import Maps.Lists.StringListMap;
 import Maps.Variables.BooleanMap;
 import Maps.Variables.CharMap;
 import Maps.Variables.IntegerMap;
@@ -18,6 +24,8 @@ import java.util.ArrayList;
 import static org.junit.jupiter.api.Assertions.*;
 
 class DeclarationsTest {
+
+    // VARIABLES
 
     @Test
     void declareInteger() throws Exception
@@ -126,6 +134,8 @@ class DeclarationsTest {
         assertEquals(true, var.getValue());
     }
 
+
+    // FUNCTIONS
 
     @Test
     void declareVoidFunction() throws InvalidSyntaxException
@@ -535,6 +545,148 @@ class DeclarationsTest {
 
         assertEquals(0, Maps.Functions.CharFunctionMap.size());
 
+    }
+
+    // LISTS
+
+    @Test
+    void declareIntegerList() throws InvalidSyntaxException
+    {
+        Mapper.clearMaps();
+
+        ArrayList<Token> line1 = new ArrayList<>();
+
+        line1.add(new Token("list", InputType.NORMAL));
+        line1.add(new Token("int", InputType.NORMAL));
+        line1.add(new Token("a", InputType.NORMAL));
+        line1.add(new Token("=", InputType.NORMAL));
+        line1.add(new Token("[", InputType.NORMAL));
+        line1.add(new Token("2", InputType.NORMAL));
+        line1.add(new Token(",", InputType.NORMAL));
+        line1.add(new Token("3", InputType.NORMAL));
+        line1.add(new Token("}", InputType.NORMAL));
+
+        Translator.handleLine(line1);
+
+        assertEquals(1,IntegerListMap.size());
+
+//        ListContainer foundListContainer = Mapper.findList("a");
+//
+//        List foundList = foundListContainer.getList();
+//
+//
+//        if (!(foundList instanceof IntegerList))
+//            fail("Should be an IntegerList");
+//
+//        foundList = (IntegerList) foundList
+//
+//        assertEquals(2, foundList.get(0));
+//        assertEquals(3, foundList.get(1));
+    }
+
+    @Test
+    void declareStringList() throws InvalidSyntaxException
+    {
+        Mapper.clearMaps();
+
+        ArrayList<Token> line1 = new ArrayList<>();
+
+        line1.add(new Token("list", InputType.NORMAL));
+        line1.add(new Token("string", InputType.NORMAL));
+        line1.add(new Token("a", InputType.NORMAL));
+        line1.add(new Token("=", InputType.NORMAL));
+        line1.add(new Token("[", InputType.NORMAL));
+        line1.add(new Token("hello", InputType.STRING));
+        line1.add(new Token(",", InputType.NORMAL));
+        line1.add(new Token("world", InputType.STRING));
+        line1.add(new Token("]", InputType.NORMAL));
+
+        Translator.handleLine(line1);
+
+        assertEquals(1, StringListMap.size());
+
+//        ListContainer foundListContainer = Mapper.findList("a");
+//
+//        List foundList = foundListContainer.getList();
+//
+//
+//        if (!(foundList instanceof StringList))
+//            fail("Should be an StringList");
+//
+//        foundList = (StringList) foundList
+//
+//        assertTrue(foundList.get(0).equals("hello");
+//        assertTrue(foundList.get(1).equals("world");
+    }
+
+    @Test
+    void declareCharList() throws InvalidSyntaxException
+    {
+        Mapper.clearMaps();
+
+        ArrayList<Token> line1 = new ArrayList<>();
+
+        line1.add(new Token("list", InputType.NORMAL));
+        line1.add(new Token("char", InputType.NORMAL));
+        line1.add(new Token("a", InputType.NORMAL));
+        line1.add(new Token("=", InputType.NORMAL));
+        line1.add(new Token("[", InputType.NORMAL));
+        line1.add(new Token("b", InputType.STRING));
+        line1.add(new Token(",", InputType.NORMAL));
+        line1.add(new Token("r", InputType.STRING));
+        line1.add(new Token("]", InputType.NORMAL));
+
+        Translator.handleLine(line1);
+
+        assertEquals(1, CharListMap.size());
+
+//        ListContainer foundListContainer = Mapper.findList("a");
+//
+//        List foundList = foundListContainer.getList();
+//
+//
+//        if (!(foundList instanceof CharList))
+//            fail("Should be an StringList");
+//
+//        foundList = (CharList) foundList
+//
+//        assertEquals(2, foundList.get(0));
+//        assertEquals(3, foundList.get(1));
+    }
+
+    @Test
+    void declareBooleanList() throws InvalidSyntaxException
+    {
+        Mapper.clearMaps();
+
+        ArrayList<Token> line1 = new ArrayList<>();
+
+        line1.add(new Token("list", InputType.NORMAL));
+        line1.add(new Token("boolean", InputType.NORMAL));
+        line1.add(new Token("a", InputType.NORMAL));
+        line1.add(new Token("=", InputType.NORMAL));
+        line1.add(new Token("[", InputType.NORMAL));
+        line1.add(new Token("true", InputType.STRING));
+        line1.add(new Token(",", InputType.NORMAL));
+        line1.add(new Token("false", InputType.STRING));
+        line1.add(new Token("]", InputType.NORMAL));
+
+        Translator.handleLine(line1);
+
+        assertEquals(1, BooleanListMap.size());
+
+//        ListContainer foundListContainer = Mapper.findList("a");
+//
+//        List foundList = foundListContainer.getList();
+//
+//
+//        if (!(foundList instanceof BooleanList))
+//            fail("Should be an BooleanList");
+//
+//        foundList = (BooleanList) foundList
+//
+//        assertTrue(foundList.get(0));
+//        assertFalse(foundList.get(1));
     }
 
     //// REDEFINE ////

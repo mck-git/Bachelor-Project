@@ -9,6 +9,7 @@ public class StringList extends List {
     public StringList(String name)
     {
         super(name);
+        listValues = new ArrayList<>();
     }
 
     public void add(String string)

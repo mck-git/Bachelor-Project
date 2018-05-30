@@ -9,9 +9,9 @@ public class StringListMap {
     private static HashMap stringListMap = new HashMap<String,StringList>();
 
 
-    public static void add(String name, StringList integerList)
+    public static void add(String name, StringList stringList)
     {
-        stringListMap.put(name,integerList);
+        stringListMap.put(name,stringList);
     }
 
     public static StringList find(String name)
