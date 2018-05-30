@@ -64,7 +64,8 @@ public class Printer {
 
     }
 
-    private static void printVariable(VariableContainer foundVariable) {
+    private static void printVariable(VariableContainer foundVariable)
+    {
         switch (foundVariable.getType())
         {
             case "int" :
@@ -143,43 +144,6 @@ public class Printer {
 
         else if (variable instanceof CharVariable)
             System.out.println(((CharVariable) variable).getValue());
-
-//        switch (functionContainer.getType())
-//        {
-//            case "int" :
-//                printIntFunction(functionContainer.getFunction());
-//                break;
-//
-//            case "char" :
-//                printCharVariable(functionContainer.getFunction());
-//                break;
-//
-//            case "string" :
-//                printStringVariable(functionContainer.getFunction());
-//                break;
-//
-//            case "boolean" :
-//                printBooleanVariable(functionContainer.getFunction());
-//                break;
-//        }
     }
-
-    private static void printIntFunction(Function function) throws InvalidSyntaxException
-    {
-        FunctionExecutor.execute(function);
-
-        VariableContainer returnValue = Mapper.findReturnValue();
-
-        if (returnValue == null)
-            return;
-
-        Variable variable = returnValue.getVariable();
-
-        if (variable instanceof IntegerVariable)
-            System.out.println(((IntegerVariable) variable).getValue());
-
-
-    }
-
 
 }
