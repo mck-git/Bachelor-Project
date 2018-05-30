@@ -13,8 +13,25 @@ public class Printer {
 
     public static void print(ArrayList<Token> tokens) throws NullPointerException, InvalidSyntaxException
     {
+        ArrayList<Token> functionToPrint = null;
+
         for (Token t : tokens)
         {
+
+            if ( t.getContent().equals(")") && (functionToPrint != null))
+            {
+                printFunction(functionToPrint);
+                functionToPrint = null;
+                continue;
+            }
+
+            if (functionToPrint != null)
+            {
+                functionToPrint.add(t);
+                continue;
+            }
+
+
             if (t.getInputType() == InputType.STRING)
             {
                 System.out.println(t.getContent());
@@ -38,7 +55,8 @@ public class Printer {
 
             FunctionContainer foundFunction = Mapper.findFunction(tokenContent);
             if (foundFunction != null) {
-                printFunction(foundFunction);
+                functionToPrint = new ArrayList<>();
+                functionToPrint.add(t);
                 continue;
             }
 
@@ -103,14 +121,35 @@ public class Printer {
         );
     }
 
-    private static void printFunction(FunctionContainer functionContainer) throws InvalidSyntaxException
+    private static void printFunction(ArrayList<Token> functionToPrint) throws InvalidSyntaxException
     {
-        switch (functionContainer.getType())
-        {
-            case "int" :
-                printIntFunction(functionContainer.getFunction());
-                break;
+        FunctionExecutor.findAndRunFunction(functionToPrint);
 
+        VariableContainer returnValue = Mapper.findReturnValue();
+
+        if (returnValue == null)
+            return;
+
+        Variable variable = returnValue.getVariable();
+
+        if (variable instanceof IntegerVariable)
+            System.out.println(((IntegerVariable) variable).getValue());
+
+        else if (variable instanceof BooleanVariable)
+            System.out.println(((BooleanVariable) variable).getValue());
+
+        else if (variable instanceof StringVariable)
+            System.out.println(((StringVariable) variable).getValue());
+
+        else if (variable instanceof CharVariable)
+            System.out.println(((CharVariable) variable).getValue());
+
+//        switch (functionContainer.getType())
+//        {
+//            case "int" :
+//                printIntFunction(functionContainer.getFunction());
+//                break;
+//
 //            case "char" :
 //                printCharVariable(functionContainer.getFunction());
 //                break;
@@ -122,7 +161,7 @@ public class Printer {
 //            case "boolean" :
 //                printBooleanVariable(functionContainer.getFunction());
 //                break;
-        }
+//        }
     }
 
     private static void printIntFunction(Function function) throws InvalidSyntaxException

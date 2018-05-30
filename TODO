@@ -1,22 +1,5 @@
 FEATURES:
 
-    Add math support when declaring integers (DONE)
-        Add order of operations?
-
-    Add support for char and String variables (DONE)
-
-    Add redefine variable support (DONE)
-
-    Add support for booleans (DONE)
-
-    Add boolean expression support (equals, greater than, less than, etc.) (DONE)
-
-    Add conditional statements support (if) (DONE)
-
-    Add loop support (DONE)
-
-    Add method support (DONE ISH)
-
     Add ! and () for conditional statements
 
     Add support for lists of ints, chars and Strings
@@ -29,13 +12,10 @@ SMALL FEATURES:
 
     Fix mismatch in boolean statements (such as 'true & 5')
 
-    Weird bug going on in Calculations.evaluateMath
+    Integrate variables and functions to evaluateBoolean
 
+    Integrate functions with arguments into Print
 
 REFACTORING:
-
-    Reevaluate method placements (such as evaluateBoolean and the like) (DONE)
-
-    Integrate errors (DONE - COULD BE BETTER)
 
     Refactor VariableContainer to use instanceof instead of getType
