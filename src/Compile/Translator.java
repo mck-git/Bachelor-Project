@@ -77,6 +77,10 @@ public class Translator {
                 Declarations.initiateFunctionDeclaration(tokens);
                 break;
 
+            case "list":
+                Declarations.declareList(tokens);
+                break;
+
             case "return":
                 Calculations.evaluateReturn(tokens);
                 break;

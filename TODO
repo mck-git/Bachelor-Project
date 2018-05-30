@@ -12,8 +12,6 @@ SMALL FEATURES:
 
     Fix mismatch in boolean statements (such as 'true & 5')
 
-    Integrate variables and functions to evaluateBoolean
-
 REFACTORING:
 
     Refactor VariableContainer to use instanceof instead of getType

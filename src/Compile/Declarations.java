@@ -2,10 +2,16 @@ package Compile;
 
 import DataTypes.*;
 import DataTypes.Functions.*;
+import DataTypes.Lists.BooleanList;
+import DataTypes.Lists.CharList;
+import DataTypes.Lists.IntegerList;
+import DataTypes.Lists.StringList;
 import DataTypes.Variables.*;
 import Errors.InvalidSyntaxException;
+import Maps.Lists.IntegerListMap;
 import Parser.Lexer;
 import SharedResources.ExecutionType;
+import SharedResources.InputType;
 
 import java.util.ArrayList;
 
@@ -109,7 +115,6 @@ public class Declarations {
 
     }
 
-
     // FUNCTIONS
 
     public static void initiateFunctionDeclaration(ArrayList<Token> tokens) throws InvalidSyntaxException
@@ -146,7 +151,6 @@ public class Declarations {
 
 
     }
-
 
     private static void initiateVoidFunctionDeclaration(ArrayList<Token> tokens) throws InvalidSyntaxException
     {
@@ -197,7 +201,6 @@ public class Declarations {
 
         Translator.setExecutionType(ExecutionType.FUNCTION);
     }
-
 
     private static void extractAndAddArguments(ArrayList<Token> tokens) throws InvalidSyntaxException
     {
@@ -276,7 +279,6 @@ public class Declarations {
         }
     }
 
-
     public static void saveLine(ArrayList<Token> tokens)
     {
         functionDeclared.addLineOfCode(tokens);
@@ -285,6 +287,102 @@ public class Declarations {
     public static void storeMethod()
     {
         functionDeclared.store();
+    }
+
+    // LISTS
+
+    public static void declareList(ArrayList<Token> tokens) throws InvalidSyntaxException
+    {
+        String listType = tokens.get(1).getContent();
+
+        switch (listType)
+        {
+            case "int":
+                declareIntegerList(tokens);
+                break;
+
+            case "string":
+                declareStringList(tokens);
+                break;
+
+            case "char":
+                declareCharList(tokens);
+                break;
+
+            case "boolean":
+                declareBooleanList(tokens);
+                break;
+
+            default:
+                throw new InvalidSyntaxException("List must have valíd datatype: At " + Lexer.getLineNumber());
+        }
+    }
+
+    private static void declareIntegerList(ArrayList<Token> tokens)
+    {
+        String name = tokens.get(2).getContent();
+        IntegerList integerList = new IntegerList(name);
+
+        for (Token token : tokens)
+        {
+            String tokenContent = token.getContent();
+
+            if (Calculations.isNumeric(tokenContent))
+            {
+                integerList.add(Integer.parseInt(tokenContent));
+            }
+
+        }
+
+        Mapper.storeIntegerList(integerList);
+    }
+
+    private static void declareStringList(ArrayList<Token> tokens)
+    {
+        String name = tokens.get(2).getContent();
+        StringList stringList = new StringList(name);
+
+        for (Token token : tokens)
+        {
+            String tokenContent = token.getContent();
+
+            if (token.getInputType() == InputType.STRING)
+                stringList.add(tokenContent);
+        }
+
+        Mapper.storeStringList(stringList);
+    }
+
+    private static void declareCharList(ArrayList<Token> tokens)
+    {
+        String name = tokens.get(2).getContent();
+        CharList charList = new CharList(name);
+
+        for (Token token : tokens)
+        {
+            String tokenContent = token.getContent();
+
+            if ( Character.isLetter(tokenContent.charAt(0)) )
+                charList.add(tokenContent.charAt(0));
+        }
+
+        Mapper.storeCharList(charList);
+    }
+
+    private static void declareBooleanList(ArrayList<Token> tokens)
+    {
+        String name = tokens.get(2).getContent();
+        BooleanList booleanList = new BooleanList(name);
+
+        for (Token token : tokens)
+        {
+            String tokenContent = token.getContent();
+
+            if ( Calculations.isBoolean(tokenContent) )
+                booleanList.add( Boolean.parseBoolean(tokenContent));
+        }
+
+        Mapper.storeBooleanList(booleanList);
     }
 
 

@@ -1,8 +1,16 @@
 package Compile;
 
 import DataTypes.Functions.*;
+import DataTypes.Lists.BooleanList;
+import DataTypes.Lists.CharList;
+import DataTypes.Lists.IntegerList;
+import DataTypes.Lists.StringList;
 import DataTypes.Variables.*;
 import Maps.Functions.*;
+import Maps.Lists.BooleanListMap;
+import Maps.Lists.CharListMap;
+import Maps.Lists.IntegerListMap;
+import Maps.Lists.StringListMap;
 import Maps.Variables.*;
 
 import java.util.ArrayList;
@@ -88,6 +96,27 @@ public class Mapper {
     public static void storeBooleanFunction(BooleanFunction booleanFunction)
     {
         BooleanFunctionMap.add(booleanFunction.getName(), booleanFunction);
+    }
+
+    // LISTS
+    public static void storeIntegerList(IntegerList integerList)
+    {
+        IntegerListMap.add(integerList.getName(), integerList);
+    }
+
+    public static void storeCharList(CharList charList)
+    {
+        CharListMap.add(charList.getName(), charList);
+    }
+
+    public static void storeStringList(StringList stringList)
+    {
+        StringListMap.add(stringList.getName(), stringList);
+    }
+
+    public static void storeBooleanList(BooleanList booleanList)
+    {
+        BooleanListMap.add(booleanList.getName(), booleanList);
     }
 
     // AUX FUNCTIONS
@@ -212,6 +241,10 @@ public class Mapper {
         BooleanFunctionMap.clear();
         StringFunctionMap.clear();
 
+        IntegerListMap.clear();
+        CharListMap.clear();
+        StringListMap.clear();
+        BooleanListMap.clear();
     }
 
 }
