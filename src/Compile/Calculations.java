@@ -3,6 +3,7 @@ package Compile;
 import Compile.Operations.BooleanNumOperation;
 import Compile.Operations.BooleanOperation;
 import Compile.Operations.MathOperation;
+import DataTypes.Functions.BooleanFunction;
 import DataTypes.Functions.Function;
 import DataTypes.Functions.FunctionContainer;
 import DataTypes.Functions.IntegerFunction;
@@ -137,9 +138,6 @@ public class Calculations {
 
             try
             {
-                if (foundFunction != null)
-                    System.out.println("why " + tokenContent);
-
                 foundFunction = Mapper.findFunction(tokenContent);
 
                 if (foundFunction == null || !(foundFunction.getFunction() instanceof IntegerFunction))
@@ -205,11 +203,58 @@ public class Calculations {
         boolean booleanVarValue = false;
 
         FunctionContainer foundFunction = null;
-
+        ArrayList<Token> functionToExecute = new ArrayList<>();
 
         for (int i = 0; i < tokens.size(); i++)
         {
             String tokenContent = tokens.get(i).getContent();
+
+            if (tokenContent.equals(")") && foundFunction != null)
+            {
+                FunctionExecutor.findAndRunFunction(functionToExecute);
+
+                VariableContainer returnValue = Mapper.findReturnValue();
+
+                if (returnValue == null || (!(returnValue.getVariable() instanceof IntegerVariable)
+                        && !(returnValue.getVariable() instanceof BooleanVariable)))
+                    throw new InvalidSyntaxException(Lexer.getLineNumber());
+
+                if (returnValue.getVariable() instanceof IntegerVariable)
+                {
+                    if (numberSequence)
+                        continue;
+                    numIndexStart = i;
+                    numberSequence = true;
+                }
+
+                else if (returnValue.getVariable() instanceof BooleanVariable)
+                {
+                    booleanVarValue = ((BooleanVariable) returnValue.getVariable()).getValue();
+
+                    result = applyBooleanOp(
+                            result, op, "" + booleanVarValue
+                    );
+
+                    continue;
+                }
+
+//                IntegerVariable returnValueVariable = (IntegerVariable) returnValue.getVariable();
+//
+//                varValue = returnValueVariable.getValue();
+//
+//                num = applyMathOp(num, op, "" + varValue);
+
+                foundFunction = null;
+                functionToExecute.clear();
+                continue;
+            }
+
+            else if (foundFunction != null)
+            {
+                functionToExecute.add(tokens.get(i));
+                continue;
+            }
+
 
             if (tokenContent.equals("&"))
             {
@@ -313,7 +358,12 @@ public class Calculations {
 
                 if (foundVariable instanceof IntegerVariable)
                 {
-                    intVarValue = ((IntegerVariable) foundVariable).getValue();
+                    //intVarValue = ((IntegerVariable) foundVariable).getValue();
+
+                    if (numberSequence)
+                        continue;
+                    numIndexStart = i;
+                    numberSequence = true;
 
                 }
 
@@ -336,19 +386,17 @@ public class Calculations {
             } catch (InvalidSyntaxException ignored) {}
 
 
-//            try
-//            {
-//                if (foundFunction != null)
-//                    System.out.println("why " + tokenContent);
-//
-//                foundFunction = Mapper.findFunction(tokenContent);
-//
-//                if (foundFunction == null || !(foundFunction.getFunction() instanceof IntegerFunction))
-//                    throw new InvalidSyntaxException(Lexer.getLineNumber());
-//
-//                functionToExecute.add(token);
-//
-//            } catch (InvalidSyntaxException ignored) {}
+            try
+            {
+                foundFunction = Mapper.findFunction(tokenContent);
+
+                if (foundFunction == null || (!(foundFunction.getFunction() instanceof IntegerFunction)
+                        && !(foundFunction.getFunction() instanceof BooleanFunction)))
+                    throw new InvalidSyntaxException(Lexer.getLineNumber());
+
+                functionToExecute.add(tokens.get(i));
+
+            } catch (InvalidSyntaxException ignored) {}
 
 
 
