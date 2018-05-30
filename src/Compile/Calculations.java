@@ -315,7 +315,8 @@ public class Calculations {
      * @param s The string to parse to a boolean and apply the boolean operation to
      * @return The result of applying the boolean operation on the two given booleans
      */
-    private static boolean applyBooleanOp(boolean result, BooleanOperation op, String s) {
+    private static boolean applyBooleanOp(boolean result, BooleanOperation op, String s)
+    {
         switch (op)
         {
             case AND :

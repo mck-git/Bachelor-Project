@@ -14,8 +14,6 @@ SMALL FEATURES:
 
     Integrate variables and functions to evaluateBoolean
 
-    Integrate functions with arguments into Print
-
 REFACTORING:
 
     Refactor VariableContainer to use instanceof instead of getType
