@@ -372,17 +372,6 @@ public class Calculations {
             {
                 numOp = BooleanNumOperation.EQUALS;
 
-                System.out.println("evaluateBoolean Equals\n\tNumberSequence: "+ numberSequence);
-
-                System.out.println("\t\tTokens:");
-                for (Token t : new ArrayList<>(tokens.subList(numIndexStart,i)))
-                {
-                    System.out.println("\t\t\t" + t.getContent());
-                }
-
-                System.out.println("\tEvaluates to: " + evaluateMath(
-                        new ArrayList<>(tokens.subList(numIndexStart,i))));
-
                 numBuffer = evaluateMath(
                         new ArrayList<>(tokens.subList(numIndexStart,i))
                 );
