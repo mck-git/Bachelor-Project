@@ -72,7 +72,8 @@ public class Lexer {
                   || c == '&' || c == '|'
                   || c == '(' || c == ')'
                   || c == '{' || c == '}'
-                  || c == '!' || c == ',')
+                  || c == '!' || c == ','
+                  || c == '[' || c == ']')
         {
             endTokenAndSwitchType(InputType.NORMAL);
             buffer += c;

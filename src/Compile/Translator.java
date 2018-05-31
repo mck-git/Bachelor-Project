@@ -18,7 +18,8 @@ public class Translator {
 //        Lexer.read("test_loops");
 //        Lexer.read("test_functions_void");
 //        Lexer.read("test_functions_int");
-        Lexer.read("test_functions_arguments");
+//        Lexer.read("test_functions_arguments");
+        Lexer.read("test_lists");
 
 //        Lexer.read("quick_test");
     }

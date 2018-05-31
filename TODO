@@ -2,13 +2,7 @@ FEATURES:
 
     Add ! and () for conditional statements
 
-    Add support for lists of ints, chars and Strings
-
-    Add support for Boolean/Int lists in evaluateBoolean
-
-    Add support for functions and lists in Print
-
-    Add support for variables in print?
+    Add support for lists in Print
 
 
 SMALL FEATURES:

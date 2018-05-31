@@ -56,7 +56,7 @@ public class FunctionExecutor {
             else
             {
                 if (tokenContent.equals("(") ||
-                        token.equals(","))
+                        tokenContent.equals(","))
                     continue;
 
                 else if (tokenContent.equals(")"))

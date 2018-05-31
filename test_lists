@@ -1,0 +1,15 @@
+list int a = [2, 3]
+
+print a[0]
+
+list string b = ["hello", "world"]
+
+print b[1]
+
+list char c = [v,f]
+
+print c[0]
+
+list boolean d = [true,false]
+
+print d[1]

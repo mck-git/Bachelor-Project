@@ -3,6 +3,7 @@ package Compile;
 import DataTypes.*;
 import DataTypes.Functions.Function;
 import DataTypes.Functions.FunctionContainer;
+import DataTypes.Lists.ListContainer;
 import DataTypes.Variables.*;
 import Errors.InvalidSyntaxException;
 import SharedResources.InputType;
@@ -13,21 +14,31 @@ public class Printer {
 
     public static void print(ArrayList<Token> tokens) throws NullPointerException, InvalidSyntaxException
     {
-        ArrayList<Token> functionToPrint = null;
+        ArrayList<Token> tokenBuffer = null;
 
         for (Token t : tokens)
         {
+            String tokenContent = t.getContent();
 
-            if ( t.getContent().equals(")") && (functionToPrint != null))
+            if ( tokenContent.equals(")") && (tokenBuffer != null))
             {
-                printFunction(functionToPrint);
-                functionToPrint = null;
+                tokenBuffer.add(t);
+                printFunction(tokenBuffer);
+                tokenBuffer = null;
                 continue;
             }
 
-            if (functionToPrint != null)
+            if ( tokenContent.equals("]") && (tokenBuffer != null))
             {
-                functionToPrint.add(t);
+                tokenBuffer.add(t);
+                printList(tokenBuffer);
+                tokenBuffer = null;
+                continue;
+            }
+
+            if (tokenBuffer != null)
+            {
+                tokenBuffer.add(t);
                 continue;
             }
 
@@ -37,8 +48,6 @@ public class Printer {
                 System.out.println(t.getContent());
                 continue;
             }
-
-            String tokenContent = t.getContent();
 
             if (tokenContent.equals("print"))
             {
@@ -55,8 +64,15 @@ public class Printer {
 
             FunctionContainer foundFunction = Mapper.findFunction(tokenContent);
             if (foundFunction != null) {
-                functionToPrint = new ArrayList<>();
-                functionToPrint.add(t);
+                tokenBuffer = new ArrayList<>();
+                tokenBuffer.add(t);
+                continue;
+            }
+
+            ListContainer foundList = Mapper.findList(tokenContent);
+            if (foundList != null) {
+                tokenBuffer = new ArrayList<>();
+                tokenBuffer.add(t);
                 continue;
             }
 
@@ -122,9 +138,9 @@ public class Printer {
         );
     }
 
-    private static void printFunction(ArrayList<Token> functionToPrint) throws InvalidSyntaxException
+    private static void printFunction(ArrayList<Token> tokenBuffer) throws InvalidSyntaxException
     {
-        FunctionExecutor.findAndRunFunction(functionToPrint);
+        FunctionExecutor.findAndRunFunction(tokenBuffer);
 
         VariableContainer returnValue = Mapper.findReturnValue();
 
@@ -144,6 +160,27 @@ public class Printer {
 
         else if (variable instanceof CharVariable)
             System.out.println(((CharVariable) variable).getValue());
+    }
+
+    private static void printList(ArrayList<Token> tokenBuffer) throws InvalidSyntaxException
+    {
+        Variable listValue = ListHandler.findGenericListValue(tokenBuffer);
+
+        if (listValue == null)
+            return;
+
+        if (listValue instanceof IntegerVariable)
+            System.out.println(((IntegerVariable) listValue).getValue());
+
+        else if (listValue instanceof BooleanVariable)
+            System.out.println(((BooleanVariable) listValue).getValue());
+
+        else if (listValue instanceof StringVariable)
+            System.out.println(((StringVariable) listValue).getValue());
+
+        else if (listValue instanceof CharVariable)
+            System.out.println(((CharVariable) listValue).getValue());
+
     }
 
 }
