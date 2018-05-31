@@ -200,9 +200,10 @@ class CalculationsTest {
         line2.add(new Token("int", InputType.NORMAL));
         line2.add(new Token("b", InputType.NORMAL));
         line2.add(new Token("=", InputType.NORMAL));
-        line2.add(new Token("0", InputType.NORMAL));
+        line2.add(new Token("1", InputType.NORMAL));
 
-        line3.add(new Token("b", InputType.NORMAL));
+        line3.add(new Token("int", InputType.NORMAL));
+        line3.add(new Token("c", InputType.NORMAL));
         line3.add(new Token("=", InputType.NORMAL));
         line3.add(new Token("b", InputType.NORMAL));
         line3.add(new Token("+", InputType.NORMAL));
@@ -232,11 +233,11 @@ class CalculationsTest {
         assertEquals(2, intList.get(0));
         assertEquals(3, intList.get(1));
 
-        VariableContainer vc = Mapper.findVariable("b");
+        VariableContainer vc = Mapper.findVariable("c");
 
-        IntegerVariable b = (IntegerVariable) vc.getVariable();
+        IntegerVariable c = (IntegerVariable) vc.getVariable();
 
-        assertEquals(2, b.getValue());
+        assertEquals(3, c.getValue());
     }
 
     @Test
@@ -517,6 +518,68 @@ class CalculationsTest {
         BooleanVariable b = (BooleanVariable) vc.getVariable();
 
         assertEquals(false, b.getValue());
+    }
+
+    @Test
+    void evaluateBoolean_integerList() throws Exception
+    {
+        Mapper.clearMaps();
+
+        ArrayList<Token> line1 = new ArrayList<>();
+        ArrayList<Token> line2 = new ArrayList<>();
+        ArrayList<Token> line3 = new ArrayList<>();
+
+
+        line1.add(new Token("list", InputType.NORMAL));
+        line1.add(new Token("int", InputType.NORMAL));
+        line1.add(new Token("a", InputType.NORMAL));
+        line1.add(new Token("=", InputType.NORMAL));
+        line1.add(new Token("[", InputType.NORMAL));
+        line1.add(new Token("2", InputType.STRING));
+        line1.add(new Token(",", InputType.NORMAL));
+        line1.add(new Token("3", InputType.STRING));
+        line1.add(new Token("]", InputType.NORMAL));
+
+        line2.add(new Token("int", InputType.NORMAL));
+        line2.add(new Token("b", InputType.NORMAL));
+        line2.add(new Token("=", InputType.NORMAL));
+        line2.add(new Token("2", InputType.NORMAL));
+
+        line3.add(new Token("boolean", InputType.NORMAL));
+        line3.add(new Token("c", InputType.NORMAL));
+        line3.add(new Token("=", InputType.NORMAL));
+        line3.add(new Token("a", InputType.NORMAL));
+        line3.add(new Token("[", InputType.NORMAL));
+        line3.add(new Token("0", InputType.NORMAL));
+        line3.add(new Token("]", InputType.NORMAL));
+        line3.add(new Token("==", InputType.NORMAL));
+        line3.add(new Token("b", InputType.NORMAL));
+
+        Translator.handleLine(line1);
+        Translator.handleLine(line2);
+        Translator.handleLine(line3);
+
+        assertEquals(1, IntegerListMap.size());
+
+        ListContainer foundListContainer = Mapper.findList("a");
+
+        List foundList = foundListContainer.getList();
+
+
+        if (!(foundList instanceof IntegerList)) {
+            fail("Should be an IntegerList");
+        }
+
+        IntegerList integerList = (IntegerList) foundList;
+
+        assertEquals(2, integerList.get(0));
+        assertEquals(3, integerList.get(1));
+
+        VariableContainer vc = Mapper.findVariable("c");
+
+        BooleanVariable c = (BooleanVariable) vc.getVariable();
+
+        assertEquals(true, c.getValue());
     }
 
     @Test

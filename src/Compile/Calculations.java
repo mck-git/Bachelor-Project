@@ -7,7 +7,9 @@ import DataTypes.Functions.BooleanFunction;
 import DataTypes.Functions.Function;
 import DataTypes.Functions.FunctionContainer;
 import DataTypes.Functions.IntegerFunction;
+import DataTypes.Lists.BooleanList;
 import DataTypes.Lists.IntegerList;
+import DataTypes.Lists.List;
 import DataTypes.Lists.ListContainer;
 import DataTypes.Token;
 import DataTypes.Variables.Variable;
@@ -231,19 +233,22 @@ public class Calculations {
 
         int numBuffer = 0;
 
-        int intVarValue = 0;
         boolean booleanVarValue = false;
 
-        FunctionContainer foundFunction = null;
-        ArrayList<Token> functionToExecute = new ArrayList<>();
+        FunctionContainer foundFunctionContainer = null;
+        ListContainer foundListContainer = null;
+
+        ArrayList<Token> tokenBuffer = new ArrayList<>();
 
         for (int i = 0; i < tokens.size(); i++)
         {
             String tokenContent = tokens.get(i).getContent();
 
-            if (tokenContent.equals(")") && foundFunction != null)
+            if (tokenContent.equals(")") && foundFunctionContainer != null)
             {
-                FunctionExecutor.findAndRunFunction(functionToExecute);
+                tokenBuffer.add(tokens.get(i));
+
+                FunctionExecutor.findAndRunFunction(tokenBuffer);
 
                 VariableContainer returnValue = Mapper.findReturnValue();
 
@@ -253,10 +258,10 @@ public class Calculations {
 
                 if (returnValue.getVariable() instanceof IntegerVariable)
                 {
-                    if (numberSequence)
-                        continue;
-                    numIndexStart = i;
-                    numberSequence = true;
+                    if (!numberSequence) {
+                        numIndexStart = i;
+                        numberSequence = true;
+                    }
                 }
 
                 else if (returnValue.getVariable() instanceof BooleanVariable)
@@ -267,17 +272,38 @@ public class Calculations {
                             result, op, "" + booleanVarValue
                     );
 
-                    continue;
                 }
 
-                foundFunction = null;
-                functionToExecute.clear();
+                foundFunctionContainer = null;
+                tokenBuffer.clear();
                 continue;
             }
 
-            else if (foundFunction != null)
+            if (tokenContent.equals("]") && foundListContainer != null)
             {
-                functionToExecute.add(tokens.get(i));
+                List foundList = foundListContainer.getList();
+
+                tokenBuffer.add(tokens.get(i));
+
+                if (foundList instanceof BooleanList)
+                {
+                    booleanVarValue = ListHandler.findBooleanListIndex(tokenBuffer);
+
+                    result = applyBooleanOp(
+                            result, op, "" + booleanVarValue
+                    );
+                }
+
+
+                foundListContainer = null;
+                tokenBuffer.clear();
+                continue;
+
+            }
+
+            else if (foundFunctionContainer != null || foundListContainer != null)
+            {
+                tokenBuffer.add(tokens.get(i));
                 continue;
             }
 
@@ -346,6 +372,17 @@ public class Calculations {
             {
                 numOp = BooleanNumOperation.EQUALS;
 
+                System.out.println("evaluateBoolean Equals\n\tNumberSequence: "+ numberSequence);
+
+                System.out.println("\t\tTokens:");
+                for (Token t : new ArrayList<>(tokens.subList(numIndexStart,i)))
+                {
+                    System.out.println("\t\t\t" + t.getContent());
+                }
+
+                System.out.println("\tEvaluates to: " + evaluateMath(
+                        new ArrayList<>(tokens.subList(numIndexStart,i))));
+
                 numBuffer = evaluateMath(
                         new ArrayList<>(tokens.subList(numIndexStart,i))
                 );
@@ -375,8 +412,8 @@ public class Calculations {
             try
             {
                 VariableContainer foundVariableContainer = Mapper.findVariable(tokenContent);
-                if (foundVariableContainer == null || !foundVariableContainer.getType().equals("int")
-                        || !foundVariableContainer.getType().equals("boolean"))
+                if (foundVariableContainer == null || (!foundVariableContainer.getType().equals("int")
+                        && !foundVariableContainer.getType().equals("boolean")))
                     throw new InvalidSyntaxException(Lexer.getLineNumber());
 
                 Variable foundVariable = foundVariableContainer.getVariable();
@@ -388,6 +425,7 @@ public class Calculations {
                     numIndexStart = i;
                     numberSequence = true;
 
+                    continue;
                 }
 
                 else if (foundVariable instanceof BooleanVariable)
@@ -402,22 +440,29 @@ public class Calculations {
 
                 }
 
-
-
-
-                continue;
             } catch (InvalidSyntaxException ignored) {}
+
+            try
+            {
+                foundListContainer = Mapper.findList(tokenContent);
+                if (foundListContainer == null || (!foundListContainer.getType().equals("int")
+                        && !foundListContainer.getType().equals("boolean")))
+                    throw new InvalidSyntaxException(Lexer.getLineNumber());
+
+                tokenBuffer.add(tokens.get(i));
+            } catch (InvalidSyntaxException ignored) {}
+
 
 
             try
             {
-                foundFunction = Mapper.findFunction(tokenContent);
+                foundFunctionContainer = Mapper.findFunction(tokenContent);
 
-                if (foundFunction == null || (!(foundFunction.getFunction() instanceof IntegerFunction)
-                        && !(foundFunction.getFunction() instanceof BooleanFunction)))
+                if (foundFunctionContainer == null || (!(foundFunctionContainer.getFunction() instanceof IntegerFunction)
+                        && !(foundFunctionContainer.getFunction() instanceof BooleanFunction)))
                     throw new InvalidSyntaxException(Lexer.getLineNumber());
 
-                functionToExecute.add(tokens.get(i));
+                tokenBuffer.add(tokens.get(i));
 
             } catch (InvalidSyntaxException ignored) {}
 

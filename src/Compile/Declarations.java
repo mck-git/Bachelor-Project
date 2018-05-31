@@ -45,6 +45,8 @@ public class Declarations {
 
     public static void declareChar(ArrayList<Token> tokens)
     {
+
+
         Mapper.addToCharMap(
                 new CharVariable(
                         tokens.get(1).getContent(),
@@ -55,10 +57,21 @@ public class Declarations {
 
     public static void declareBoolean(ArrayList<Token> tokens) throws InvalidSyntaxException
     {
+        ArrayList<Token> body = new ArrayList<>(tokens.subList(DECLARATION_STATEMENT_BODY_START_INDEX,tokens.size()));
+
+        System.out.println("declareBoolean: \n\tDeclaring boolean: " + tokens.get(1).getContent());
+
+        for (Token t : body)
+        {
+            System.out.println("\t\t" + t.getContent());
+        }
+
+        System.out.println("\t\t\tEvaluates to " + Calculations.evaluateBoolean(body));
+
         Mapper.addToBooleanMap(
                 new BooleanVariable(
                         tokens.get(1).getContent(),
-                        Calculations.evaluateBoolean(tokens)
+                        Calculations.evaluateBoolean(body)
                 )
         );
     }
