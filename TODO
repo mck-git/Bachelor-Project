@@ -4,11 +4,14 @@ FEATURES:
 
     Add support for lists of ints, chars and Strings
 
-    Add arguments to be fetchable for calculations and printing
+    Add support for Boolean/Int lists in evaluateBoolean
+
+    Add support for functions and lists in Print
+
+    Add support for variables in print?
+
 
 SMALL FEATURES:
-
-    Assign variables to be equal to other variables
 
     Fix mismatch in boolean statements (such as 'true & 5')
 

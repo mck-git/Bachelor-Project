@@ -3,9 +3,7 @@ package Compile;
 import DataTypes.*;
 import DataTypes.Functions.Function;
 import DataTypes.Functions.FunctionContainer;
-import DataTypes.Functions.VoidFunction;
-import DataTypes.Lists.IntegerList;
-import DataTypes.Lists.List;
+import DataTypes.Lists.*;
 import DataTypes.Variables.*;
 import Errors.InvalidSyntaxException;
 import Maps.Lists.BooleanListMap;
@@ -570,18 +568,20 @@ class DeclarationsTest {
 
         assertEquals(1,IntegerListMap.size());
 
-//        ListContainer foundListContainer = Mapper.findList("a");
-//
-//        List foundList = foundListContainer.getList();
-//
-//
-//        if (!(foundList instanceof IntegerList))
-//            fail("Should be an IntegerList");
-//
-//        foundList = (IntegerList) foundList
-//
-//        assertEquals(2, foundList.get(0));
-//        assertEquals(3, foundList.get(1));
+        ListContainer foundListContainer = Mapper.findList("a");
+
+        List foundList = foundListContainer.getList();
+
+
+        if (!(foundList instanceof IntegerList)) {
+            fail("Should be an IntegerList");
+        }
+
+        IntegerList intList = (IntegerList) foundList;
+
+        assertEquals(2, intList.get(0));
+        assertEquals(3, intList.get(1));
+
     }
 
     @Test
@@ -605,18 +605,18 @@ class DeclarationsTest {
 
         assertEquals(1, StringListMap.size());
 
-//        ListContainer foundListContainer = Mapper.findList("a");
-//
-//        List foundList = foundListContainer.getList();
-//
-//
-//        if (!(foundList instanceof StringList))
-//            fail("Should be an StringList");
-//
-//        foundList = (StringList) foundList
-//
-//        assertTrue(foundList.get(0).equals("hello");
-//        assertTrue(foundList.get(1).equals("world");
+        ListContainer foundListContainer = Mapper.findList("a");
+
+        List foundList = foundListContainer.getList();
+
+
+        if (!(foundList instanceof StringList))
+            fail("Should be an StringList");
+
+        StringList stringList = (StringList) foundList;
+
+        assertTrue(stringList.get(0).equals("hello"));
+        assertTrue(stringList.get(1).equals("world"));
     }
 
     @Test
@@ -631,7 +631,7 @@ class DeclarationsTest {
         line1.add(new Token("a", InputType.NORMAL));
         line1.add(new Token("=", InputType.NORMAL));
         line1.add(new Token("[", InputType.NORMAL));
-        line1.add(new Token("b", InputType.STRING));
+        line1.add(new Token("q", InputType.STRING));
         line1.add(new Token(",", InputType.NORMAL));
         line1.add(new Token("r", InputType.STRING));
         line1.add(new Token("]", InputType.NORMAL));
@@ -640,18 +640,18 @@ class DeclarationsTest {
 
         assertEquals(1, CharListMap.size());
 
-//        ListContainer foundListContainer = Mapper.findList("a");
-//
-//        List foundList = foundListContainer.getList();
-//
-//
-//        if (!(foundList instanceof CharList))
-//            fail("Should be an StringList");
-//
-//        foundList = (CharList) foundList
-//
-//        assertEquals(2, foundList.get(0));
-//        assertEquals(3, foundList.get(1));
+        ListContainer foundListContainer = Mapper.findList("a");
+
+        List foundList = foundListContainer.getList();
+
+
+        if (!(foundList instanceof CharList))
+            fail("Should be an CharList");
+
+        CharList charList = (CharList) foundList;
+
+        assertEquals('q', charList.get(0));
+        assertEquals('r', charList.get(1));
     }
 
     @Test
@@ -675,18 +675,18 @@ class DeclarationsTest {
 
         assertEquals(1, BooleanListMap.size());
 
-//        ListContainer foundListContainer = Mapper.findList("a");
-//
-//        List foundList = foundListContainer.getList();
-//
-//
-//        if (!(foundList instanceof BooleanList))
-//            fail("Should be an BooleanList");
-//
-//        foundList = (BooleanList) foundList
-//
-//        assertTrue(foundList.get(0));
-//        assertFalse(foundList.get(1));
+        ListContainer foundListContainer = Mapper.findList("a");
+
+        List foundList = foundListContainer.getList();
+
+
+        if (!(foundList instanceof BooleanList))
+            fail("Should be an BooleanList");
+
+        BooleanList booleanList = (BooleanList) foundList;
+
+        assertTrue(booleanList.get(0));
+        assertFalse(booleanList.get(1));
     }
 
     //// REDEFINE ////

@@ -1,10 +1,7 @@
 package Compile;
 
 import DataTypes.Functions.*;
-import DataTypes.Lists.BooleanList;
-import DataTypes.Lists.CharList;
-import DataTypes.Lists.IntegerList;
-import DataTypes.Lists.StringList;
+import DataTypes.Lists.*;
 import DataTypes.Variables.*;
 import Maps.Functions.*;
 import Maps.Lists.BooleanListMap;
@@ -119,7 +116,7 @@ public class Mapper {
         BooleanListMap.add(booleanList.getName(), booleanList);
     }
 
-    // AUX FUNCTIONS
+    // FINDER FUNCTIONS
     public static VariableContainer findVariable(String varname)
     {
         Variable result;
@@ -180,7 +177,6 @@ public class Mapper {
         return null;
     }
 
-
     public static VariableContainer findReturnValue()
     {
         Variable result = TemporaryVariablesMap.find("returnValue");
@@ -223,6 +219,33 @@ public class Mapper {
 
         return null;
 
+    }
+
+    public static ListContainer findList(String listName)
+    {
+        List result;
+
+        result = IntegerListMap.find(listName);
+
+        if (result != null)
+            return new ListContainer("int",result);
+
+        result = StringListMap.find(listName);
+
+        if (result != null)
+            return new ListContainer("string",result);
+
+        result = CharListMap.find(listName);
+
+        if (result != null)
+            return new ListContainer("char",result);
+
+        result = BooleanListMap.find(listName);
+
+        if (result != null)
+            return new ListContainer("boolean",result);
+
+        return null;
     }
 
     /**

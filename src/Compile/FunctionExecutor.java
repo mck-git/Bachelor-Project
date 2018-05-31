@@ -76,10 +76,7 @@ public class FunctionExecutor {
                 else if ( (arg instanceof CharVariable) && tokenContent.length() == 1 && Character.isLetter(tokenContent.charAt(0)))
                     TemporaryVariablesMap.add(arg.getName(), new CharVariable(arg.getName(), tokenContent.charAt(0)));
             }
-
-            // Retrieve argument names and save the given values in TemporaryVariables map
         }
-
 
         if (functionFound)
         {

@@ -358,11 +358,16 @@ public class Declarations {
         String name = tokens.get(2).getContent();
         CharList charList = new CharList(name);
 
+        boolean seenEquals = false;
+
         for (Token token : tokens)
         {
             String tokenContent = token.getContent();
 
-            if ( Character.isLetter(tokenContent.charAt(0)) )
+            if (tokenContent.equals("="))
+                seenEquals = true;
+
+            else if ( Character.isLetter(tokenContent.charAt(0)) && seenEquals)
                 charList.add(tokenContent.charAt(0));
         }
 

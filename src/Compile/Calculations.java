@@ -7,6 +7,8 @@ import DataTypes.Functions.BooleanFunction;
 import DataTypes.Functions.Function;
 import DataTypes.Functions.FunctionContainer;
 import DataTypes.Functions.IntegerFunction;
+import DataTypes.Lists.IntegerList;
+import DataTypes.Lists.ListContainer;
 import DataTypes.Token;
 import DataTypes.Variables.Variable;
 import DataTypes.Variables.VariableContainer;
@@ -17,6 +19,8 @@ import Maps.Variables.TemporaryVariablesMap;
 import Parser.Lexer;
 
 import java.util.ArrayList;
+
+import static Compile.ListHandler.findIntegerListIndex;
 
 public class Calculations {
 
@@ -67,7 +71,9 @@ public class Calculations {
         MathOperation op = MathOperation.PLUS;
 
         FunctionContainer foundFunction = null;
-        ArrayList<Token> functionToExecute = new ArrayList<>();
+        ListContainer foundList = null;
+
+        ArrayList<Token> tokenBuffer = new ArrayList<>();
 
         for (Token token : tokens) {
             String tokenContent = token.getContent();
@@ -75,7 +81,7 @@ public class Calculations {
 
             if (tokenContent.equals(")") && foundFunction != null)
             {
-                FunctionExecutor.findAndRunFunction(functionToExecute);
+                FunctionExecutor.findAndRunFunction(tokenBuffer);
 
                 VariableContainer returnValue = Mapper.findReturnValue();
 
@@ -89,13 +95,25 @@ public class Calculations {
                 num = applyMathOp(num, op, "" + varValue);
 
                 foundFunction = null;
-                functionToExecute.clear();
+                tokenBuffer.clear();
                 continue;
             }
 
-            else if (foundFunction != null)
+            else if (tokenContent.equals("]") && foundList != null)
             {
-                functionToExecute.add(token);
+                int listValue = ListHandler.findIntegerListIndex(tokenBuffer);
+
+                num = applyMathOp(num, op, "" + listValue);
+
+                foundList = null;
+                tokenBuffer.clear();
+                continue;
+
+            }
+
+            else if (foundFunction != null || foundList != null)
+            {
+                tokenBuffer.add(token);
                 continue;
             }
 
@@ -120,6 +138,7 @@ public class Calculations {
             else if (tokenContent.equals("="))
                 continue;
 
+            // FIND VARIABLE
             try
             {
                 VariableContainer foundVariableContainer = Mapper.findVariable(tokenContent);
@@ -135,7 +154,20 @@ public class Calculations {
                 continue;
             } catch (InvalidSyntaxException ignored) {}
 
+            // FIND LIST
+            try
+            {
+                foundList = Mapper.findList(tokenContent);
 
+                if (foundList == null || !(foundList.getList() instanceof IntegerList))
+                    throw new InvalidSyntaxException(Lexer.getLineNumber());
+
+
+                tokenBuffer.add(token);
+
+            } catch (InvalidSyntaxException ignored) {}
+
+            // FIND FUNCTION
             try
             {
                 foundFunction = Mapper.findFunction(tokenContent);
@@ -143,7 +175,7 @@ public class Calculations {
                 if (foundFunction == null || !(foundFunction.getFunction() instanceof IntegerFunction))
                     throw new InvalidSyntaxException(Lexer.getLineNumber());
 
-                functionToExecute.add(token);
+                tokenBuffer.add(token);
 
             } catch (InvalidSyntaxException ignored) {}
 
@@ -237,12 +269,6 @@ public class Calculations {
 
                     continue;
                 }
-
-//                IntegerVariable returnValueVariable = (IntegerVariable) returnValue.getVariable();
-//
-//                varValue = returnValueVariable.getValue();
-//
-//                num = applyMathOp(num, op, "" + varValue);
 
                 foundFunction = null;
                 functionToExecute.clear();
@@ -353,13 +379,10 @@ public class Calculations {
                         || !foundVariableContainer.getType().equals("boolean"))
                     throw new InvalidSyntaxException(Lexer.getLineNumber());
 
-
                 Variable foundVariable = foundVariableContainer.getVariable();
 
                 if (foundVariable instanceof IntegerVariable)
                 {
-                    //intVarValue = ((IntegerVariable) foundVariable).getValue();
-
                     if (numberSequence)
                         continue;
                     numIndexStart = i;
@@ -447,7 +470,8 @@ public class Calculations {
      * @param num2 The second number in the comparison
      * @return The result of comparing the two boolean values
      */
-    private static boolean applyBooleanNumOp(boolean result, BooleanOperation op, BooleanNumOperation numOp, int num1, int num2) {
+    private static boolean applyBooleanNumOp(boolean result, BooleanOperation op, BooleanNumOperation numOp, int num1, int num2)
+    {
         switch (numOp)
         {
             case LESSER:
