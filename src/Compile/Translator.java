@@ -19,9 +19,9 @@ public class Translator {
 //        Lexer.read("test_functions_void");
 //        Lexer.read("test_functions_int");
 //        Lexer.read("test_functions_arguments");
-        Lexer.read("test_lists");
+//        Lexer.read("test_lists");
 
-//        Lexer.read("quick_test");
+        Lexer.read("quick_test");
     }
 
     public static void handleLine(ArrayList<Token> tokens) throws InvalidSyntaxException
@@ -29,10 +29,15 @@ public class Translator {
         if (tokens.isEmpty())
             return;
 
-        if (executionType == ExecutionType.IF_FALSE)
+        String firstTokenContent = tokens.get(0).getContent();
+
+        if (executionType == ExecutionType.IF_FALSE && !firstTokenContent.equals("}"))
             return;
 
-        String firstTokenContent = tokens.get(0).getContent();
+        else if (executionType == ExecutionType.IF_FALSE && firstTokenContent.equals("}")) {
+            setExecutionType(ExecutionType.NORMAL);
+            return;
+        }
 
         if (executionType == ExecutionType.WHILE && !firstTokenContent.equals("}"))
         {

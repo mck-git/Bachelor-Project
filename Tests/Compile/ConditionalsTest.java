@@ -1,15 +1,98 @@
 package Compile;
 
 import DataTypes.Token;
+import DataTypes.Variables.CharVariable;
+import DataTypes.Variables.VariableContainer;
 import SharedResources.InputType;
 import org.junit.jupiter.api.Test;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.*;
 
 class ConditionalsTest {
+
+    //// IF ////
+    @Test
+    void testIf_true() throws Exception
+    {
+        Mapper.clearMaps();
+
+        ArrayList<Token> line1 = new ArrayList<>();
+        ArrayList<Token> line2 = new ArrayList<>();
+        ArrayList<Token> line3 = new ArrayList<>();
+        ArrayList<Token> line4 = new ArrayList<>();
+
+
+        line1.add(new Token("char",InputType.NORMAL));
+        line1.add(new Token("c",InputType.NORMAL));
+        line1.add(new Token("=",InputType.NORMAL));
+        line1.add(new Token("q",InputType.NORMAL));
+
+
+        line2.add(new Token("if",InputType.NORMAL));
+        line2.add(new Token("true",InputType.NORMAL));
+        line2.add(new Token("{",InputType.NORMAL));
+
+        line3.add(new Token("c",InputType.NORMAL));
+        line3.add(new Token("=",InputType.NORMAL));
+        line3.add(new Token("r",InputType.NORMAL));
+
+        line4.add(new Token("}",InputType.NORMAL));
+
+        Translator.handleLine(line1);
+        Translator.handleLine(line2);
+        Translator.handleLine(line3);
+        Translator.handleLine(line4);
+
+        VariableContainer vc = Mapper.findVariable("c");
+
+        CharVariable c = (CharVariable) vc.getVariable();
+
+        assertEquals('r', c.getValue());
+    }
+
+    @Test
+    void testIf_false() throws Exception
+    {
+        Mapper.clearMaps();
+
+        ArrayList<Token> line1 = new ArrayList<>();
+        ArrayList<Token> line2 = new ArrayList<>();
+        ArrayList<Token> line3 = new ArrayList<>();
+        ArrayList<Token> line4 = new ArrayList<>();
+
+
+        line1.add(new Token("char",InputType.NORMAL));
+        line1.add(new Token("c",InputType.NORMAL));
+        line1.add(new Token("=",InputType.NORMAL));
+        line1.add(new Token("q",InputType.NORMAL));
+
+
+        line2.add(new Token("if",InputType.NORMAL));
+        line2.add(new Token("false",InputType.NORMAL));
+        line2.add(new Token("{",InputType.NORMAL));
+
+        line3.add(new Token("c",InputType.NORMAL));
+        line3.add(new Token("=",InputType.NORMAL));
+        line3.add(new Token("r",InputType.NORMAL));
+
+        line4.add(new Token("}",InputType.NORMAL));
+
+        Translator.handleLine(line1);
+        Translator.handleLine(line2);
+        Translator.handleLine(line3);
+        Translator.handleLine(line4);
+
+        VariableContainer vc = Mapper.findVariable("c");
+
+        CharVariable c = (CharVariable) vc.getVariable();
+
+        assertEquals('q', c.getValue());
+    }
+
 
     //// OR ////
 
