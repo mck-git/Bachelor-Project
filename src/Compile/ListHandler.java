@@ -69,7 +69,7 @@ public class ListHandler {
 
     }
 
-    public static int findIntegerListIndex(ArrayList<Token> tokens) throws InvalidSyntaxException
+    public static int findIntegerListIndex(ArrayList<Token> tokens) throws InvalidSyntaxException, NullPointerException
     {
 
         IntegerList foundList = null;
@@ -83,6 +83,15 @@ public class ListHandler {
 
             else if (Calculations.isNumeric(tokenContent))
                 return foundList.get(Integer.parseInt(tokenContent));
+
+            try
+            {
+                IntegerVariable integerVariable = (IntegerVariable) Mapper.findVariable(tokenContent).getVariable();
+
+                if (integerVariable != null)
+                    return foundList.get(integerVariable.getValue());
+
+            } catch (NullPointerException ignored) {}
 
         }
 
@@ -104,6 +113,15 @@ public class ListHandler {
 
             else if (Calculations.isNumeric(tokenContent))
                 return foundList.get(Integer.parseInt(tokenContent));
+
+            try
+            {
+                IntegerVariable integerVariable = (IntegerVariable) Mapper.findVariable(tokenContent).getVariable();
+
+                if (integerVariable != null)
+                    return foundList.get(integerVariable.getValue());
+
+            } catch (NullPointerException ignored) {}
         }
 
         throw new InvalidSyntaxException(Lexer.getLineNumber());
@@ -124,6 +142,15 @@ public class ListHandler {
             else if (Calculations.isNumeric(tokenContent))
                 return foundList.get(Integer.parseInt(tokenContent));
 
+            try
+            {
+                IntegerVariable integerVariable = (IntegerVariable) Mapper.findVariable(tokenContent).getVariable();
+
+                if (integerVariable != null)
+                    return foundList.get(integerVariable.getValue());
+
+            } catch (NullPointerException ignored) {}
+
         }
 
         throw new InvalidSyntaxException(Lexer.getLineNumber());
@@ -143,6 +170,15 @@ public class ListHandler {
 
             else if (Calculations.isNumeric(tokenContent))
                 return foundList.get(Integer.parseInt(tokenContent));
+
+            try
+            {
+                IntegerVariable integerVariable = (IntegerVariable) Mapper.findVariable(tokenContent).getVariable();
+
+                if (integerVariable != null)
+                    return foundList.get(integerVariable.getValue());
+
+            } catch (NullPointerException ignored) {}
 
         }
 
