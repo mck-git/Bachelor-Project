@@ -14,21 +14,7 @@ public class Translator {
 
     public static void main(String[] args) throws Exception
     {
-//        Lexer.read("test_program");
-//        Lexer.read("test_loops");
-//        Lexer.read("test_functions_void");
-//        Lexer.read("test_functions_int");
-//        Lexer.read("test_functions_arguments");
-//        Lexer.read("test_lists");
-
-//        Lexer.read("quick_test");
-        final long startTime = System.currentTimeMillis();
-        Lexer.read("benchmark");
-//        Lexer.read("benchmark2");
-        final long endTime = System.currentTimeMillis();
-
-        System.out.println("\nExecution time: " + (endTime-startTime) + " ms");
-
+        Lexer.read(args[0]);
     }
 
     public static void handleLine(ArrayList<Token> tokens) throws InvalidSyntaxException
